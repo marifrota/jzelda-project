@@ -15,11 +15,11 @@ public class GameWindow extends JFrame {
         
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        window.setLocationRelativeTo(null);
+        window.setLocationRelativeTo(null);//centralizar a tela(center the window)
         
-        window.setLayout(new BorderLayout());
+        window.setLayout(new BorderLayout());//definir o layout(set the layout)
         
-        window.setContentPane(new MenuPanel(window));//nao pode usar this dentro do main
+        window.setContentPane(new MenuPanel(window));//colocar dentro do menu(place it inside the menu)
         		
         window.setVisible(true);
     }
