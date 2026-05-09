@@ -1,5 +1,4 @@
 package view;
-
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
@@ -14,6 +13,13 @@ public class MenuPanel extends JPanel{
 			//nao pode usar this dentro do main(cant use this inside the main)
 			JButton startButton = new JButton("start");
 			add(startButton);
+			
+			startButton.addActionListener( e -> {
+				System.out.println("inizio del gioco");
+				window.setContentPane(new GamePanel());
+				window.revalidate();
+				window.repaint();
+			});
 		}
 }
 

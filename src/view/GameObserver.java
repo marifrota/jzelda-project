@@ -1,5 +1,5 @@
 package view;
 
-public class GameObserver {
-
+public interface GameObserver {
+	void update();
 }
