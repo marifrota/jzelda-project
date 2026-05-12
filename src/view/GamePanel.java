@@ -1,6 +1,7 @@
 package view;
 import javax.swing.JPanel;
 import java.awt.Graphics;
+import java.awt.Color;
 
 
 public class GamePanel extends JPanel{
@@ -25,13 +26,30 @@ public class GamePanel extends JPanel{
 	}
 	
 	private void drawPlayer(Graphics g) {
-	g.fillRect(50,50,50,50);//quadrado que funciona como um "fake player"(Square that works as a "fake player")	
+		g.setColor(Color.RED);
+		g.fillRect(50,50,50,50);//(Square that works as a "fake player")	
 	}
 	
 	private void drawEnemy(Graphics g) {
+		g.setColor(Color.BLACK);
+		g.fillRect(200,200,32,32);//(Square that works as a "fake enemy")	
 	}
 	
 	private void drawMap(Graphics g) {
+		g.setColor(new Color(34,139,34));
+		// Dark green color (little red, lots of green, little blue)
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(new Color(139, 69, 19));
+		g.fillRect(0, 0, getWidth(), 50);
+		// Draws a wall at the top
+		// (0,0) = starts at the top left corner
+		// getWidth() = full screen width
+		// 50 = height of 50 pixels (wall thickness)
+		g.fillRect(0,  getHeight()-50, getWidth(), 50);
+		g.fillRect(getWidth()-50, 0, 50, getHeight());
+		g.fillRect(getWidth()-50, 0, 50, getHeight());
+		g.setColor(new Color(70, 130, 200));
+		g.fillRect(200, 200, 60, 60);
 	}
 	
 	public void aumentapunteggio(int xscore) {
