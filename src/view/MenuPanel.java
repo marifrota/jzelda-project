@@ -1,5 +1,6 @@
 package view;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -22,4 +23,3 @@ public class MenuPanel extends JPanel{
 			});
 		}
 }
-
