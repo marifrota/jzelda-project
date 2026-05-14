@@ -2,15 +2,19 @@ package view;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Color;
-
+import model.GameState;
+import model.Player;
+import model.Enemy;
 
 public class GamePanel extends JPanel{
-
+	
+	private GameState gameState;
 	private int score = 0;
 	int vite = 3;
 	private HUDPanel hud;
 	
-	public GamePanel() {
+	public GamePanel(GameState gameState) {
+		this.gameState = gameState;
 		hud = new HUDPanel();
 		add(hud);
 	}
@@ -27,12 +31,14 @@ public class GamePanel extends JPanel{
 	
 	private void drawPlayer(Graphics g) {
 		g.setColor(Color.RED);
-		g.fillRect(50,50,50,50);//(Square that works as a "fake player")	
+		Player player = gameState.getPlayer();
+		g.fillRect(player.getX(),player.getY(),32,32);//(Square that works as a "fake player")	
 	}
 	
 	private void drawEnemy(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(200,200,32,32);//(Square that works as a "fake enemy")	
+		Enemy enemy = gameState.getEnemy();
+		g.fillRect(enemy.getX(),enemy.getY(),32,32);//(Square that works as a "fake enemy")	
 	}
 	
 	private void drawMap(Graphics g) {
@@ -47,7 +53,7 @@ public class GamePanel extends JPanel{
 		// 50 = height of 50 pixels (wall thickness)
 		g.fillRect(0,  getHeight()-50, getWidth(), 50);
 		g.fillRect(getWidth()-50, 0, 50, getHeight());
-		g.fillRect(getWidth()-50, 0, 50, getHeight());
+		g.fillRect(0, 0, 50, getHeight());
 		g.setColor(new Color(70, 130, 200));
 		g.fillRect(200, 200, 60, 60);
 	}
