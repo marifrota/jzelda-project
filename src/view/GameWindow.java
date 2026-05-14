@@ -11,7 +11,7 @@ public class GameWindow extends JFrame {
    
         JFrame window = new JFrame("JZelda");
       
-        window.setSize(800,800);
+        window.setSize(975,485);
         
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         

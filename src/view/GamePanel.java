@@ -5,6 +5,7 @@ import java.awt.Color;
 import model.GameState;
 import model.Player;
 import model.Enemy;
+import java.awt.Graphics2D;
 
 public class GamePanel extends JPanel{
 	
@@ -42,20 +43,7 @@ public class GamePanel extends JPanel{
 	}
 	
 	private void drawMap(Graphics g) {
-		g.setColor(new Color(34,139,34));
-		// Dark green color (little red, lots of green, little blue)
-		g.fillRect(0, 0, getWidth(), getHeight());
-		g.setColor(new Color(139, 69, 19));
-		g.fillRect(0, 0, getWidth(), 50);
-		// Draws a wall at the top
-		// (0,0) = starts at the top left corner
-		// getWidth() = full screen width
-		// 50 = height of 50 pixels (wall thickness)
-		g.fillRect(0,  getHeight()-50, getWidth(), 50);
-		g.fillRect(getWidth()-50, 0, 50, getHeight());
-		g.fillRect(0, 0, 50, getHeight());
-		g.setColor(new Color(70, 130, 200));
-		g.fillRect(200, 200, 60, 60);
+	    gameState.getLivelloAttuale().render((Graphics2D) g);
 	}
 	
 	public void aumentapunteggio(int xscore) {
@@ -66,7 +54,7 @@ public class GamePanel extends JPanel{
 	
 	public void aumentavita( int vita) {
 		vite += vita;
-		hud.aumentavita(vita);
+		hud.aumentavita(vite);
 		repaint();
 	}
 }

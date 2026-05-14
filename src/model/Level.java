@@ -27,7 +27,7 @@ public class Level {
  // Later add enemies in the room
    
 
-    private final int tileSize = 32; // 32x32 pixel
+    private final int tileSize = 64; // 32x32 pixel
 
     public Level() {
         
