@@ -3,7 +3,7 @@ package view;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
-
+import controller.InputHandler;
 
 public class GameWindow extends JFrame {
 	
@@ -11,7 +11,7 @@ public class GameWindow extends JFrame {
    
         JFrame window = new JFrame("JZelda");
       
-        window.setSize(800,800);
+        window.setSize(975,485);
         
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -22,5 +22,7 @@ public class GameWindow extends JFrame {
         window.setContentPane(new MenuPanel(window));//colocar dentro do menu(place it inside the menu)
         		
         window.setVisible(true);
+        InputHandler inputHandler = new InputHandler();
+        window.addKeyListener(inputHandler);
     }
 }
