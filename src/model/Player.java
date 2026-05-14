@@ -20,6 +20,19 @@ public class Player {
     public Player(int xIniziale, int yIniziale) {
         this.x = xIniziale;
         this.y = yIniziale; }
+    
+    public void muoviSu() { 
+    	muovi(Direzione.NORD);
+    }
+    public void muoviGiu() {
+    	muovi(Direzione.SUD);
+    }
+    public void muoviDestra() { 
+    	muovi(Direzione.EST);
+    }
+    public void muoviSinistra() {
+    	muovi(Direzione.OVEST);
+    }
    
  public void muovi(Direzione direzione) {
 	 this.direzione = direzione;

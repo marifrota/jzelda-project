@@ -22,19 +22,17 @@ public class GameState {
         if (gameOver) { 
         	return; // so we stop when game over
         }
-
-      
         
 
-        // 2) checks if player is alive or not
+        // checks if player is alive or not
         if (player.getPuntiVita() <= 0) {
             gameOver = true;
         }
         
-        // 3) colliding controls
+        //colliding controls
     }
 
-    // 4. GETTERS 
+    // GETTERS 
     public Player getPlayer() { return player; }
     public Level getLivelloAttuale() { return livelloAttuale; }
     public boolean isGameOver() { return gameOver; }

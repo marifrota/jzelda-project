@@ -8,14 +8,16 @@ public class GameController implements Runnable {
     private GameState gameState;
     private GamePanel gamePanel;
     private Thread gameThread;
+    private InputHandler inputHandler;
     private boolean isRunning = false;
 
     // 60 should be standard
     private static final int FPS = 60;
 
-    public GameController(GameState gameState, GamePanel gamePanel) {
+    public GameController(GameState gameState, GamePanel gamePanel, InputHandler inputHandler) {
         this.gameState = gameState;
         this.gamePanel = gamePanel;
+        this.inputHandler = inputHandler;
     }
 
     // to start game engine 
@@ -59,7 +61,12 @@ public class GameController implements Runnable {
     }
 
     private void update() {
-        gameState.update();
+    	if (inputHandler.su) gameState.getPlayer().muoviSu();
+        if (inputHandler.giu) gameState.getPlayer().muoviGiu();
+        if (inputHandler.sinistra) gameState.getPlayer().muoviSinistra();
+        if (inputHandler.destra) gameState.getPlayer().muoviDestra();
+        
+        gameState.update(); 
     }
 
     private void render() {

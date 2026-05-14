@@ -11,7 +11,7 @@ public class InputHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int codice = e.getKeyCode();
-
+// i used the arrows instead of WASD
         if (codice == KeyEvent.VK_UP)    su = true;
         if (codice == KeyEvent.VK_DOWN)  giu = true;
         if (codice == KeyEvent.VK_LEFT)  sinistra = true;
