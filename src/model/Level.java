@@ -1,73 +1,69 @@
 package model;
 
-import java.util.ArrayList;
+import java.awt.Graphics2D;
 import java.util.List;
+import java.awt.Color;
 
 public class Level {
+	
+	private static final int erba = 0;
+    private static final int muro = 1;
+
+    private static final Color coloreMuro = new Color(64, 64, 64);
+    private static final Color coloreErba = new Color(0, 128, 0);
+
+
+    // 0 = grass, 1 = wall
+    private int[][] mappa = {
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1},
+        {1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+    };
     
-    // The map
-    // 0 = Grass (Player can walk in it), 1 = Wall (it's solid)
-    private int[][] mappa;
-    
-    // Enemies in the room
-    private List<Enemy> nemici;
-    	
+ // Later add enemies in the room
+   
 
+    private final int tileSize = 32; // 32x32 pixel
 
-    // dimensions
-    private static final int COLONNE = 16;
-    private static final int RIGHE = 11;
-    private static final int TILE_SIZE = 32; // measure of each block
-
-    // construct 
     public Level() {
-        // to start the empty list of enemies
-        nemici = new ArrayList<>();
         
-        // loads the structure of the map
-        caricaMappa();
-        
-        
-        nemici.add(new Enemy(100, 100));
-        nemici.add(new Enemy(300, 200));
     }
 
-    // creating a closed room
-    private void caricaMappa() {
-        mappa = new int[RIGHE][COLONNE];
-        
-        for (int riga = 0; riga < RIGHE; riga++) {
-            for (int col = 0; col < COLONNE; col++) {
-                // if we are on the outside border it creates a wall (1), else grass (0)
-                if (riga == 0 || riga == RIGHE - 1 || col == 0 || col == COLONNE - 1) {
-                    mappa[riga][col] = 1; // Wall/Muro
+    public void render(Graphics2D g2) {
+        for (int riga = 0; riga < mappa.length; riga++) {
+            for (int colonna = 0; colonna < mappa[riga].length; colonna++) {
+                
+                int x = colonna * tileSize;
+                int y = riga * tileSize;
+
+                if (mappa[riga][colonna] == muro) {
+                    g2.setColor(coloreMuro); // Wall, gray
                 } else {
-                    mappa[riga][col] = 0; // Grass/Erba
+                    g2.setColor(coloreErba); // Grass, green
                 }
+
+                g2.fillRect(x, y, tileSize, tileSize);
             }
         }
     }
 
-    // for the colliding
-    
-    // to warn about a solid object, like a wall
-    public boolean isOstacoloSolido(int x, int y) {
-      
-        int colonna = x / TILE_SIZE;
-        int riga = y / TILE_SIZE;
-        
-        // to not crash the game
-        if (colonna < 0 || colonna >= COLONNE || riga < 0 || riga >= RIGHE) {
-            return true; // to not go on the outside of the screen
+    // for colliding
+    public boolean presenzaOstacolo(int x, int y) {
+        int colonna = x / tileSize;
+        int riga = y / tileSize;
+
+        //if outside, its a wall
+        if (riga < 0 || riga >= mappa.length || colonna < 0 || colonna >= mappa[0].length) {
+            return true;
         }
-        
+
         
         return mappa[riga][colonna] == 1;
     }
 
-    public int[][] getMappa() { return mappa; }
-    
-    public List<Enemy> getNemici() { return nemici; }
-    
-    public int getTileSize() { return TILE_SIZE; }
+    public int getTileSize() { return tileSize; }
 }

@@ -23,10 +23,8 @@ public class GameState {
         	return; // so we stop when game over
         }
 
-        // 1) move enemies
-        for (Enemy e : livelloAttuale.getNemici()) {
-            e.aggiorna();
-        }
+      
+        
 
         // 2) checks if player is alive or not
         if (player.getPuntiVita() <= 0) {

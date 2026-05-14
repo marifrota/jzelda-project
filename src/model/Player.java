@@ -2,10 +2,11 @@ package model;
 
 import java.awt.Rectangle;
 
+
 public class Player {
     
    public enum Direzione { 
-	   NORD, SUD, EST, OVEST
+	   NORD, SUD, EST, OVEST, IDLE
    }
     
   //character profile 
@@ -20,10 +21,30 @@ public class Player {
         this.x = xIniziale;
         this.y = yIniziale; }
    
- public void muovi(int dx, int dy) {
-        x += dx;
-        y += dy;
+ public void muovi(Direzione direzione) {
+	 this.direzione = direzione;
+
+	    switch (direzione) {
+
+	        case NORD:
+	            y -= velocita;
+	            break;
+
+	        case SUD:
+	            y += velocita;
+	            break;
+
+	        case EST:
+	            x += velocita;
+	            break;
+
+	        case OVEST:
+	            x -= velocita;
+	            break;
+	        case IDLE:
+	        	break;
     }
+ }
 
     //rectangle for colliding Area
  public java.awt.Rectangle getBounds() {

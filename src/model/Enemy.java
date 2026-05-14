@@ -6,8 +6,8 @@ import java.util.Random; // to make the enemy go in different directions
 public class Enemy {
 
     public enum Direzione {
-        NORD, SUD, EST, OVEST
-    }
+        NORD, SUD, EST, OVEST, IDLE
+    } //
 
     //enemy profile
     private int x;
@@ -19,7 +19,7 @@ public class Enemy {
     //to make the enemy move
     private Direzione direzione = Direzione.SUD;
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
     private int contatorePassi = 0;
     //construct
@@ -39,6 +39,7 @@ public class Enemy {
 
             contatorePassi = 0;
         }
+      
    //movement based on the preferred direction
         switch (direzione) {
 
@@ -54,12 +55,14 @@ public class Enemy {
             case OVEST:
                 x -= velocita;
                 break;
+            case IDLE:
+            	break;
         }
     }
 
     private void scegliDirezioneCasuale() {
 
-        int numero = random.nextInt(4);
+        int numero = random.nextInt(5);
 
         switch (numero) {
 
@@ -75,6 +78,9 @@ public class Enemy {
             case 3:
                 direzione = Direzione.OVEST;
                 break;
+            case 4:
+            	direzione = Direzione.IDLE;
+            	break;
         }
     }
   //to understand if the Enemy made contact with the Player or an object
@@ -86,7 +92,7 @@ public class Enemy {
         puntiVita -= danno;
     }
 //when enemy dead
-    public boolean isMorto() {
+    public boolean nemicoMorto() {
         return puntiVita <= 0;
     }
 
