@@ -71,6 +71,10 @@ public class GameController implements Runnable {
         	gameState.getPlayer().setStaAttaccando(false);
         }//MARIAN UPDATE 15/5
         gameState.update(); 
+        if(inputHandler.attacco && gameState.getEnemy().isAlive() && gameState.getPlayer().getBounds().intersects(gameState.getEnemy().getBounds())) { 
+        	gameState.getEnemy().setAlive(false);
+        	gameState.addScore(100);
+        }
     }
 
     private void render() {

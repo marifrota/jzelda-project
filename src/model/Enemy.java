@@ -4,7 +4,8 @@ import java.awt.Rectangle;
 import java.util.Random; // to make the enemy go in different directions
 
 public class Enemy {
-
+	
+	private boolean alive = true;
     public enum Direzione {
         NORD, SUD, EST, OVEST, IDLE
     } //
@@ -27,6 +28,12 @@ public class Enemy {
 
         this.x = xIniziale;
         this.y = yIniziale;
+    }
+    public boolean isAlive() {
+    	return alive;
+    }
+    public void setAlive(boolean alive) {
+    	this.alive = alive;
     }
     //the brain, it will be called by the game loop each 60 updates
     public void aggiorna() {

@@ -40,6 +40,8 @@ public class GamePanel extends JPanel{
 		if(gameState.getPlayer().isStaAttaccando()) {
 			g.drawString("ATTACCO!!!", 250,250);
 		}
+		hud.aumentapunteggio(gameState.getScore());
+
 	}
 	
 	private void drawPlayer(Graphics g) {
@@ -49,9 +51,11 @@ public class GamePanel extends JPanel{
 	}
 	
 	private void drawEnemy(Graphics g) {
-		g.setColor(Color.BLACK);
-		Enemy enemy = gameState.getEnemy();
-		g.fillRect(enemy.getX(),enemy.getY(),32,32);//(Square that works as a "fake enemy")	
+		if(gameState.getEnemy().isAlive()) {
+			g.setColor(Color.BLACK);
+			Enemy enemy = gameState.getEnemy();
+			g.fillRect(enemy.getX(),enemy.getY(),32,32);//(Square that works as a "fake enemy")	
+		}
 	}
 	
 	private void drawMap(Graphics g) {

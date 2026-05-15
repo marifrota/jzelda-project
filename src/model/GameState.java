@@ -1,4 +1,5 @@
 package model;
+import java.awt.Rectangle;
 
 
 public class GameState {
@@ -9,6 +10,7 @@ public class GameState {
     private Level livelloAttuale;
     private boolean gameOver = false;
     private boolean collision = false;
+    private int score = 0;
     //construct
     public GameState() {
         // PLayer spawns in the middle of the screen
@@ -16,6 +18,14 @@ public class GameState {
         enemy = new Enemy(300,300);
         // creating level (with map and enemies)
         livelloAttuale = new Level();
+    }
+    
+    public void addScore(int points) {
+    	score += points;
+    }
+    
+    public int getScore() {
+    	return score;
     }
 
     // the total brain
@@ -35,6 +45,10 @@ public class GameState {
         	collision = true;
         } else {
         	collision = false;
+        }
+        
+        if(player.getBounds().intersects(enemy.getBounds())) {
+            collision = true;
         }
     }
 
