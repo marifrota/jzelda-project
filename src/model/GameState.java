@@ -17,7 +17,7 @@ public class GameState {
         // PLayer spawns in the middle of the screen
         player = new Player(200, 200);
         enemy = new Enemy(300,300);
-        enemy2 = new Enemy(450, 150); // 2nd enemy, he does not move 15/05
+        enemy2 = new Enemy(120,120); // 2nd enemy, he does not move 15/05
         // creating level (with map and enemies)
         livelloAttuale = new Level();
     }
