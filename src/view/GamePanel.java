@@ -28,6 +28,18 @@ public class GamePanel extends JPanel{
 		drawMap(g);
 		drawPlayer(g);
 		drawEnemy(g);
+		
+		if(gameState.isCollision()) {
+			g.drawString("Collision!", 200, 200);
+		}
+		
+		if(gameState.isGameOver()) {
+			g.drawString("GAME OVER!", 300, 300);
+		}
+		
+		if(gameState.getPlayer().isStaAttaccando()) {
+			g.drawString("ATTACCO!!!", 250,250);
+		}
 	}
 	
 	private void drawPlayer(Graphics g) {

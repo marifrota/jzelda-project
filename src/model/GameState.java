@@ -8,7 +8,7 @@ public class GameState {
     private Enemy enemy;
     private Level livelloAttuale;
     private boolean gameOver = false;
-
+    private boolean collision = false;
     //construct
     public GameState() {
         // PLayer spawns in the middle of the screen
@@ -30,7 +30,12 @@ public class GameState {
             gameOver = true;
         }
         
-        //colliding controls
+        //colliding controls (MARIANA UPDATE 15/5)
+        if (livelloAttuale.presenzaOstacolo(player.getX(), player.getY())) {
+        	collision = true;
+        } else {
+        	collision = false;
+        }
     }
 
     // GETTERS 
@@ -40,4 +45,7 @@ public class GameState {
     }
     public Level getLivelloAttuale() { return livelloAttuale; }
     public boolean isGameOver() { return gameOver; }
+    public boolean isCollision() {
+    	return collision;
+    } //MARIANA UPDATE  15/5
 }

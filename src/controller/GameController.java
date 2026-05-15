@@ -65,7 +65,11 @@ public class GameController implements Runnable {
         if (inputHandler.giu) gameState.getPlayer().muoviGiu();
         if (inputHandler.sinistra) gameState.getPlayer().muoviSinistra();
         if (inputHandler.destra) gameState.getPlayer().muoviDestra();
-        
+        if (inputHandler.attacco) {
+        	gameState.getPlayer().setStaAttaccando(true);
+        } else {
+        	gameState.getPlayer().setStaAttaccando(false);
+        }//MARIAN UPDATE 15/5
         gameState.update(); 
     }
 
