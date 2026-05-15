@@ -56,7 +56,14 @@ public class GamePanel extends JPanel{
 			Enemy enemy = gameState.getEnemy();
 			g.fillRect(enemy.getX(),enemy.getY(),32,32);//(Square that works as a "fake enemy")	
 		}
+		
+		if(gameState.getEnemy2().isAlive()) {
+			g.setColor(Color.BLUE);
+			Enemy enemy2 = gameState.getEnemy2();
+			g.fillRect(enemy2.getX(),enemy2.getY(),32,32);// 15/05 Meryem has been here! drawing for the second enemy	
+		
 	}
+		}
 	
 	private void drawMap(Graphics g) {
 	    gameState.getLivelloAttuale().render((Graphics2D) g);

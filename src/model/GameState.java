@@ -7,6 +7,7 @@ public class GameState {
     // World's elements
     private Player player;
     private Enemy enemy;
+    private Enemy enemy2; //update 15/05
     private Level livelloAttuale;
     private boolean gameOver = false;
     private boolean collision = false;
@@ -16,6 +17,7 @@ public class GameState {
         // PLayer spawns in the middle of the screen
         player = new Player(200, 200);
         enemy = new Enemy(300,300);
+        enemy = new Enemy(450, 150); // 2nd enemy, he does not move 15/05
         // creating level (with map and enemies)
         livelloAttuale = new Level();
     }
@@ -34,6 +36,9 @@ public class GameState {
         	return; // so we stop when game over
         }
         
+     // 15/05
+        enemy.aggiorna(); // to move 1st enemy
+        
 
         // checks if player is alive or not
         if (player.getPuntiVita() <= 0) {
@@ -50,12 +55,18 @@ public class GameState {
         if(player.getBounds().intersects(enemy.getBounds())) {
             collision = true;
         }
+        if(player.getBounds().intersects(enemy2.getBounds())); {
+        	collision = true;
+        }
     }
 
     // GETTERS 
     public Player getPlayer() { return player; }
     public Enemy getEnemy() {
     	return enemy;
+    }
+    public Enemy getEnemy2() {
+    	return enemy2;
     }
     public Level getLivelloAttuale() { return livelloAttuale; }
     public boolean isGameOver() { return gameOver; }
