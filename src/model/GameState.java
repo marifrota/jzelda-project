@@ -100,6 +100,8 @@ public class GameState {
          if (touchObstacle(enemy2.getX(), enemy2.getY())) {
                 enemy2.setX(vecchiaX2);
                 enemy2.setY(vecchiaY2);
+                
+                enemy2.scegliDirezioneCasuale();
             }     
         }
          
@@ -110,6 +112,8 @@ public class GameState {
         	    if (touchObstacle(enemy3.getX(), enemy3.getY())) {
         	        enemy3.setX(vecchiaX3);
         	        enemy3.setY(vecchiaY3);
+        	        
+                    enemy3.scegliDirezioneCasuale();
         	    }
         	}
          
@@ -120,6 +124,8 @@ public class GameState {
         	    if (touchObstacle(enemy4.getX(), enemy4.getY())) {
         	        enemy4.setX(vecchiaX4);
         	        enemy4.setY(vecchiaY4);
+        	        
+                    enemy4.scegliDirezioneCasuale();
         	    }
         	}
          
@@ -130,6 +136,8 @@ public class GameState {
         	    if (touchObstacle(enemy5.getX(), enemy5.getY())) {
         	        enemy5.setX(vecchiaX5);
         	        enemy5.setY(vecchiaY5);
+        	        
+                    enemy5.scegliDirezioneCasuale();
         	    }
         	}
               

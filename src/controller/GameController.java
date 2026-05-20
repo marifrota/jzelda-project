@@ -2,6 +2,7 @@ package controller;
 
 import model.GameState;
 import view.GamePanel;
+import view.AudioManager;
 
 public class GameController implements Runnable {
 
@@ -63,29 +64,37 @@ public class GameController implements Runnable {
     private void update() {
     	if(inputHandler.exit) {
             System.exit(0);
-        }//EXIT
+        }
+    	//EXIT
     	if(inputHandler.retry && gameState.isGameOver()) {
     		gameState.resetGame();
-    	} //TRY AGAIN
+    	} 
+    	//TRY AGAIN
     	if(!gameState.isGameOver()) {
-	    	if (inputHandler.su) gameState.getPlayer().muoviSu();
-	        if (inputHandler.giu) gameState.getPlayer().muoviGiu();
-	        if (inputHandler.sinistra) gameState.getPlayer().muoviSinistra();
-	        if (inputHandler.destra) gameState.getPlayer().muoviDestra();
-	        if (inputHandler.attacco) {
-	        	gameState.getPlayer().setStaAttaccando(true);
-	        } else {
-	        	gameState.getPlayer().setStaAttaccando(false);
-	        }//MARIANA UPDATE 15/5
-	        if(inputHandler.attacco && gameState.getEnemy().isAlive() && gameState.getPlayer().getBounds().intersects(gameState.getEnemy().getBounds())) { 
-	        	gameState.getEnemy().setHit(true);
-	        	gameState.getEnemy().setAlive(false);
-	        	gameState.addScore(100);
-	        }
+    		//movement
+    		if (inputHandler.su) { gameState.getPlayer().muoviSu();
+    		
+    		} else if (inputHandler.giu) { gameState.getPlayer().muoviGiu();
+    		    
+    		} else if (inputHandler.sinistra) {gameState.getPlayer().muoviSinistra();
 
+    		} else if (inputHandler.destra) {gameState.getPlayer().muoviDestra(); 
+    			
+	      }
+    	//MARIANA UPDATE 15/5
+	      //  if(inputHandler.attacco && gameState.getEnemy().isAlive() && gameState.getPlayer().getBounds().intersects(gameState.getEnemy().getBounds())) { 
+	        //	gameState.getEnemy().setHit(true);
+	        //	gameState.getEnemy().setAlive(false);
+	        //	gameState.addScore(100);
+    		//Attack
+	        if (inputHandler.attacco) {
+	            gameState.getPlayer().startAttack();
+	        }
+	        gameState.getPlayer().update();
 	        gameState.update(); 
+    	}
 	    }
-    }
+    
 
     private void render() {
         //Asks Swing to redimension the panel 

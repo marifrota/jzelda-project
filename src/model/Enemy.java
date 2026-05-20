@@ -56,24 +56,29 @@ public class Enemy {
     
 //20/05 
     public void followPlayer(Player player) {
-    //x
-    if (this.x < player.getX()) {
-        this.x += velocita;
-        direzione = Direzione.EST;
-    } else if (this.x > player.getX()) {
-        this.x -= velocita;
-        direzione = Direzione.OVEST;
-    }
 
-    //y
-    if (this.y < player.getY()) {
-        this.y += velocita;
-        direzione = Direzione.SUD;
-    } else if (this.y > player.getY()) {
-        this.y -= velocita;
-        direzione = Direzione.NORD;
+        int dx = player.getX() - this.x;
+        int dy = player.getY() - this.y;
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+
+            if (dx > 0) { direzione = Direzione.EST;
+                x += velocita;
+            } else {
+                direzione = Direzione.OVEST;
+                x -= velocita;
+            }
+
+        } else {
+            if (dy > 0) {
+                direzione = Direzione.SUD;
+                y += velocita;
+            } else {
+                direzione = Direzione.NORD;
+                y -= velocita;
+            }
+        }
     }
-}
     
    //movement based on the preferred direction
     public void moveEnemy() {
