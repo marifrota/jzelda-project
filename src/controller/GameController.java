@@ -77,11 +77,15 @@ public class GameController implements Runnable {
 	        } else {
 	        	gameState.getPlayer().setStaAttaccando(false);
 	        }//MARIANA UPDATE 15/5
+<<<<<<< HEAD
 	        if(inputHandler.attacco && gameState.getEnemy().isAlive() && gameState.getPlayer().getBounds().intersects(gameState.getEnemy().getBounds())) { 
 	        	gameState.getEnemy().setHit(true);
 	        	gameState.getEnemy().setAlive(false);
 	        	gameState.addScore(100);
 	        }
+=======
+	    
+>>>>>>> branch 'master' of https://github.com/marifrota/jzelda-project.git
 	        gameState.update(); 
 	    }
     }
