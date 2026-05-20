@@ -92,21 +92,39 @@ public class GamePanel extends JPanel{
 	}
 	
 	private void drawEnemy(Graphics g) {
-		if(gameState.getEnemy().isAlive()) {
-			Enemy enemy = gameState.getEnemy();
-			g.fillRect(enemy.getX(),enemy.getY(),32,32);//(Square that works as a "fake enemy")	
-			if(enemy.isHit()) {
-			    g.setColor(Color.RED);
-			} else {
-			    g.setColor(Color.BLACK);
-			}
-		}
-		
-		if(gameState.getEnemy2().isAlive()) {
-			g.setColor(Color.BLUE);
-			Enemy enemy2 = gameState.getEnemy2();
-			g.fillRect(enemy2.getX(),enemy2.getY(),32,32);// 15/05 Meryem has been here! drawing for the second enemy	
-		}
+	    if(gameState.getEnemy().isAlive()) {
+	        Enemy enemy = gameState.getEnemy();
+	        if(enemy.isHit()) {
+	            g.setColor(Color.RED);
+	        } else {
+	            g.setColor(Color.BLACK);
+	        }
+	        g.fillRect(enemy.getX(), enemy.getY(), 32, 32);
+	    }
+
+	    if(gameState.getEnemy2().isAlive()) {
+	        g.setColor(Color.BLUE);
+	        Enemy enemy2 = gameState.getEnemy2();
+	        g.fillRect(enemy2.getX(), enemy2.getY(), 32, 32);
+	    }
+
+	    if(gameState.getEnemy3().isAlive()) {
+	        g.setColor(Color.ORANGE);
+	        Enemy enemy3 = gameState.getEnemy3();
+	        g.fillRect(enemy3.getX(), enemy3.getY(), 32, 32);
+	    }
+
+	    if(gameState.getEnemy4().isAlive()) {
+	        g.setColor(Color.PINK);
+	        Enemy enemy4 = gameState.getEnemy4();
+	        g.fillRect(enemy4.getX(), enemy4.getY(), 32, 32);
+	    }
+
+	    if(gameState.getEnemy5().isAlive()) {
+	        g.setColor(Color.YELLOW);
+	        Enemy enemy5 = gameState.getEnemy5();
+	        g.fillRect(enemy5.getX(), enemy5.getY(), 32, 32);
+	    }
 	}
 		
 	

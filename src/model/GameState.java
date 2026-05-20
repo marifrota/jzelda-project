@@ -9,13 +9,16 @@ public class GameState {
     private Player player;
     private Enemy enemy;
     private Enemy enemy2; //update 15/05
+    private Enemy enemy3;
+    private Enemy enemy4;
+    private Enemy enemy5;
     private Level livelloAttuale;
     private int livelloCorrente = 1;
     private boolean gameOver = false;
     private boolean colliding = false;
     private int score = 0;
 	private List<GameObserver> observers  = new ArrayList<>();
-
+	
     private int cooldownDamage = 0;
     
     //CONSTRUCT
@@ -24,7 +27,9 @@ public class GameState {
         player = new Player(100, 150);
         enemy = new Enemy(400,200);
         enemy2 = new Enemy(500,300); // 2nd enemy, he does not move 15/05, now he does 20/05
-        
+        enemy3 = new Enemy(600, 250);
+        enemy4 = new Enemy(700, 350);
+        enemy5 = new Enemy(800, 150);
         // creating level (with map and enemies)
         livelloAttuale = new Level();
     }
@@ -97,6 +102,36 @@ public class GameState {
                 enemy2.setY(vecchiaY2);
             }     
         }
+         
+         if (enemy3.isAlive()) {
+        	    int vecchiaX3 = enemy3.getX();
+        	    int vecchiaY3 = enemy3.getY();
+        	    enemy3.followPlayer(player);
+        	    if (touchObstacle(enemy3.getX(), enemy3.getY())) {
+        	        enemy3.setX(vecchiaX3);
+        	        enemy3.setY(vecchiaY3);
+        	    }
+        	}
+         
+         if (enemy4.isAlive()) {
+        	    int vecchiaX4 = enemy4.getX();
+        	    int vecchiaY4 = enemy4.getY();
+        	    enemy4.followPlayer(player);
+        	    if (touchObstacle(enemy4.getX(), enemy4.getY())) {
+        	        enemy4.setX(vecchiaX4);
+        	        enemy4.setY(vecchiaY4);
+        	    }
+        	}
+         
+         if (enemy5.isAlive()) {
+        	    int vecchiaX5 = enemy5.getX();
+        	    int vecchiaY5 = enemy5.getY();
+        	    enemy5.followPlayer(player);
+        	    if (touchObstacle(enemy5.getX(), enemy5.getY())) {
+        	        enemy5.setX(vecchiaX5);
+        	        enemy5.setY(vecchiaY5);
+        	    }
+        	}
               
       if(cooldownDamage > 0) {
     	  cooldownDamage--;
@@ -128,6 +163,24 @@ public class GameState {
                     addScore(100);
                 }
             }
+            if (enemy3.isAlive() &&player.getAttackBounds().intersects(enemy3.getBounds())) {
+            	enemy3.subisciDanno(1);
+            	if (enemy3.nemicoMorto()) {
+            		addScore(150);
+            	}
+            }
+            if (enemy4.isAlive() &&player.getAttackBounds().intersects(enemy4.getBounds())) {
+            		enemy4.subisciDanno(1);
+            	    if (enemy4.nemicoMorto()) {
+            	        addScore(200);
+            	    }
+            }
+            if (enemy5.isAlive() &&player.getAttackBounds().intersects(enemy5.getBounds())) {
+            	    enemy5.subisciDanno(1);
+            	    if (enemy5.nemicoMorto()) {
+            	        addScore(250);
+            	    }
+            }
         }
         
         if (enemy.isAlive() && player.getBounds().intersects(enemy.getBounds())) {
@@ -142,6 +195,24 @@ public class GameState {
             if (cooldownDamage == 0) {
                 loseLife();
             }
+        }
+        if (enemy3.isAlive() &&player.getBounds().intersects(enemy3.getBounds())) {
+        	    colliding = true;
+        	    if (cooldownDamage == 0) {
+        	        loseLife();
+        	    }
+        }
+        if (enemy4.isAlive() && player.getBounds().intersects(enemy4.getBounds())) {
+        	    colliding = true;
+        	    if (cooldownDamage == 0) {
+        	        loseLife();
+        	    }
+        }
+        if (enemy5.isAlive() &&player.getBounds().intersects(enemy5.getBounds())) {
+        	    colliding = true;
+        	    if (cooldownDamage == 0) {
+        	        loseLife();
+        	    }
         }
     }
 
@@ -158,6 +229,9 @@ public class GameState {
     	player = new Player(200,200);
         enemy = new Enemy(300,300);
         enemy2 = new Enemy(500,300);
+        enemy3 = new Enemy(600,250);
+        enemy4 = new Enemy(700,350);
+        enemy5 = new Enemy(800,150);
         gameOver = false;
         score = 0;
     }
@@ -175,6 +249,15 @@ public class GameState {
     public Player getPlayer() { return player; }
     public Enemy getEnemy() { return enemy; }
     public Enemy getEnemy2() { return enemy2; }
+    public Enemy getEnemy3() {
+        return enemy3;
+    }
+    public Enemy getEnemy4() {
+        return enemy4;
+    }
+    public Enemy getEnemy5() {
+        return enemy5;
+    }
     public Level getLivelloAttuale() { return livelloAttuale; }
     public boolean isGameOver() { return gameOver; }
     public boolean isColliding() { return colliding; } //MARIANA UPDATE  15/5
