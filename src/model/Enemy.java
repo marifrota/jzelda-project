@@ -89,7 +89,7 @@ public class Enemy {
         }
     }
 
-    private void scegliDirezioneCasuale() {
+    public void scegliDirezioneCasuale() {
         int numero = random.nextInt(5);
         switch (numero) {
 
@@ -136,5 +136,13 @@ public class Enemy {
 
     public int getY() {
         return y;
+    }
+    //20/05
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

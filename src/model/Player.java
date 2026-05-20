@@ -65,7 +65,17 @@ public class Player {
 	    return new java.awt.Rectangle(x, y, 32, 32);
 	}
     
+    //rectangle for the sword
+ public Rectangle getAttackBounds() {
+     switch (direzione) {
+         case NORD: return new Rectangle(x, y - 32, 32, 32);
+         case SUD:  return new Rectangle(x, y + 32, 32, 32);
+         case EST:  return new Rectangle(x + 32, y, 32, 32);
+         case OVEST: return new Rectangle(x - 32, y, 32, 32);
+         default:   return getBounds(); }
+ }
  
+ //GETTERS AND SETTERS
     public int getX() { return x; }
     public void setX(int x) { this.x = x; }
 

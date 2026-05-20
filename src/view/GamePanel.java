@@ -55,7 +55,7 @@ public class GamePanel extends JPanel{
 		drawAttackEffect(g);
 		drawGameOver(g);
 		
-		if(gameState.isCollision()) {
+		if(gameState.isColliding()) { // tua amie was here!
 			g.drawString("COLLISION!", 200, 200);
 		}
 		
