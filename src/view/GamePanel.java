@@ -39,44 +39,53 @@ public class GamePanel extends JPanel{
 	
 	private void drawGameOver(Graphics g) {
 		if(gameState.isGameOver()) {
+			g.setColor(new Color(0,0,0,180));
+			g.fillRect(0,0,getWidth(),getHeight());
+			g.setFont(new Font("Arial", Font.BOLD, 60));
+			g.setColor(Color.WHITE);
+			g.drawString("GAME OVER",295,225);
 			g.setColor(Color.RED);
 			g.setFont(new Font("Arial", Font.BOLD, 60));
-			g.drawString("GAME OVER", 250, 250);
-			g.setFont( new Font("Arial", Font.PLAIN, 24));
-			g.drawString("Press R to Try Again", 220, 340);
-			g.drawString("Press ESC to Exit", 240, 390);
+			g.drawString("GAME OVER", 290, 220);
+			g.setFont( new Font("Arial", Font.PLAIN, 26));
+			g.setColor(Color.WHITE);
+			g.drawString("Press R to Try Again", 290, 340);
+			g.drawString("Press ESC to Exit", 290, 390);
+			g.setColor(Color.YELLOW);
+			g.drawString("Press R to Try Again", 291, 341);
+			g.drawString("Press ESC to Exit", 291, 391);
 		}
 	}
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		g.drawString("Gioco iniziato!",100,100);//retangulo com a frase no meio(Rectangle with centered text)
 		drawMap(g);
 		drawPlayer(g);
 		drawEnemy(g);
 		drawAttackEffect(g);
 		drawGameOver(g);
 		
-		if(gameState.isColliding()) { // tua amie was here!
-			g.drawString("COLLISION!", 200, 200);
+		if(!gameState.isGameOver()) {
+			if(gameState.isColliding()) { // tua amie was here!
+				g.drawString("COLLISION!", 200, 200);
+			}
+			
+			if(gameState.getPlayer().isStaAttaccando()) {
+				g.drawString("ATTACCO!!!", 250,250);
+			}
 		}
-		
-		if(gameState.isGameOver()) {
-			g.drawString("GAME OVER!!!", 300, 300);
-		}
-		
-		if(gameState.getPlayer().isStaAttaccando()) {
-			g.drawString("ATTACCO!!!", 250,250);
-		}
+		drawGameOver(g);
 		hud.aumentapunteggio(gameState.getScore());
 		hud.aumentavita(gameState.getPlayer().getPuntiVita());
 	}
 	
 	private void drawPlayer(Graphics g) {
-		g.setColor(Color.RED);
+		g.setColor(Color.BLACK);
 		Player player = gameState.getPlayer();
-		g.fillRect(player.getX(),player.getY(),32,32);//(Square that works as a "fake player")	
+		g.fillOval(player.getX()-2,player.getY()-2,36,36);
+		g.setColor(new Color(220,20,60));
+		g.fillOval(player.getX(),player.getY(), 32, 32);
 	}
 	
 	private void drawEnemy(Graphics g) {

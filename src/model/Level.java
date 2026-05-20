@@ -9,7 +9,7 @@ public class Level {
 	private static final int erba = 0;
     private static final int muro = 1;
 
-    private static final Color coloreMuro = new Color(64, 64, 64);
+    private static final Color coloreMuro = new Color(101,67,33);
     private static final Color coloreErba = new Color(0, 128, 0);
 
 
