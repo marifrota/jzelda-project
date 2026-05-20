@@ -19,6 +19,8 @@ public class GameController implements Runnable {
         this.gameState = gameState;
         this.gamePanel = gamePanel;
         this.inputHandler = inputHandler;
+        
+        AudioManager.getInstance().play("resources/03.-Dungeon-Theme_1.wav");
     }
 
     // to start game engine 

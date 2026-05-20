@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Rectangle;
+import view.AudioManager;
 
 public class Player {
 
@@ -30,6 +31,8 @@ public class Player {
 
         if (timerAttacco == 0) {
             timerAttacco = 10;
+            AudioManager.getInstance()
+            .play("resources/15 - SE_GAME_ATTACK1.wav");
         }
     }
 

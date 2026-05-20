@@ -3,6 +3,8 @@ import java.awt.Rectangle;
 import view.GameObserver;
 import java.util.ArrayList;
 import java.util.List;
+import model.SaveManager;
+import view.AudioManager;
 
 public class GameState {
     // World's elements
@@ -229,7 +231,11 @@ public class GameState {
     	player.setPuntiVita(player.getPuntiVita() - 1);
     	cooldownDamage = 30;
     	if (player.getPuntiVita() <= 0) {
-            gameOver = true;
+            gameOver = true;       
+            
+        AudioManager.getInstance().play("resources/11-Game-Over.wav");
+           
+         SaveManager.saveScore(score);
     	}
     }
     
