@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.util.Random; // to make the enemy go in different directions
 
 public class Enemy {
-	
+	private boolean hit = false;
 	private boolean alive = true;
     public enum Direzione {
         NORD, SUD, EST, OVEST, IDLE
@@ -23,6 +23,13 @@ public class Enemy {
     private int contatorePassi = 0;
     
     //construct
+    public boolean isHit() {
+        return hit;
+    }
+    public void setHit(boolean hit) {
+        this.hit = hit;
+    }
+    
     public Enemy(int xIniziale, int yIniziale) {
 
         this.x = xIniziale;

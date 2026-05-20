@@ -46,7 +46,9 @@ public class Level {
                     g2.setColor(coloreErba); // Grass, green
                 }
 
-                g2.fillRect(x, y, tileSize, tileSize);
+                g2.fillRect(x, y, tileSize, tileSize); //The tile borders were softened to give the map a more vintage and retro look
+                g2.setColor(Color.BLACK);
+                g2.drawRect(x,y,tileSize,tileSize);
             }
         }
     }

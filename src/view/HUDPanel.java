@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Color;
 
 
-public class HUDPanel extends JPanel{
+public class HUDPanel extends JPanel implements GameObserver{
 	
 	private JLabel scoreLabel;
 	private JLabel livesLabel;
@@ -30,5 +30,11 @@ public class HUDPanel extends JPanel{
 	
 	public void aumentavita(int vita) {
 		livesLabel.setText("Lives: " + vita);
+	}
+	
+	public void update() {
+	    System.out.println(
+	        "HUD updated!"
+	    );
 	}
 }

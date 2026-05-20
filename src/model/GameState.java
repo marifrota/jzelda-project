@@ -1,19 +1,21 @@
 package model;
 import java.awt.Rectangle;
-
+import view.GameObserver;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameState {
-    
     // World's elements
     private Player player;
     private Enemy enemy;
     private Enemy enemy2; //update 15/05
     private Level livelloAttuale;
-
+    private int livelloCorrente = 1;
     private boolean gameOver = false;
     private boolean colliding = false;
     private int score = 0;
-    
+	private List<GameObserver> observers  = new ArrayList<>();
+
     private int cooldownDamage = 0;
     
     //CONSTRUCT
@@ -38,7 +40,12 @@ public class GameState {
     // score system
     public void addScore(int points) { score += points; }
     public int getScore() { return score; }
-
+    public int getLivelloCorrente() {
+        return livelloCorrente;
+    }
+    public void nextLevel() {
+        livelloCorrente++;
+    }
     //  the brain
     public void update() {
         if (gameOver) return; // so we stop when game over
@@ -153,6 +160,16 @@ public class GameState {
         enemy2 = new Enemy(500,300);
         gameOver = false;
         score = 0;
+    }
+    
+    public void addObserver(GameObserver observer) {
+        observers.add(observer);
+    }//GameObserve allows that GameState notify the HUD and the others objects when some information changes.
+    
+    public void notifyObservers() {
+        for(GameObserver observer: observers) {
+            observer.update();
+        }
     }
     // GETTERS 
     public Player getPlayer() { return player; }

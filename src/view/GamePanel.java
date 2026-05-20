@@ -26,14 +26,16 @@ public class GamePanel extends JPanel{
 		Player player = gameState.getPlayer();
 		if(player.isStaAttaccando()) {
 			g.setColor(Color.YELLOW);
-			g.fillRect(player.getX()+32, player.getY(), 20,20);
+			g.fillOval(player.getX()+20, player.getY()-5, 30,30);
 		}
 	}
 	
 	private void drawCOLLISSION(Graphics g) {
 		if(gameState.isColliding()) {
 			g.setColor(Color.WHITE);
-			g.drawString("COLLISION!", 350,50);
+			g.setFont(new Font("Arial",Font.BOLD,28));
+				g.setColor(Color.WHITE);
+				g.drawString("COLLISION!",220,200);		
 		}
 	}
 	
@@ -65,6 +67,7 @@ public class GamePanel extends JPanel{
 		drawEnemy(g);
 		drawAttackEffect(g);
 		drawGameOver(g);
+		drawLevel(g);
 		
 		if(!gameState.isGameOver()) {
 			if(gameState.isColliding()) { // tua amie was here!
@@ -90,18 +93,22 @@ public class GamePanel extends JPanel{
 	
 	private void drawEnemy(Graphics g) {
 		if(gameState.getEnemy().isAlive()) {
-			g.setColor(Color.BLACK);
 			Enemy enemy = gameState.getEnemy();
 			g.fillRect(enemy.getX(),enemy.getY(),32,32);//(Square that works as a "fake enemy")	
+			if(enemy.isHit()) {
+			    g.setColor(Color.RED);
+			} else {
+			    g.setColor(Color.BLACK);
+			}
 		}
 		
 		if(gameState.getEnemy2().isAlive()) {
 			g.setColor(Color.BLUE);
 			Enemy enemy2 = gameState.getEnemy2();
 			g.fillRect(enemy2.getX(),enemy2.getY(),32,32);// 15/05 Meryem has been here! drawing for the second enemy	
-		
-	}
 		}
+	}
+		
 	
 	private void drawMap(Graphics g) {
 	    gameState.getLivelloAttuale().render((Graphics2D) g);
@@ -117,5 +124,10 @@ public class GamePanel extends JPanel{
 		vite += vita;
 		hud.aumentavita(vite);
 		repaint();
+	}
+	public void drawLevel(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Arial", Font.BOLD, 20));
+		g.drawString("Level: " + gameState.getLivelloCorrente(), 20, 30);
 	}
 }

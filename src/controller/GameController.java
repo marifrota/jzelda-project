@@ -78,6 +78,7 @@ public class GameController implements Runnable {
 	        	gameState.getPlayer().setStaAttaccando(false);
 	        }//MARIANA UPDATE 15/5
 	        if(inputHandler.attacco && gameState.getEnemy().isAlive() && gameState.getPlayer().getBounds().intersects(gameState.getEnemy().getBounds())) { 
+	        	gameState.getEnemy().setHit(true);
 	        	gameState.getEnemy().setAlive(false);
 	        	gameState.addScore(100);
 	        }
