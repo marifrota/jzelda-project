@@ -61,20 +61,28 @@ public class GameController implements Runnable {
     }
 
     private void update() {
-    	if (inputHandler.su) gameState.getPlayer().muoviSu();
-        if (inputHandler.giu) gameState.getPlayer().muoviGiu();
-        if (inputHandler.sinistra) gameState.getPlayer().muoviSinistra();
-        if (inputHandler.destra) gameState.getPlayer().muoviDestra();
-        if (inputHandler.attacco) {
-        	gameState.getPlayer().setStaAttaccando(true);
-        } else {
-        	gameState.getPlayer().setStaAttaccando(false);
-        }//MARIAN UPDATE 15/5
-        gameState.update(); 
-        if(inputHandler.attacco && gameState.getEnemy().isAlive() && gameState.getPlayer().getBounds().intersects(gameState.getEnemy().getBounds())) { 
-        	gameState.getEnemy().setAlive(false);
-        	gameState.addScore(100);
-        }
+    	if(inputHandler.exit) {
+            System.exit(0);
+        }//EXIT
+    	if(inputHandler.retry && gameState.isGameOver()) {
+    		gameState.resetGame();
+    	} //TRY AGAIN
+    	if(!gameState.isGameOver()) {
+	    	if (inputHandler.su) gameState.getPlayer().muoviSu();
+	        if (inputHandler.giu) gameState.getPlayer().muoviGiu();
+	        if (inputHandler.sinistra) gameState.getPlayer().muoviSinistra();
+	        if (inputHandler.destra) gameState.getPlayer().muoviDestra();
+	        if (inputHandler.attacco) {
+	        	gameState.getPlayer().setStaAttaccando(true);
+	        } else {
+	        	gameState.getPlayer().setStaAttaccando(false);
+	        }//MARIANA UPDATE 15/5
+	        if(inputHandler.attacco && gameState.getEnemy().isAlive() && gameState.getPlayer().getBounds().intersects(gameState.getEnemy().getBounds())) { 
+	        	gameState.getEnemy().setAlive(false);
+	        	gameState.addScore(100);
+	        }
+	        gameState.update(); 
+	    }
     }
 
     private void render() {

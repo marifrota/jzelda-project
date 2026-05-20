@@ -12,7 +12,7 @@ public class Player {
   //character profile 
     private int x, y;                // coordinates
     private int velocita = 4;        // speed movement
-    private int puntiVita = 6;       // health point, 2 are 1 heart
+    private int puntiVita = 3;       // MARIANA CHANGED
     private Direzione direzione = Direzione.SUD; // initial direction
     private boolean staAttaccando = false;
 

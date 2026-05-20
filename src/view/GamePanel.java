@@ -42,6 +42,9 @@ public class GamePanel extends JPanel{
 			g.setColor(Color.RED);
 			g.setFont(new Font("Arial", Font.BOLD, 60));
 			g.drawString("GAME OVER", 250, 250);
+			g.setFont( new Font("Arial", Font.PLAIN, 24));
+			g.drawString("Press R to Try Again", 220, 340);
+			g.drawString("Press ESC to Exit", 240, 390);
 		}
 	}
 	@Override
@@ -67,7 +70,7 @@ public class GamePanel extends JPanel{
 			g.drawString("ATTACCO!!!", 250,250);
 		}
 		hud.aumentapunteggio(gameState.getScore());
-
+		hud.aumentavita(gameState.getPlayer().getPuntiVita());
 	}
 	
 	private void drawPlayer(Graphics g) {

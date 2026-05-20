@@ -42,7 +42,6 @@ public class GameState {
     //  the brain
     public void update() {
         if (gameOver) return; // so we stop when game over
-       
       
      // Manage Player collision
         if (touchObstacle(player.getX(), player.getY())) {
@@ -148,7 +147,13 @@ public class GameState {
     	}
     }
     
-    
+    public void resetGame() {
+    	player = new Player(200,200);
+        enemy = new Enemy(300,300);
+        enemy2 = new Enemy(500,300);
+        gameOver = false;
+        score = 0;
+    }
     // GETTERS 
     public Player getPlayer() { return player; }
     public Enemy getEnemy() { return enemy; }
