@@ -9,7 +9,8 @@ public class GameState {
     private Enemy enemy;
     private Enemy enemy2; //update 15/05
     private Level livelloAttuale;
-    
+    private boolean colliding;
+
     private boolean gameOver = false;
     private boolean collision = false;
     private int score = 0;

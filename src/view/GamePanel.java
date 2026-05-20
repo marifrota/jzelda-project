@@ -6,6 +6,8 @@ import model.GameState;
 import model.Player;
 import model.Enemy;
 import java.awt.Graphics2D;
+import java.awt.Font;
+
 
 public class GamePanel extends JPanel{
 	
@@ -20,6 +22,28 @@ public class GamePanel extends JPanel{
 		add(hud);
 	}
 	
+	private void drawAttackEffect(Graphics g) {
+		Player player = gameState.getPlayer();
+		if(player.isStaAttaccando()) {
+			g.setColor(Color.YELLOW);
+			g.fillRect(player.getX()+32, player.getY(), 20,20);
+		}
+	}
+	
+	private void drawCOLLISSION(Graphics g) {
+		if(gameState.isColliding()) {
+			g.setColor(Color.WHITE);
+			g.drawString("COLLISION!", 350,50);
+		}
+	}
+	
+	private void drawGameOver(Graphics g) {
+		if(gameState.isGameOver()) {
+			g.setColor(Color.RED);
+			g.setFont(new Font("Arial", Font.BOLD, 60));
+			g.drawString("GAME OVER", 250, 250);
+		}
+	}
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -28,13 +52,15 @@ public class GamePanel extends JPanel{
 		drawMap(g);
 		drawPlayer(g);
 		drawEnemy(g);
+		drawAttackEffect(g);
+		drawGameOver(g);
 		
 		if(gameState.isCollision()) {
-			g.drawString("Collision!", 200, 200);
+			g.drawString("COLLISION!", 200, 200);
 		}
 		
 		if(gameState.isGameOver()) {
-			g.drawString("GAME OVER!", 300, 300);
+			g.drawString("GAME OVER!!!", 300, 300);
 		}
 		
 		if(gameState.getPlayer().isStaAttaccando()) {
