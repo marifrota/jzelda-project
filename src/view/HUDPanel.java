@@ -13,8 +13,9 @@ public class HUDPanel extends JPanel implements GameObserver{
 	private JLabel rupeesLabel;
 	
 	public HUDPanel() {//no inicio(at the beggingin)
+		setLayout(null);
 		scoreLabel = new JLabel("Score: 0");
-		livesLabel = new JLabel("Lives: 3");
+		livesLabel = new JLabel("♥ ♥ ♥");
 		rupeesLabel = new JLabel("Rupees: 0");
 		nicknameLabel = new JLabel("Player: ");
 		add(nicknameLabel);
@@ -25,13 +26,18 @@ public class HUDPanel extends JPanel implements GameObserver{
 		Font hudFont = new Font("Arial", Font.BOLD, 20);
 		nicknameLabel.setFont(hudFont);
 		rupeesLabel.setFont(hudFont);
-		rupeesLabel.setForeground(Color.PINK);
-		nicknameLabel.setForeground(Color.YELLOW);
+		rupeesLabel.setForeground(new Color(255,120,255));
+		nicknameLabel.setForeground(Color.WHITE);
 		scoreLabel.setFont(hudFont);
-		livesLabel.setFont(hudFont);
+		livesLabel.setFont(new Font("Segoe UI Emoji", Font.BOLD, 20));;
 		setOpaque(false);
-		scoreLabel.setForeground(Color.YELLOW);
-		livesLabel.setForeground(Color.YELLOW);
+		scoreLabel.setForeground(new Color(255,215,0));
+		livesLabel.setForeground(new Color(220,40,40));
+		
+		nicknameLabel.setBounds(220, 0, 200, 30);
+		scoreLabel.setBounds(420, 0, 150, 30);
+		livesLabel.setBounds(580, 0, 150, 30);
+		rupeesLabel.setBounds(760, 0, 150, 30);
 	}
 	
 	public void setNickname(String nickname) {
@@ -43,7 +49,7 @@ public class HUDPanel extends JPanel implements GameObserver{
 	}
 	
 	public void aumentavita(int vita) {
-		livesLabel.setText("Lives: " + vita);
+	    livesLabel.setText("♥ ".repeat(vita));
 	}
 	public void aumentaRupees(int rupees) {
 	    rupeesLabel.setText("Rupees: " + rupees);

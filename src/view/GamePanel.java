@@ -186,7 +186,7 @@ public class GamePanel extends JPanel{
 	public void drawLevel(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 20));
-		g.drawString("Level: " + gameState.getLivelloCorrente(), 20, 30);
+		g.drawString("Level: " + gameState.getLivelloCorrente(), 20, 23);
 	}
 	
 	private void drawRupees(Graphics g) {
