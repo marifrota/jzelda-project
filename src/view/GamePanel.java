@@ -128,6 +128,7 @@ public class GamePanel extends JPanel{
 		hud.aumentapunteggio(gameState.getScore());
 		hud.aumentavita(gameState.getPlayer().getPuntiVita());
 		hud.aumentaRupees(gameState.getRupees());
+		hud.aumentaLosses(gameState.getLosses());
 	}
 	
 	private void drawPlayer(Graphics g) {

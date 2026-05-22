@@ -25,7 +25,8 @@ public class GameState {
 	private String nickname;
     private int cooldownDamage = 0;
     private List<Rupee> rupeesOnGround = new ArrayList<>();
-    
+    private int losses = 0;
+    private int wins = 0;
     //CONSTRUCT
     public GameState() {
         // coordinates of the characters
@@ -255,7 +256,8 @@ public class GameState {
     	cooldownDamage = 30;
     	if (player.getPuntiVita() <= 0) {
             gameOver = true;       
-            
+            addLosses();
+            addWins();
         AudioManager.getInstance().play("resources/11-Game-Over.wav");
            
          SaveManager.saveScore(score);
@@ -300,6 +302,18 @@ public class GameState {
     }
     public Enemy getEnemy5() {
         return enemy5;
+    }
+    public int getLosses() {
+        return losses;
+    }
+    public int getWins() {
+        return wins;
+    }
+    public void addWins() {
+        wins++;
+    }
+    public void addLosses() {
+        losses++;
     }
     public Level getLivelloAttuale() { return livelloAttuale; }
     public boolean isGameOver() { return gameOver; }

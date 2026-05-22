@@ -11,6 +11,8 @@ public class HUDPanel extends JPanel implements GameObserver{
 	private JLabel livesLabel;
 	private JLabel nicknameLabel;
 	private JLabel rupeesLabel;
+	private JLabel lossesLabel;
+	private JLabel winsLabel;
 	
 	public HUDPanel() {//no inicio(at the beggingin)
 		setLayout(null);
@@ -34,10 +36,20 @@ public class HUDPanel extends JPanel implements GameObserver{
 		scoreLabel.setForeground(new Color(255,215,0));
 		livesLabel.setForeground(new Color(220,40,40));
 		
-		nicknameLabel.setBounds(220, 0, 200, 30);
-		scoreLabel.setBounds(420, 0, 150, 30);
-		livesLabel.setBounds(580, 0, 150, 30);
-		rupeesLabel.setBounds(760, 0, 150, 30);
+		nicknameLabel.setBounds(140, 0, 180, 30);
+		scoreLabel.setBounds(320, 0, 130, 30);
+		livesLabel.setBounds(470, 0, 120, 30);
+		rupeesLabel.setBounds(600, 0, 130, 30);
+		lossesLabel = new JLabel("Defeats: 0");
+		add(lossesLabel);
+		lossesLabel.setFont(hudFont);
+		lossesLabel.setForeground(new Color(220,70,70));
+		lossesLabel.setBounds(730, 0, 120, 30);
+		winsLabel = new JLabel("Wins: 0");
+		add(winsLabel);
+		winsLabel.setFont(hudFont);
+		winsLabel.setForeground(new Color(80,220,120));
+		winsLabel.setBounds(850, 0, 110, 30);
 	}
 	
 	public void setNickname(String nickname) {
@@ -54,9 +66,9 @@ public class HUDPanel extends JPanel implements GameObserver{
 	public void aumentaRupees(int rupees) {
 	    rupeesLabel.setText("Rupees: " + rupees);
 	}
-	public void update() {
-	    System.out.println(
-	        "HUD updated!"
-	    );
+	public void aumentaLosses(int losses) {
+	    lossesLabel.setText("Losses: " + losses);
+	}
+	public void update() {System.out.println("HUD updated!");
 	}
 }
