@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.SaveManager;
 import view.AudioManager;
+import model.Rupee;
 
 public class GameState {
     // World's elements
@@ -19,9 +20,11 @@ public class GameState {
     private boolean gameOver = false;
     private boolean colliding = false;
     private int score = 0;
+    private int rupees;
 	private List<GameObserver> observers  = new ArrayList<>();
-	
+	private String nickname;
     private int cooldownDamage = 0;
+    private List<Rupee> rupeesOnGround = new ArrayList<>();
     
     //CONSTRUCT
     public GameState() {
@@ -43,12 +46,21 @@ public class GameState {
         
         return upLeft || upRight || downLeft || downRight;
     }
-    
+        
+    public List<Rupee> getRupeesOnGround() {
+	   return rupeesOnGround;
+    }
     // score system
     public void addScore(int points) { score += points; }
+    public void addRupees(int value) {
+        rupees += value;
+    }
     public int getScore() { return score; }
     public int getLivelloCorrente() {
         return livelloCorrente;
+    }
+    public int getRupees() {
+        return rupees;
     }
     public void nextLevel() {
         livelloCorrente++;
@@ -146,6 +158,12 @@ public class GameState {
       if(cooldownDamage > 0) {
     	  cooldownDamage--;
       }
+      for(Rupee rupee : rupeesOnGround) {
+    	    if(!rupee.isCollected()&&player.getBounds().intersects(rupee.getBounds())) {
+    	    	rupee.collect();
+    	    	addRupees(1);
+    	    }
+    	}
             //20/05 manage all of the collisions
          checkCollision();
         }
@@ -164,6 +182,7 @@ public class GameState {
                 enemy.subisciDanno(1);
                 if (enemy.nemicoMorto()) {
                     addScore(50); 
+                    rupeesOnGround.add(new Rupee(enemy.getX(),enemy.getY()));
                 }
             }
             // Enemy2 attacked
@@ -171,24 +190,28 @@ public class GameState {
                 enemy2.subisciDanno(1);
                 if (enemy2.nemicoMorto()) {
                     addScore(100);
+                    rupeesOnGround.add(new Rupee(enemy2.getX() + 40, enemy2.getY() + 20));
                 }
             }
             if (enemy3.isAlive() &&player.getAttackBounds().intersects(enemy3.getBounds())) {
             	enemy3.subisciDanno(1);
             	if (enemy3.nemicoMorto()) {
             		addScore(150);
+                    rupeesOnGround.add(new Rupee(enemy3.getX(),enemy3.getY()));
             	}
             }
             if (enemy4.isAlive() &&player.getAttackBounds().intersects(enemy4.getBounds())) {
             		enemy4.subisciDanno(1);
             	    if (enemy4.nemicoMorto()) {
             	        addScore(200);
+                        rupeesOnGround.add(new Rupee(enemy4.getX(),enemy4.getY()));
             	    }
             }
             if (enemy5.isAlive() &&player.getAttackBounds().intersects(enemy5.getBounds())) {
             	    enemy5.subisciDanno(1);
             	    if (enemy5.nemicoMorto()) {
             	        addScore(250);
+                        rupeesOnGround.add(new Rupee(enemy5.getX(),enemy5.getY()));
             	    }
             }
         }
@@ -248,6 +271,12 @@ public class GameState {
         enemy5 = new Enemy(800,150);
         gameOver = false;
         score = 0;
+    }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+    public String getNickname() {
+        return nickname;
     }
     
     public void addObserver(GameObserver observer) {

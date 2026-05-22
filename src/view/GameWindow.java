@@ -4,12 +4,14 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import controller.InputHandler;
-
+import javax.swing.JOptionPane;
 public class GameWindow extends JFrame {
 	
     public static void main(String[] args) {
-   
+    	
         JFrame window = new JFrame("JZelda");
+        
+        String nickname = JOptionPane.showInputDialog("Enter your nickname:");
       
         window.setSize(975,485);
         
@@ -19,9 +21,9 @@ public class GameWindow extends JFrame {
         
         window.setLayout(new BorderLayout());//definir o layout(set the layout)
         
-        window.setContentPane(new MenuPanel(window));//colocar dentro do menu(place it inside the menu)
-        		
+        window.setContentPane(new MenuPanel(window, nickname));        		
+        
         window.setVisible(true);
-       
+               
     }
 }

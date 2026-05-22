@@ -1,13 +1,19 @@
 package controller;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import view.GamePanel;
 
 public class InputHandler implements KeyListener {
 
-    
+	private GamePanel gamePanel;
     public boolean su, giu, sinistra, destra, attacco;
     public boolean retry, exit; //MARIANA (detect keys for exit and try again)
+    
+    // CONSTRUCTOR
+    public InputHandler(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
+    
     @Override
     public void keyPressed(KeyEvent e) {
         int codice = e.getKeyCode();

@@ -7,19 +7,24 @@ import model.GameState;
 import controller.InputHandler;
 import java.awt.Color;
 import java.awt.Font;
+import model.GameState;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class MenuPanel extends JPanel{
 	
 	private JFrame window;
-		public MenuPanel(JFrame w) {
-			window = w;
+	public MenuPanel(JFrame w, String nickname) {		window = w;
 			//nao pode usar this dentro do main(cant use this inside the main)
-			
 			GameState gameState = new GameState();
+			gameState.setNickname(nickname);
 			GamePanel gamePanel = new GamePanel(gameState);
-			InputHandler inputHandler = new InputHandler();
-			GameController controller = new GameController(gameState, gamePanel, inputHandler);
+			InputHandler inputHandler = new InputHandler(gamePanel);			GameController controller = new GameController(gameState, gamePanel, inputHandler);
 		
+			setLayout(null);
+			setBackground(Color.BLACK);
 			
 			JButton startButton = new JButton("START");
 			add(startButton);
@@ -35,8 +40,8 @@ public class MenuPanel extends JPanel{
 	        startButton.setFocusPainted(false);
 	        exitButton.setFocusPainted(false);   
 	            
-	        startButton.setBounds(350,180,250,70);
-	        exitButton.setBounds( 350,300,250,70);
+	        startButton.setBounds(360,230,250,70);
+	        exitButton.setBounds(360,325,250,70);//(x,y,largura,altura)(x,y,large,height)
 
 	        
 			startButton.addActionListener( e -> {
@@ -54,4 +59,24 @@ public class MenuPanel extends JPanel{
 	            System.exit(0);
 	        });
 	    }
+	
+	protected void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    Graphics2D g2 = (Graphics2D) g;
+	    // background
+	    g2.setColor(Color.BLACK);
+	    g2.fillRect(0,0,getWidth(),getHeight());
+	    // title
+	    g2.setFont(new Font("Serif", Font.BOLD, 90));
+	    // shadow
+	    g2.setColor(new Color(80,40,0));
+	    g2.drawString("JZELDA", 315, 125);
+	    // gold
+	    g2.setColor(new Color(255,215,0));
+	    g2.drawString("JZELDA", 310, 120);
+	    // subtitle
+	    g2.setFont(new Font("Arial", Font.PLAIN, 28));
+	    g2.setColor(Color.WHITE);
+	    g2.drawString("The Forgotten Ruins", 360, 175);
 	}
+}

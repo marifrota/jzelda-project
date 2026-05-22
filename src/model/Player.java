@@ -87,7 +87,7 @@ public class Player {
     //rectangle for colliding Area
     public java.awt.Rectangle getBounds() {
 
-        return new java.awt.Rectangle(x, y, 32, 32);
+        return new java.awt.Rectangle(x, y, 80, 60);
     }
 
     //rectangle for the sword

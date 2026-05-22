@@ -9,9 +9,12 @@ import java.awt.Graphics2D;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.Image;
+import model.Rupee;
+import javax.swing.JButton;
 
 public class GamePanel extends JPanel{
-	
+	private JButton retryButton;
+	private JButton exitButton;
 	private GameState gameState;
 	private int score = 0;
 	int vite = 3;
@@ -24,12 +27,17 @@ public class GamePanel extends JPanel{
 	private Image linelblue;
 	private Image oktorokblue;
 	private Image playerzelda;
+	private Image moeda;
+	
 
 	
 	public GamePanel(GameState gameState) {
 		this.gameState = gameState;
+		setLayout(null);
 		hud = new HUDPanel();
+		hud.setNickname(gameState.getNickname());
 		add(hud);
+		hud.setBounds(0, 0, 975, 50);//define a posição e o tamanho do HUD para ele voltar a aparecer quando  usa setLayout(null)( the HUD position and size so it becomes visible again when using setLayout(null).
 		enemyMoblinSprite = new ImageIcon("resources/sprites/enemy_moblin (2)_ORANGE.png").getImage();
 		enemyOctorokSprite = new ImageIcon("resources/sprites/OCTOROK_ENEMY_BLUE.png").getImage();
 		enemyLinelSprite = new ImageIcon("resources/sprites/LINEL_ENEMY_BLUE.png").getImage();
@@ -38,6 +46,30 @@ public class GamePanel extends JPanel{
 		linelblue = new ImageIcon("resources/sprites/LINEL_BLUE.png").getImage();
 		oktorokblue = new ImageIcon("resources/sprites/OCTOROK_BLUE.png").getImage();
 		playerzelda = new ImageIcon("resources/sprites/PLAYER (1).png").getImage();
+		moeda = new ImageIcon("resources/sprites/MOEDAS (1).png").getImage();
+
+		retryButton = new JButton("TRY AGAIN");
+		exitButton = new JButton("EXIT");
+		retryButton.setBounds(300, 280, 180, 60);
+		retryButton.setBackground(new Color(20,20,20));
+		retryButton.setForeground(new Color(255,215,0));
+		retryButton.setFont(new Font("Arial", Font.BOLD, 22));
+		retryButton.setFocusPainted(false);
+		exitButton.setBounds(500, 280, 180, 60);
+		exitButton.setBackground(new Color(120,0,0));
+		exitButton.setForeground(Color.WHITE);
+		exitButton.setFont(new Font("Arial", Font.BOLD, 22));
+		retryButton.setVisible(false);
+		exitButton.setVisible(false);
+		add(retryButton);
+		add(exitButton);
+		retryButton.addActionListener(e -> {
+		    gameState.resetGame();
+		    retryButton.setVisible(false);
+		    exitButton.setVisible(false);
+		    repaint();
+		});
+		exitButton.addActionListener(e -> {System.exit(0);});
 	}
 	
 	private void drawAttackEffect(Graphics g) {
@@ -51,9 +83,7 @@ public class GamePanel extends JPanel{
 	private void drawCOLLISSION(Graphics g) {
 		if(gameState.isColliding()) {
 			g.setColor(Color.WHITE);
-			g.setFont(new Font("Arial",Font.BOLD,28));
-				g.setColor(Color.WHITE);
-				g.drawString("COLLISION!",220,200);		
+			g.drawString("COLLISION!",220,200);		
 		}
 	}
 	
@@ -61,19 +91,14 @@ public class GamePanel extends JPanel{
 		if(gameState.isGameOver()) {
 			g.setColor(new Color(0,0,0,180));
 			g.fillRect(0,0,getWidth(),getHeight());
-			g.setFont(new Font("Arial", Font.BOLD, 60));
-			g.setColor(Color.WHITE);
-			g.drawString("GAME OVER",295,225);
-			g.setColor(Color.RED);
-			g.setFont(new Font("Arial", Font.BOLD, 60));
-			g.drawString("GAME OVER", 290, 220);
-			g.setFont( new Font("Arial", Font.PLAIN, 26));
-			g.setColor(Color.WHITE);
-			g.drawString("Press R to Try Again", 290, 340);
-			g.drawString("Press ESC to Exit", 290, 390);
-			g.setColor(Color.YELLOW);
-			g.drawString("Press R to Try Again", 291, 341);
-			g.drawString("Press ESC to Exit", 291, 391);
+			g.setFont(new Font("Serif", Font.BOLD, 110));
+			g.setColor(new Color(255,215,0));
+			g.drawString("GAME OVER",145,225);
+			g.setColor(new Color(160,0,0));
+			g.setFont(new Font("Serif", Font.BOLD, 110));
+			g.drawString("GAME OVER", 140, 220);
+			retryButton.setVisible(true);
+			exitButton.setVisible(true);
 		}
 	}
 	@Override
@@ -86,6 +111,9 @@ public class GamePanel extends JPanel{
 		drawAttackEffect(g);
 		drawGameOver(g);
 		drawLevel(g);
+		drawRupees(g);
+		drawCOLLISSION(g);
+		
 		
 		if(!gameState.isGameOver()) {
 			if(gameState.isColliding()) { // tua amie was here!
@@ -99,6 +127,7 @@ public class GamePanel extends JPanel{
 		drawGameOver(g);
 		hud.aumentapunteggio(gameState.getScore());
 		hud.aumentavita(gameState.getPlayer().getPuntiVita());
+		hud.aumentaRupees(gameState.getRupees());
 	}
 	
 	private void drawPlayer(Graphics g) {
@@ -118,26 +147,21 @@ public class GamePanel extends JPanel{
 	    }
 
 	    if(gameState.getEnemy2().isAlive()) {
-	        g.setColor(Color.BLUE);
 	        Enemy enemy2 = gameState.getEnemy2();
 	        g.drawImage(zorablue,enemy2.getX(),enemy2.getY(),175,175,null);
 	    }
 
 	    if(gameState.getEnemy3().isAlive()) {
-	        g.setColor(Color.ORANGE);
 	        Enemy enemy3 = gameState.getEnemy3();
 	        g.drawImage(enemyLinelSprite,enemy3.getX(),enemy3.getY(),105,65,null);
 	    }
 
 	    if(gameState.getEnemy4().isAlive()) {
-	        g.setColor(Color.PINK);
 	        Enemy enemy4 = gameState.getEnemy4();
 	        g.drawImage(oktorokblue,enemy4.getX(),enemy4.getY(),105,65,null);
-
 	    }
 
 	    if(gameState.getEnemy5().isAlive()) {
-	        g.setColor(Color.YELLOW);
 	        Enemy enemy5 = gameState.getEnemy5();
 	        g.drawImage(enemyMoblinSprite,enemy5.getX(),enemy5.getY(),105,65,null);
 	    }
@@ -163,5 +187,13 @@ public class GamePanel extends JPanel{
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 20));
 		g.drawString("Level: " + gameState.getLivelloCorrente(), 20, 30);
+	}
+	
+	private void drawRupees(Graphics g) {
+	    for(Rupee rupee : gameState.getRupeesOnGround()) {
+	        if(!rupee.isCollected()) {
+	            g.drawImage(moeda,rupee.getX(),rupee.getY(),32, 32, null);
+	        }
+	    }
 	}
 }

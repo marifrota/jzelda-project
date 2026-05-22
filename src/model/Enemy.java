@@ -125,7 +125,7 @@ public class Enemy {
     
   //to understand if the Enemy made contact with the Player or an object
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 32, 32);
+        return new Rectangle(x, y, 80, 60);
     }
     
 //when the enemy loses health points
