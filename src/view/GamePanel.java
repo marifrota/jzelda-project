@@ -145,6 +145,9 @@ public class GamePanel extends JPanel{
 		    g.drawString("2 - SHIELD (10)", 280, 280);
 		    g.drawImage(espada, 220, 300, 40, 40, null);
 		    g.drawString("3 - MASTER SWORD (15)", 280, 330);
+		    g.drawString("3 - MASTER SWORD (15)", 280, 330);
+		    g.setFont(new Font("Arial", Font.PLAIN, 16));
+		    g.drawString("Press B to exit", 320, 380);
 		}
 		drawGameOver(g);
 		hud.aumentapunteggio(gameState.getScore());
