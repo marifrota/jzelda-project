@@ -27,6 +27,8 @@ public class GameState {
     private List<Rupee> rupeesOnGround = new ArrayList<>();
     private int losses = 0;
     private int wins = 0;
+    private boolean scudo = false;
+    private boolean spada = false;
     //CONSTRUCT
     public GameState() {
         // coordinates of the characters
@@ -180,7 +182,10 @@ public class GameState {
         if (player.isStaAttaccando()) {
             // Enemy1 attacked
             if (enemy.isAlive() && player.getAttackBounds().intersects(enemy.getBounds())) {
-                enemy.subisciDanno(1);
+            	if(spada)
+            	    enemy.subisciDanno(2);
+            	else
+            	    enemy.subisciDanno(1);
                 if (enemy.nemicoMorto()) {
                     addScore(50); 
                     rupeesOnGround.add(new Rupee(enemy.getX(),enemy.getY()));
@@ -252,7 +257,11 @@ public class GameState {
 
 
     public void loseLife() {
-    	player.setPuntiVita(player.getPuntiVita() - 1);
+    	if(scudo) {
+    	    player.setPuntiVita(player.getPuntiVita() - 0);
+    	}else {
+    	    player.setPuntiVita(player.getPuntiVita() - 1);
+    	}    	
     	cooldownDamage = 30;
     	if (player.getPuntiVita() <= 0) {
             gameOver = true;       
@@ -314,6 +323,31 @@ public class GameState {
     }
     public void addLosses() {
         losses++;
+    }
+    public boolean scudo() {
+    	return scudo;
+    }
+    public boolean spada() {
+    	return spada;
+    }
+    public void buyPotion() {
+    	if(rupees >= 5) {
+    		rupees -= 5;
+    		player.setPuntiVita(player.getPuntiVita() + 1);
+    		System.out.println(player.getPuntiVita());
+    	}
+    }//doesnt need private boolean because it used imediately
+    public void buyscudo() {
+        if(rupees >= 10) {
+            rupees -= 10;
+            scudo = true;
+        }
+    }
+    public void buyspada() {
+        if(rupees >= 15) {
+            rupees -= 15;
+            spada = true;
+        }
     }
     public Level getLivelloAttuale() { return livelloAttuale; }
     public boolean isGameOver() { return gameOver; }
