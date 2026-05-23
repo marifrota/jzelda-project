@@ -5,9 +5,11 @@ import java.util.List;
 import model.SaveManager;
 import view.AudioManager;
 import model.Rupee;
+import java.io.Serializable;
 import java.awt.Rectangle;
 
-public class GameState {
+public class GameState implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
     // WORLD'S ELEMENTS
     private Player player;
@@ -20,7 +22,7 @@ public class GameState {
     private boolean colliding = false;
     private int score = 0;
     private int rupees;
-	private List<GameObserver> observers= new ArrayList<>();
+	private transient List<GameObserver> observers= new ArrayList<>();
 	private String nickname;
     private int cooldownDamage= 0;
     private List<Rupee> rupeesOnGround= new ArrayList<>();
@@ -250,6 +252,10 @@ public class GameState {
         return nickname;
     }
     public void addObserver(GameObserver observer) {
+    	
+    	if (this.observers == null) {
+            this.observers = new java.util.ArrayList<>();
+        }
         observers.add(observer);
     }//GameObserve allows that GameState notify the HUD and the others objects when some information changes.
     public void notifyObservers() {

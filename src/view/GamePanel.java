@@ -12,7 +12,7 @@ import java.awt.Image;
 import model.Rupee;
 import javax.swing.JButton;
 
-public class GamePanel extends JPanel{
+public class GamePanel extends JPanel implements GameObserver{
 	private JButton retryButton;
 	private JButton exitButton;
 	private GameState gameState;
@@ -32,6 +32,9 @@ public class GamePanel extends JPanel{
 	private Image porcao;
 	private Image espada;
 	private Image escudo;
+	public void setGameState(GameState gameState) {
+	    this.gameState = gameState;
+	}
 	/**Creates the main game panel and loads, sprites, HUD, buttons and game resources.
 	 */
 	public GamePanel(GameState gameState) {
@@ -129,6 +132,9 @@ public class GamePanel extends JPanel{
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 16));
 		g.drawString("Press B to open SHOP",  20, 430);
+		//meryem 23/05
+		g.drawString("Press S to SAVE", 250, 430);
+		g.drawString("Press L to LOAD", 420, 430);
 		
 		if(!gameState.isGameOver()) {
 			if(gameState.getPlayer().isStaAttaccando()) {
@@ -246,4 +252,8 @@ public class GamePanel extends JPanel{
 	    	g.drawImage(espada,860,35,32,32,null);
 	    }
 	}
+	@Override
+    public void update() {
+        repaint(); 
+    }
 }

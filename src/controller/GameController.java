@@ -65,6 +65,7 @@ public class GameController implements Runnable {
     }
 
     private void update() {
+    	this.gameState = gamePanel.getGameState();
     	if(inputHandler.exit) {
             System.exit(0);
         }

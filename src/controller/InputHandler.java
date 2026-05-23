@@ -1,7 +1,9 @@
 package controller;
 import java.awt.event.KeyEvent;
+import model.SaveManager;
 import java.awt.event.KeyListener;
 import view.GamePanel;
+import model.GameState;
 /**Handles keyboard input for the game, controls player movement, attacks, shop, retry, exit commands and items */
 public class InputHandler implements KeyListener {
 
@@ -57,6 +59,26 @@ public class InputHandler implements KeyListener {
         if(codice == KeyEvent.VK_3) {
             gamePanel.getGameState().buyspada();
             gamePanel.repaint();
+        }
+        
+     // KEY S TO SAVE
+        if (codice == KeyEvent.VK_S) {
+            SaveManager.saveGame(gamePanel.getGameState());
+            System.out.println("Salvataggio completato");
+        }
+
+        // Key L TO LOAD, 23/05 meryem
+        if (codice == KeyEvent.VK_L) {
+            GameState loadedState = SaveManager.loadGame();
+            if (loadedState != null) {
+                gamePanel.setGameState(loadedState);
+                loadedState.addObserver(gamePanel); 
+                
+                gamePanel.repaint();
+                System.out.println("Caricamento completato");
+            } else {
+                System.out.println("Nessun salvataggio trovato.");
+            }
         }
     }
     /**Detects when a key is released and stops the movement with the released key*/

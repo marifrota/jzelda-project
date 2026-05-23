@@ -1,7 +1,10 @@
 package model;
 import java.awt.Rectangle;
+import java.io.Serializable;
 
-public class Rupee {
+
+public class Rupee implements Serializable {
+	private static final long serialVersionUID = 1L;
 	 private int x;
 	 private int y;
 	 

@@ -1,9 +1,11 @@
 package model;
 
 import java.awt.Rectangle;
+import java.io.Serializable;
 import view.AudioManager;
 
-public class Player {
+public class Player implements Serializable {
+	private static final long serialVersionUID = 1L;
 
     public enum Direzione {
         NORD, SUD, EST, OVEST, IDLE

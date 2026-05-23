@@ -1,14 +1,15 @@
 package model;
 
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.List;
 import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
-public class Level {
-	
+public class  Level implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private static final int erba = 0;
     private static final int muro = 1;
     private static final int porta = 2;
