@@ -30,6 +30,8 @@ public class Level {
     private int[][] mappa; //removed matrice from here to add levels 
     private final int tileSize = 64; // 32x32 pixel
     private int livelloCorrente = 1;
+    
+
        
     public Level(int numeroLvl) {
         this.livelloCorrente = numeroLvl;
@@ -58,6 +60,18 @@ public class Level {
             // safety map
             this.mappa = new int[0][0]; 
         }
+    }
+    
+ // 23/05 link touch door
+    public boolean isPorta(int x, int y) {
+        int colonna = x / tileSize;
+        int riga = y / tileSize;
+
+        if (riga < 0 || riga >= mappa.length || colonna < 0 || colonna >= mappa[0].length) {
+            return false;
+        }
+
+        return mappa[riga][colonna] == porta;
     }
  // Later add enemies in the room
    
