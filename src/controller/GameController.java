@@ -68,6 +68,11 @@ public class GameController implements Runnable {
     	if(inputHandler.exit) {
             System.exit(0);
         }
+    	
+    	if(inputHandler.retry && gameState.isGameOver()) {
+            gameState.resetGame();
+            AudioManager.getInstance().playMusica("resources/03.-Dungeon-Theme_1.wav");
+        }
     	//EXIT
     	if(inputHandler.retry && gameState.isGameOver()) {
     		gameState.resetGame();

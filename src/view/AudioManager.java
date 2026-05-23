@@ -31,11 +31,16 @@ public class AudioManager {
         	
         	if (ost != null) {
                 ost.stop();
+                ost.close();
+                ost = null;
             }
         	  
         	File file = new File(filename);
             ost = AudioSystem.getClip(); 
             ost.open(AudioSystem.getAudioInputStream(file));
+            if (filename.contains("Dungeon") || filename.contains("Theme")) {
+                ost.loop(Clip.LOOP_CONTINUOUSLY);
+            }
             ost.start(); 
         } catch (Exception e) {
             System.out.println("Errore musica: " + e.getMessage());

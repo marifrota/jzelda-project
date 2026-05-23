@@ -76,6 +76,7 @@ public class GameState {
             score = 0;
             livelloCorrente = 1;
             livelloAttuale = new Level(1);
+            AudioManager.getInstance().playMusica("resources/03.-Dungeon-Theme_1.wav");
     }
         
     //OSTACOLI TT
