@@ -74,9 +74,7 @@ public class GameController implements Runnable {
             AudioManager.getInstance().playMusica("resources/03.-Dungeon-Theme_1.wav");
         }
     	//EXIT
-    	if(inputHandler.retry && gameState.isGameOver()) {
-    		gameState.resetGame();
-    	} 
+    	
     	//TRY AGAIN
     	if(!gameState.isGameOver()) {
  
