@@ -15,7 +15,7 @@ public class Enemy {
     private int y; //coordinates
 
     private int velocita = 1; //speed
-    private int puntiVita = 2; ///health points (2=1 heart)
+    private int puntiVita = 4; ///health points (2=1 heart)
 
     //to make the enemy move
     private Direzione direzione = Direzione.SUD;

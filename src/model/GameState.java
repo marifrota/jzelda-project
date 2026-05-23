@@ -131,7 +131,9 @@ public class GameState {
             getEnemy4().moveThere(this);
         }
         if (getEnemy5().isAlive()) {
-            // idle
+        	getEnemy5().aggiorna();
+            getEnemy5().moveThere(this);
+        	// idle
         }
               
       if(cooldownDamage > 0) {
@@ -169,28 +171,28 @@ public class GameState {
                     }
                 }
                 if (getEnemy2().isAlive() && player.getAttackBounds().intersects(getEnemy2().getBounds())) {
-                    getEnemy2().subisciDanno(1);
+                    getEnemy2().subisciDanno(spada ? 2 : 1);;
                     if (getEnemy2().nemicoMorto()) {
                         addScore(100);
                         rupeesOnGround.add(new Rupee(getEnemy2().getX() + 40, getEnemy2().getY() + 20));
                     }
                 }
                 if (getEnemy3().isAlive() && player.getAttackBounds().intersects(getEnemy3().getBounds())) {
-                    getEnemy3().subisciDanno(1);
+                    getEnemy3().subisciDanno(spada ? 2 : 1);;
                     if (getEnemy3().nemicoMorto()) {
                         addScore(150);
                         rupeesOnGround.add(new Rupee(getEnemy3().getX(), getEnemy3().getY()));
                     }
                 }
                 if (getEnemy4().isAlive() && player.getAttackBounds().intersects(getEnemy4().getBounds())) {
-                    getEnemy4().subisciDanno(1);
+                    getEnemy4().subisciDanno(spada ? 2 : 1);;
                     if (getEnemy4().nemicoMorto()) {
                         addScore(200);
                         rupeesOnGround.add(new Rupee(getEnemy4().getX(), getEnemy4().getY()));
                     }
                 }
                 if (getEnemy5().isAlive() && player.getAttackBounds().intersects(getEnemy5().getBounds())) {
-                    getEnemy5().subisciDanno(1);
+                    getEnemy5().subisciDanno(spada ? 2 : 1);;
                     if (getEnemy5().nemicoMorto()) {
                         addScore(250);
                         rupeesOnGround.add(new Rupee(getEnemy5().getX(), getEnemy5().getY())); 
@@ -219,7 +221,8 @@ public class GameState {
 
     public void loseLife() {
     	if(scudo) {
-    	    player.setPuntiVita(player.getPuntiVita() - 0);
+    		scudo = false;
+    	  	System.out.println("Shield broken!");
     	}else {
     	    player.setPuntiVita(player.getPuntiVita() - 1);
     	}    	

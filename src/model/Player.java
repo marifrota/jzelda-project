@@ -95,16 +95,16 @@ public class Player {
         switch (direzione) {
 
             case NORD:
-                return new Rectangle(x, y - 32, 32, 32);
+                return new Rectangle(x, y - 48, 48, 48);
 
             case SUD:
-                return new Rectangle(x, y + 32, 32, 32);
+                return new Rectangle(x + 48, y, 48, 48);
 
             case EST:
-                return new Rectangle(x + 32, y, 32, 32);
+                return new Rectangle(x + 48, y, 48, 48);
 
             case OVEST:
-                return new Rectangle(x - 32, y, 32, 32);
+                return new Rectangle(x, y - 48, 48, 48);
 
             default:
                 return getBounds();
