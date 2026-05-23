@@ -12,7 +12,7 @@ public class AudioManager {
     
     
     private static AudioManager instance;
-    
+    private Clip ost;
     private Clip sound;
     
     public static AudioManager getInstance() {
@@ -26,29 +26,30 @@ public class AudioManager {
     private AudioManager() {
     }
     
-    
-    public void play(String filename) {
+    public void playMusica(String filename) {
         try {
         	
-        	  if (sound != null && sound.isRunning()) {
-                  sound.stop();
-                  sound.close();
-              }
+        	if (ost != null) {
+                ost.stop();
+            }
         	  
+        	File file = new File(filename);
+            ost = AudioSystem.getClip(); 
+            ost.open(AudioSystem.getAudioInputStream(file));
+            ost.start(); 
+        } catch (Exception e) {
+            System.out.println("Errore musica: " + e.getMessage());
+        }
+    }
+    
+    public void playSound(String filename) {
+        try {
             File file = new File(filename);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            Clip sound = AudioSystem.getClip();
-            sound.open(audioStream);
-            sound.start(); 
-        } catch (UnsupportedAudioFileException e1) {
-            System.out.println("Audio non supportato: " + e1.getMessage());
-            e1.printStackTrace();
-        } catch (IOException e1) {
-            System.out.println("Errore di lettura del file audio: " + e1.getMessage());
-            e1.printStackTrace();
-        } catch (LineUnavailableException e1) {
-            System.out.println("Linea audio non disponibile: " + e1.getMessage());
-            e1.printStackTrace();
+            Clip effetto = AudioSystem.getClip(); 
+            effetto.open(AudioSystem.getAudioInputStream(file));
+            effetto.start(); 
+        } catch (Exception e) {
+            System.out.println("Errore suono: " + e.getMessage());
         }
     }
 }
