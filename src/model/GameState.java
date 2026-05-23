@@ -27,10 +27,10 @@ public class GameState {
     private List<Rupee> rupeesOnGround = new ArrayList<>();
     private int losses = 0;
     private int wins = 0;
-
+    private boolean levelCompleted = false;
     private boolean scudo = false;
     private boolean spada = false;
-//github.com/marifrota/jzelda-project.git
+    //github.com/marifrota/jzelda-project.git
     //CONSTRUCT
     public GameState() {
         // coordinates of the characters
@@ -130,6 +130,7 @@ public class GameState {
         
       
         private void checkCollision() {
+        	colliding = false;
       
         //colliding controls (MARIANA UPDATE 15/5)
       
@@ -173,6 +174,10 @@ public class GameState {
             	    if (enemy5.nemicoMorto()) {
             	        addScore(250);
                         rupeesOnGround.add(new Rupee(enemy5.getX(),enemy5.getY())); }
+            }
+            if(!levelCompleted &&!enemy.isAlive() &&!enemy2.isAlive() && !enemy3.isAlive() &&!enemy4.isAlive() && !enemy5.isAlive()) {
+            	addWins();
+            	levelCompleted = true;
             }
         }
         
@@ -220,7 +225,6 @@ public class GameState {
     	if (player.getPuntiVita() <= 0) {
             gameOver = true;       
             addLosses();
-            addWins();
         AudioManager.getInstance().play("resources/11-Game-Over.wav");
            
          SaveManager.saveScore(score);

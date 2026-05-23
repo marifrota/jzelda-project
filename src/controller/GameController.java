@@ -83,8 +83,7 @@ public class GameController implements Runnable {
    // up
    if (inputHandler.su) {
        int nextY = player.getY() - player.getVelocita();
-       Rectangle future = new Rectangle(
-           player.getX() + 42, nextY + 4, 56, 56);
+       Rectangle future = new Rectangle(player.getX() + 8, nextY + 8, 48, 48);
 
        if (!gameState.touchObstacle(future)) {
            player.muoviSu();
@@ -96,8 +95,7 @@ public class GameController implements Runnable {
    // down
    else if (inputHandler.giu) {
        int nextY = player.getY() + player.getVelocita();
-       Rectangle future = new Rectangle(
-           player.getX() + 4, nextY + 4, 56,56);
+       Rectangle future = new Rectangle(player.getX() + 8, nextY + 8, 48,48);
        if (!gameState.touchObstacle(future)) {
            player.muoviGiu();
        } else {
@@ -108,9 +106,7 @@ public class GameController implements Runnable {
    // left
    else if (inputHandler.sinistra) {
        int nextX = player.getX() - player.getVelocita();
-       Rectangle future = new Rectangle(
-           nextX +4,
-           player.getY() +4, 56,56);
+       Rectangle future = new Rectangle(nextX +8,player.getY() +8, 48,48);
 
        if (!gameState.touchObstacle(future)) {
            player.muoviSinistra();
@@ -123,7 +119,7 @@ public class GameController implements Runnable {
    else if (inputHandler.destra) {
        int nextX = player.getX() + player.getVelocita();
        
-       Rectangle future = new Rectangle( nextX + 4, player.getY() + 4, 56, 56);
+       Rectangle future = new Rectangle( nextX + 8, player.getY() + 8, 48, 48);
        if (!gameState.touchObstacle(future)) {
            player.muoviDestra();
        } else {

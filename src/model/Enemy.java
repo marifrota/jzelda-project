@@ -22,8 +22,8 @@ public class Enemy {
     private final Random random = new Random();
     private int contatorePassi = 0;
     
-    private static final int offSet = 4;
-    private static final int size = 56;
+    private static final int offSet = 8;
+    private static final int size = 48;
     
     public void moveThere(GameState gameState) {
 

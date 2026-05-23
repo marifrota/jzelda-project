@@ -41,7 +41,7 @@ public class GamePanel extends JPanel{
 		add(hud);
 		hud.setBounds(0, 0, 975, 50);//define a posição e o tamanho do HUD para ele voltar a aparecer quando  usa setLayout(null)( the HUD position and size so it becomes visible again when using setLayout(null).
 		enemyMoblinSprite = new ImageIcon("resources/sprites/enemy_moblin (2)_ORANGE.png").getImage();
-		enemyOctorokSprite = new ImageIcon("resources/sprites/OCTOROK_ENEMY_BLUE.png").getImage();
+		enemyOctorokSprite = new ImageIcon("resources/sprites/OCTOROK_BLUE.png").getImage();
 		enemyLinelSprite = new ImageIcon("resources/sprites/LINEL_ENEMY_BLUE.png").getImage();
 		zorablue = new ImageIcon("resources/sprites/ZORA_BLUE.png").getImage();
 		tektiteblue = new ImageIcon("resources/sprites/TEKTITE_BLUE.png").getImage();
@@ -86,10 +86,11 @@ public class GamePanel extends JPanel{
 	}
 	
 	private void drawCOLLISSION(Graphics g) {
-		if(gameState.isColliding()) {
-			g.setColor(Color.WHITE);
-			g.drawString("COLLISION!",220,200);		
-		}
+	    if(gameState.isColliding()) {
+	        g.setFont(new Font("Arial", Font.BOLD, 40));
+	        g.setColor(Color.RED);
+	        g.drawString("COLLISION!", 320, 220);
+	    }
 	}
 	
 	private void drawGameOver(Graphics g) {
@@ -125,9 +126,6 @@ public class GamePanel extends JPanel{
 		g.drawString("Press B to open SHOP",  20, 430);
 		
 		if(!gameState.isGameOver()) {
-			if(gameState.isColliding()) { // tua amie was here!
-				g.drawString("COLLISION!", 200, 200);
-			}
 			if(gameState.getPlayer().isStaAttaccando()) {
 				g.drawString("ATTACCO!!!", 250,250);
 			}
@@ -174,7 +172,7 @@ public class GamePanel extends JPanel{
 
 	    if(gameState.getEnemy2().isAlive()) {
 	        Enemy enemy2 = gameState.getEnemy2();
-	        g.drawImage(zorablue,enemy2.getX(),enemy2.getY(),175,175,null);
+	        g.drawImage(enemyOctorokSprite,enemy2.getX(),enemy2.getY(),105,65,null);
 	    }
 
 	    if(gameState.getEnemy3().isAlive()) {
