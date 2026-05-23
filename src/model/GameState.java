@@ -291,28 +291,21 @@ public class GameState {
     public boolean isGameOver() { return gameOver; }
     public boolean isColliding() { return colliding; } //MARIANA UPDATE  15/5
     public Enemy getEnemy3() {
-        return enemy3;
-    }
+        return enemy3; }
     public Enemy getEnemy4() {
-        return enemy4;
-    }
-    public Enemy getEnemy5() {
-        return enemy5;
+        return enemy4;  }
+    public Enemy getEnemy5() { return enemy5;
     }
 
-    public int getLosses() {
-        return losses;
+    public int getLosses() { return losses;
     }
 
-    public int getWins() {
-        return wins;
+    public int getWins() { return wins;
     }
 
-    public void addWins() {
-        wins++;
+    public void addWins() { wins++;
     }
 
-    public void addLosses() {
-        losses++;
+    public void addLosses() {  losses++;
     }
 }
