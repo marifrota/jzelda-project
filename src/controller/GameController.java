@@ -3,6 +3,8 @@ package controller;
 import model.GameState;
 import view.GamePanel;
 import view.AudioManager;
+import model.Player;
+import java.awt.Rectangle;
 
 public class GameController implements Runnable {
 
@@ -73,16 +75,61 @@ public class GameController implements Runnable {
     	} 
     	//TRY AGAIN
     	if(!gameState.isGameOver()) {
-    		//movement
-    		if (inputHandler.su) { gameState.getPlayer().muoviSu();
-    		
-    		} else if (inputHandler.giu) { gameState.getPlayer().muoviGiu();
-    		    
-    		} else if (inputHandler.sinistra) {gameState.getPlayer().muoviSinistra();
+ 
+   Player player = gameState.getPlayer(); //22/05 change to debug
+   
+//MOVEMENT
 
-    		} else if (inputHandler.destra) {gameState.getPlayer().muoviDestra(); 
-    			
-	      }
+   // up
+   if (inputHandler.su) {
+       int nextY = player.getY() - player.getVelocita();
+       Rectangle future = new Rectangle(
+           player.getX() + 42, nextY + 4, 56, 56);
+
+       if (!gameState.touchObstacle(future)) {
+           player.muoviSu();
+       } else {
+           player.setDirezione(Player.Direzione.NORD);
+       }
+   }
+
+   // down
+   else if (inputHandler.giu) {
+       int nextY = player.getY() + player.getVelocita();
+       Rectangle future = new Rectangle(
+           player.getX() + 4, nextY + 4, 56,56);
+       if (!gameState.touchObstacle(future)) {
+           player.muoviGiu();
+       } else {
+           player.setDirezione(Player.Direzione.SUD);
+       }
+   }
+
+   // left
+   else if (inputHandler.sinistra) {
+       int nextX = player.getX() - player.getVelocita();
+       Rectangle future = new Rectangle(
+           nextX +4,
+           player.getY() +4, 56,56);
+
+       if (!gameState.touchObstacle(future)) {
+           player.muoviSinistra();
+       } else {
+           player.setDirezione(Player.Direzione.OVEST);
+       }
+   }
+
+   // right
+   else if (inputHandler.destra) {
+       int nextX = player.getX() + player.getVelocita();
+       
+       Rectangle future = new Rectangle( nextX + 4, player.getY() + 4, 56, 56);
+       if (!gameState.touchObstacle(future)) {
+           player.muoviDestra();
+       } else {
+           player.setDirezione(Player.Direzione.EST);
+       }
+   }
     	//MARIANA UPDATE 15/5
 	      //  if(inputHandler.attacco && gameState.getEnemy().isAlive() && gameState.getPlayer().getBounds().intersects(gameState.getEnemy().getBounds())) { 
 	        //	gameState.getEnemy().setHit(true);

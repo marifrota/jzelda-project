@@ -22,6 +22,44 @@ public class Enemy {
     private final Random random = new Random();
     private int contatorePassi = 0;
     
+    private static final int offSet = 4;
+    private static final int size = 56;
+    
+    public void moveThere(GameState gameState) {
+
+        Rectangle future = getFutureBounds();
+
+        if (!gameState.touchObstacle(future)) {
+
+            moveEnemy();
+
+        } else {
+
+            switch (direzione) {
+
+                case NORD:
+                    direzione = Direzione.SUD;
+                    break;
+
+                case SUD:
+                    direzione = Direzione.NORD;
+                    break;
+
+                case EST:
+                    direzione = Direzione.OVEST;
+                    break;
+
+                case OVEST:
+                    direzione = Direzione.EST;
+                    break;
+
+                default:
+                    scegliDirezioneCasuale();
+                    break;
+            }
+        }
+    }
+    
     //construct
     public boolean isHit() {
         return hit;
@@ -50,8 +88,6 @@ public class Enemy {
         scegliDirezioneCasuale();
         contatorePassi = 0;
         }
-      //20/05
-        moveEnemy();
     }
     
 //20/05 
@@ -63,24 +99,19 @@ public class Enemy {
         if (Math.abs(dx) > Math.abs(dy)) {
 
             if (dx > 0) { direzione = Direzione.EST;
-                x += velocita;
-            } else {
-                direzione = Direzione.OVEST;
-                x -= velocita;
-            }
-
-        } else {
+             } else {
+                direzione = Direzione.OVEST; }
+             } else {
             if (dy > 0) {
                 direzione = Direzione.SUD;
-                y += velocita;
             } else {
                 direzione = Direzione.NORD;
-                y -= velocita;
             }
         }
     }
     
    //movement based on the preferred direction
+    
     public void moveEnemy() {
         switch (direzione) {
 
@@ -100,7 +131,12 @@ public class Enemy {
             	break;
         }
     }
-
+    public void setDirezione(Direzione direzione) {
+        this.direzione = direzione;
+    }
+    public Direzione getDirezione() {
+        return direzione;
+    } // spostare
     public void scegliDirezioneCasuale() {
         int numero = random.nextInt(5);
         switch (numero) {
@@ -125,8 +161,22 @@ public class Enemy {
     
   //to understand if the Enemy made contact with the Player or an object
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 80, 60);
+
+        return new Rectangle( x + offSet, y + offSet, size, size );
     }
+    
+    public Rectangle getFutureBounds() {
+        int nextX = x;
+        int nextY = y;
+        switch (direzione) {
+            case NORD:  nextY -= velocita; break;
+            case SUD:   nextY += velocita; break;
+            case EST:   nextX += velocita; break;
+            case OVEST: nextX -= velocita; break;
+        }
+        return new Rectangle( nextX + offSet, nextY + offSet, size, size);
+    }
+    
     
 //when the enemy loses health points
     public void subisciDanno(int danno) {

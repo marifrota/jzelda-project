@@ -31,7 +31,7 @@ public class Player {
 
         if (timerAttacco == 0) {
             timerAttacco = 10;
-            AudioManager.getInstance()
+             AudioManager.getInstance()
             .play("resources/15 - SE_GAME_ATTACK1.wav");
         }
     }
@@ -87,7 +87,7 @@ public class Player {
     //rectangle for colliding Area
     public java.awt.Rectangle getBounds() {
 
-        return new java.awt.Rectangle(x, y, 80, 60);
+        return new java.awt.Rectangle(x + 4, y + 4, 56, 56);
     }
 
     //rectangle for the sword

@@ -13,6 +13,8 @@ public class AudioManager {
     
     private static AudioManager instance;
     
+    private Clip sound;
+    
     public static AudioManager getInstance() {
         if (instance == null) {
             instance = new AudioManager();
@@ -27,13 +29,19 @@ public class AudioManager {
     
     public void play(String filename) {
         try {
+        	
+        	  if (sound != null && sound.isRunning()) {
+                  sound.stop();
+                  sound.close();
+              }
+        	  
             File file = new File(filename);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip sound = AudioSystem.getClip();
             sound.open(audioStream);
             sound.start(); 
         } catch (UnsupportedAudioFileException e1) {
-            System.out.println("Formato audio non supportato: " + e1.getMessage());
+            System.out.println("Audio non supportato: " + e1.getMessage());
             e1.printStackTrace();
         } catch (IOException e1) {
             System.out.println("Errore di lettura del file audio: " + e1.getMessage());
