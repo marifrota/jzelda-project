@@ -7,15 +7,13 @@ import model.GameState;
 import controller.InputHandler;
 import java.awt.Color;
 import java.awt.Font;
-import model.GameState;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+/** its the main menu panel of the game that allows the player to start and also to exit the game*/
 public class MenuPanel extends JPanel{
 	
 	private JFrame window;
+	 /* it creates the game menu and initializes buttons, game state and controller*/
 	public MenuPanel(JFrame w, String nickname) {		window = w;
 			//nao pode usar this dentro do main(cant use this inside the main)
 			GameState gameState = new GameState();
@@ -43,7 +41,7 @@ public class MenuPanel extends JPanel{
 	        startButton.setBounds(360,230,250,70);
 	        exitButton.setBounds(360,325,250,70);//(x,y,largura,altura)(x,y,large,height)
 
-	        
+	     // Starts the game
 			startButton.addActionListener( e -> {
 				System.out.println("inizio del gioco");
 				window.setContentPane(gamePanel);
@@ -54,12 +52,14 @@ public class MenuPanel extends JPanel{
 				controller.start();
 				window.repaint();
 			});
+			// Closes the application
 			exitButton.addActionListener(e -> {
 
 	            System.exit(0);
 	        });
+			
 	    }
-	
+	/** Draws the menu background and title screen "JZELDA"  in the color gold with the brown shadow*/
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
 	    Graphics2D g2 = (Graphics2D) g;
