@@ -37,10 +37,11 @@ public class  Level implements Serializable {
     public Level(int numeroLvl) {
         this.livelloCorrente = numeroLvl;
         caricaLvl(numeroLvl);
+        caricaEntita(numeroLvl);
     }
     
     private void caricaLvl(int numeroLvl) {
-        String file = "resources/levels/lvl" + numeroLvl;
+        String file = "resources/levels/lvl" + numeroLvl + ".txt";
         
         try {
             java.util.List<String> totRighe = java.nio.file.Files.readAllLines(java.nio.file.Paths.get(file));
@@ -60,6 +61,20 @@ public class  Level implements Serializable {
             System.out.println("Errore: " + e.getMessage());
             // safety map
             this.mappa = new int[0][0]; 
+        }
+    }
+    
+ // ENTITIES 24/04
+    private java.util.List<String> entitaDaCaricare = new java.util.ArrayList<>();
+
+    private void caricaEntita(int numeroLvl) {
+        String fileEntita = "resources/levels/lvl" + numeroLvl + "_entities.txt";
+        try {
+            java.util.List<String> righe = java.nio.file.Files.readAllLines(java.nio.file.Paths.get(fileEntita));
+            this.entitaDaCaricare = righe; 
+            System.out.println("Load " + righe.size() + " entity for level" + numeroLvl);
+        } catch (Exception e) {
+            System.out.println("No entity for lvl" + numeroLvl);
         }
     }
     

@@ -28,7 +28,7 @@ public class SaveManager {
                 return Integer.parseInt(linea.trim());
             }
         } catch (IOException | NumberFormatException e) {
-            System.out.println("Errore durante il caricamento del punteggio: " + e.getMessage());
+            System.out.println("Errore con il punteggio: " + e.getMessage());
         }
         return 0;
     }
@@ -54,7 +54,7 @@ public class SaveManager {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileSave))) {
                 return (GameState) ois.readObject();
             } catch (IOException | ClassNotFoundException e) {
-                System.err.println("Errore durante il caricamento: " + e.getMessage());
+                System.err.println("Errore nel caricamento: " + e.getMessage());
                 return null;
             }
           }

@@ -236,13 +236,13 @@ public class GamePanel extends JPanel implements GameObserver{
 	    return gameState;
 	}
 	/**Draw rupie*/
-	private void drawRupees(Graphics g) {
-	    for(Rupee rupee : gameState.getRupeesOnGround()) {
-	        if(!rupee.isCollected()) {
-	            g.drawImage(moeda,rupee.getX(),rupee.getY(),32, 32, null);
-	        }
-	    }
-	}
+	
+		private void drawRupees(Graphics g) {
+		    // CHANGED STRAEM
+		    gameState.getRupeesOnGround().stream()
+		             .filter(rupee -> !rupee.isCollected())
+		             .forEach(rupee -> g.drawImage(moeda, rupee.getX(), rupee.getY(), 32, 32, null));
+		}
 	/*draw scudo and the sworm*/
 	private void drawItems(Graphics g) {
 	    if(gameState.scudo()) {
