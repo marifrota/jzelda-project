@@ -4,7 +4,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 
-
+/**HUD display panel,hows score, lives, rupees, wins and losses*/
 public class HUDPanel extends JPanel implements GameObserver{
 	
 	private JLabel scoreLabel;
@@ -13,7 +13,9 @@ public class HUDPanel extends JPanel implements GameObserver{
 	private JLabel rupeesLabel;
 	private JLabel lossesLabel;
 	private JLabel winsLabel;
-	
+	/**
+	 * Creates the HUD interface and labels.
+	 */
 	public HUDPanel() {//no inicio(at the beggingin)
 		setLayout(null);
 		scoreLabel = new JLabel("Score: 0");
@@ -51,24 +53,31 @@ public class HUDPanel extends JPanel implements GameObserver{
 		winsLabel.setForeground(new Color(80,220,120));
 		winsLabel.setBounds(850, 0, 110, 30);
 	}
-	
+	/**
+	 * Sets the player's nickname.
+	 */
 	public void setNickname(String nickname) {
 	    nicknameLabel.setText("Player: " + nickname);
 	}
-	
+	/**
+	 * update the score
+	 */
 	public void aumentapunteggio(int score) {
 		scoreLabel.setText("Score: " + score);
 	}
-	
+	/**update the life*/
 	public void aumentavita(int vita) {
 	    livesLabel.setText("♥ ".repeat(vita));
 	}
+	/**update the rupee*/
 	public void aumentaRupees(int rupees) {
 	    rupeesLabel.setText("Rupees: " + rupees);
-	}
+	}/**update the lost*/
 	public void aumentaLosses(int losses) {
 	    lossesLabel.setText("Losses: " + losses);
-	}
+	}/**
+	 * Updates the HUD observer.
+	 */
 	public void update() {System.out.println("HUD updated!");
 	}
 }

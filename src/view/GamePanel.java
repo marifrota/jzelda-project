@@ -32,7 +32,8 @@ public class GamePanel extends JPanel{
 	private Image porcao;
 	private Image espada;
 	private Image escudo;
-	
+	/**Creates the main game panel and loads, sprites, HUD, buttons and game resources.
+	 */
 	public GamePanel(GameState gameState) {
 		this.gameState = gameState;
 		setLayout(null);
@@ -76,7 +77,8 @@ public class GamePanel extends JPanel{
 		});
 		exitButton.addActionListener(e -> {System.exit(0);});
 	}
-	
+	/** 
+	 * Draw the yellow attack effect*/
 	private void drawAttackEffect(Graphics g) {
 		Player player = gameState.getPlayer();
 		if(player.isStaAttaccando()) {
@@ -84,7 +86,8 @@ public class GamePanel extends JPanel{
 			g.fillOval(player.getX()+20, player.getY()-5, 30,30);
 		}
 	}
-	
+	/**
+	 * Draw the big red string "collision" always when colide with an enemy*/
 	private void drawCOLLISSION(Graphics g) {
 	    if(gameState.isColliding()) {
 	        g.setFont(new Font("Arial", Font.BOLD, 40));
@@ -92,7 +95,7 @@ public class GamePanel extends JPanel{
 	        g.drawString("COLLISION!", 320, 220);
 	    }
 	}
-	
+	/**Draw GAME OVER in the center with the dark red and the gold for the shadow, also it draws the retry and exit*/
 	private void drawGameOver(Graphics g) {
 		if(gameState.isGameOver()) {
 			g.setColor(new Color(0,0,0,180));
@@ -107,6 +110,8 @@ public class GamePanel extends JPanel{
 			exitButton.setVisible(true);
 		}
 	}
+	
+	/**Draw all game elements on  the screen like map, player, elements, HUD, shop, attack effects and game over screen*/
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -129,7 +134,7 @@ public class GamePanel extends JPanel{
 			if(gameState.getPlayer().isStaAttaccando()) {
 				g.drawString("ATTACCO!!!", 250,250);
 			}
-		}
+		}/**Drawing the shop*/
 		if(shopOpen) {
 			g.setColor(new Color(0,0,0,220));
 		    g.fillRect(200,100,500,300);
@@ -153,12 +158,12 @@ public class GamePanel extends JPanel{
 		hud.aumentaRupees(gameState.getRupees());
 		hud.aumentaLosses(gameState.getLosses());
 	}
-	
+	/**Draw player*/
 	private void drawPlayer(Graphics g) {
 		Player player = gameState.getPlayer();
         g.drawImage(playerzelda,player.getX(),player.getY(),105,65,null);
 	}
-	
+	/**Draw enemy1*/
 	private void drawEnemy(Graphics g) {
 	    if(gameState.getEnemy().isAlive()) {
 	        Enemy enemy = gameState.getEnemy();
@@ -169,56 +174,62 @@ public class GamePanel extends JPanel{
 	        }
 	        g.drawImage(tektiteblue,enemy.getX(),enemy.getY(),105,65,null);
 	    }
-
+	    /**Draw enemy2*/
 	    if(gameState.getEnemy2().isAlive()) {
 	        Enemy enemy2 = gameState.getEnemy2();
 	        g.drawImage(enemyOctorokSprite,enemy2.getX(),enemy2.getY(),105,65,null);
 	    }
-
+	    /**Draw enemy3*/
 	    if(gameState.getEnemy3().isAlive()) {
 	        Enemy enemy3 = gameState.getEnemy3();
 	        g.drawImage(enemyLinelSprite,enemy3.getX(),enemy3.getY(),105,65,null);
 	    }
-
+	    /**Draw enemy4*/
 	    if(gameState.getEnemy4().isAlive()) {
 	        Enemy enemy4 = gameState.getEnemy4();
 	        g.drawImage(oktorokblue,enemy4.getX(),enemy4.getY(),105,65,null);
 	    }
-
+	    /**Draw enemy5*/
 	    if(gameState.getEnemy5().isAlive()) {
 	        Enemy enemy5 = gameState.getEnemy5();
 	        g.drawImage(enemyMoblinSprite,enemy5.getX(),enemy5.getY(),105,65,null);
 	    }
 	}
 		
-	
+	/**draw map*/
 	private void drawMap(Graphics g) {
 	    gameState.getLivelloAttuale().render((Graphics2D) g);
 	}
-	
+	/**to gain points(aumentare punteggio)*/
 	public void aumentapunteggio(int xscore) {
 		score += xscore;
 		hud.aumentapunteggio(score);
 		repaint();
 	}
-	
+	/*to gain life*/
 	public void aumentavita( int vita) {
 		vite += vita;
 		hud.aumentavita(vite);
 		repaint();
 	}
+	/*open the shop and also close/
 	public void setShopOpen(boolean shopOpen) {
 	    this.shopOpen = shopOpen;
 	}
+
+	/**Draw the level*/
 	public void drawLevel(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 20));
 		g.drawString("Level: " + gameState.getLivelloCorrente(), 20, 23);
 	}
+	/**
+	 * Returns the current game state like the current life, score, enemys, level, rupees...
+	 */
 	public GameState getGameState() {
 	    return gameState;
 	}
-	
+	/**Draw rupie*/
 	private void drawRupees(Graphics g) {
 	    for(Rupee rupee : gameState.getRupeesOnGround()) {
 	        if(!rupee.isCollected()) {
@@ -226,6 +237,7 @@ public class GamePanel extends JPanel{
 	        }
 	    }
 	}
+	/*draw scudo and the sworm*/
 	private void drawItems(Graphics g) {
 	    if(gameState.scudo()) {
 	    	g.drawImage(escudo,820,35,32,32,null);
