@@ -8,7 +8,7 @@ public class InputHandler implements KeyListener {
 	private GamePanel gamePanel;
     public boolean su, giu, sinistra, destra, attacco;
     public boolean retry, exit; //MARIANA (detect keys for exit and try again)
-    
+    public boolean shop;
     // CONSTRUCTOR
     public InputHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -27,6 +27,24 @@ public class InputHandler implements KeyListener {
             retry = true;//TRY AGAIN
         if(codice == KeyEvent.VK_ESCAPE)
             exit = true;//EXIT
+        if(codice == KeyEvent.VK_B) {
+            shop = !shop;
+            gamePanel.setShopOpen(shop);
+            gamePanel.repaint();
+        }
+        if(codice == KeyEvent.VK_1) {
+            System.out.println("POTION");
+            gamePanel.getGameState().buyPotion();
+            gamePanel.repaint();
+        }
+        if(codice == KeyEvent.VK_2) {
+            gamePanel.getGameState().buyscudo();
+            gamePanel.repaint();
+        }
+        if(codice == KeyEvent.VK_3) {
+            gamePanel.getGameState().buyspada();
+            gamePanel.repaint();
+        }
     }
 
     @Override

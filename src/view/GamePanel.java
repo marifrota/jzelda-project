@@ -28,8 +28,10 @@ public class GamePanel extends JPanel{
 	private Image oktorokblue;
 	private Image playerzelda;
 	private Image moeda;
-	
-
+	private boolean shopOpen = false;
+	private Image porcao;
+	private Image espada;
+	private Image escudo;
 	
 	public GamePanel(GameState gameState) {
 		this.gameState = gameState;
@@ -47,6 +49,9 @@ public class GamePanel extends JPanel{
 		oktorokblue = new ImageIcon("resources/sprites/OCTOROK_BLUE.png").getImage();
 		playerzelda = new ImageIcon("resources/sprites/PLAYER (1).png").getImage();
 		moeda = new ImageIcon("resources/sprites/MOEDAS (1).png").getImage();
+		escudo = new ImageIcon("resources/sprites/ESCUDO.png").getImage();
+		espada = new ImageIcon("resources/sprites/SPADA.png").getImage();
+		porcao = new ImageIcon("resources/sprites/PORCAO.png").getImage();
 
 		retryButton = new JButton("TRY AGAIN");
 		exitButton = new JButton("EXIT");
@@ -113,16 +118,36 @@ public class GamePanel extends JPanel{
 		drawLevel(g);
 		drawRupees(g);
 		drawCOLLISSION(g);
+		drawItems(g);
 		
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Arial", Font.BOLD, 16));
+		g.drawString("Press B to open SHOP",  20, 430);
 		
 		if(!gameState.isGameOver()) {
 			if(gameState.isColliding()) { // tua amie was here!
 				g.drawString("COLLISION!", 200, 200);
 			}
-			
 			if(gameState.getPlayer().isStaAttaccando()) {
 				g.drawString("ATTACCO!!!", 250,250);
 			}
+		}
+		if(shopOpen) {
+			g.setColor(new Color(0,0,0,220));
+		    g.fillRect(200,100,500,300);
+		    g.setColor(Color.WHITE);
+		    g.setFont(new Font("Arial", Font.BOLD, 30));
+		    g.drawString("SHOP", 360, 150);
+		    g.setFont(new Font("Arial", Font.PLAIN, 22));
+		    g.drawImage(porcao, 220, 200, 40, 40, null);
+		    g.drawString("1 - POTION (5)", 280, 230);
+		    g.drawImage(escudo, 220, 250, 40, 40, null);
+		    g.drawString("2 - SHIELD (10)", 280, 280);
+		    g.drawImage(espada, 220, 300, 40, 40, null);
+		    g.drawString("3 - MASTER SWORD (15)", 280, 330);
+		    g.drawString("3 - MASTER SWORD (15)", 280, 330);
+		    g.setFont(new Font("Arial", Font.PLAIN, 16));
+		    g.drawString("Press B to exit", 320, 380);
 		}
 		drawGameOver(g);
 		hud.aumentapunteggio(gameState.getScore());
@@ -184,10 +209,16 @@ public class GamePanel extends JPanel{
 		hud.aumentavita(vite);
 		repaint();
 	}
+	public void setShopOpen(boolean shopOpen) {
+	    this.shopOpen = shopOpen;
+	}
 	public void drawLevel(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 20));
 		g.drawString("Level: " + gameState.getLivelloCorrente(), 20, 23);
+	}
+	public GameState getGameState() {
+	    return gameState;
 	}
 	
 	private void drawRupees(Graphics g) {
@@ -195,6 +226,14 @@ public class GamePanel extends JPanel{
 	        if(!rupee.isCollected()) {
 	            g.drawImage(moeda,rupee.getX(),rupee.getY(),32, 32, null);
 	        }
+	    }
+	}
+	private void drawItems(Graphics g) {
+	    if(gameState.scudo()) {
+	    	g.drawImage(escudo,820,35,32,32,null);
+	    }
+	    if(gameState.spada()) {
+	    	g.drawImage(espada,860,35,32,32,null);
 	    }
 	}
 }
