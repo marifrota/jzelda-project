@@ -188,6 +188,7 @@ public class GamePanel extends JPanel implements GameObserver{
 		hud.aumentavita(gameState.getPlayer().getPuntiVita());
 		hud.aumentaRupees(gameState.getRupees());
 		hud.aumentaLosses(gameState.getLosses());
+		hud.aumentaGiocate(gameState.getGiocate());
 	}
 	/**Draw player*/
 	private void drawPlayer(Graphics g) {

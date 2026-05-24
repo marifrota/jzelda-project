@@ -13,6 +13,8 @@ public class HUDPanel extends JPanel implements GameObserver{
 	private JLabel rupeesLabel;
 	private JLabel lossesLabel;
 	private JLabel winsLabel;
+	private int giocate;
+	private JLabel giocateLabel;
 	/**
 	 * Creates the HUD interface and labels.
 	 */
@@ -52,6 +54,11 @@ public class HUDPanel extends JPanel implements GameObserver{
 		winsLabel.setFont(hudFont);
 		winsLabel.setForeground(new Color(80,220,120));
 		winsLabel.setBounds(850, 0, 110, 30);
+		giocateLabel = new JLabel("Partite: 0");
+		add(giocateLabel);
+		giocateLabel.setFont(hudFont);
+		giocateLabel.setForeground(new Color(120,200,255));
+		giocateLabel.setBounds(850, 25, 150, 30);
 	}
 	/**
 	 * Sets the player's nickname.
@@ -65,9 +72,18 @@ public class HUDPanel extends JPanel implements GameObserver{
 	public void aumentapunteggio(int score) {
 		scoreLabel.setText("Score: " + score);
 	}
+	/**update the partite giocata*/
+	public void aumentaGiocate(int giocate) {
+	    this.giocate = giocate;
+	    giocateLabel.setText("Partite: " + giocate);
+	}
 	/**update the life*/
 	public void aumentavita(int vita) {
 	    livesLabel.setText("♥ ".repeat(vita));
+	}
+	/**update the wins*/
+	public void aumentaWins(int wins) {
+	    winsLabel.setText("Wins: " + wins);
 	}
 	/**update the rupee*/
 	public void aumentaRupees(int rupees) {
