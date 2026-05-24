@@ -254,12 +254,12 @@ public class GameState implements Serializable {
         //RESET 
         public void resetGame() {
         	addGiocate();
-        	player = new Player(128,320);
-           spawnEnemies();
-            gameOver = false;
+        	gameOver = false;
             score = 0;
             livelloCorrente = 1;
             livelloAttuale = new Level(1);
+        	player = new Player(128,320);
+            spawnEnemies();
             AudioManager.getInstance().playMusica("resources/03.-Dungeon-Theme_1.wav");
     }
         
