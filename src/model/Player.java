@@ -88,7 +88,7 @@ public class Player implements Serializable {
     //rectangle for colliding Area
     public java.awt.Rectangle getBounds() {
     	
-        return new java.awt.Rectangle(x + 8, y + 8, 48, 48);
+        return new java.awt.Rectangle(x + 6, y + 6, 46, 46);
     }
 
     //rectangle for the sword
