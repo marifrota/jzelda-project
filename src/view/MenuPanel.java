@@ -1,5 +1,6 @@
 package view;
 import javax.swing.JFrame;
+import editor.LevelEditor; //24/05 
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import controller.GameController;
@@ -40,6 +41,21 @@ public class MenuPanel extends JPanel{
 	            
 	        startButton.setBounds(360,230,250,70);
 	        exitButton.setBounds(360,325,250,70);//(x,y,largura,altura)(x,y,large,height)
+	        
+	        //24/05 Edits the levels 
+	        JButton editorButton = new JButton("LEVEL EDITOR");
+	        add(editorButton);
+	        Font editorFont = new Font("Arial", Font.PLAIN, 16); 
+	        editorButton.setFont(editorFont);
+	        editorButton.setBackground(Color.DARK_GRAY);
+	        editorButton.setForeground(Color.WHITE);
+	        editorButton.setFocusPainted(false);
+	        editorButton.setBounds(770, 25, 180, 30);	        
+	        editorButton.addActionListener(e -> {
+	            System.out.println("Apertura Level Editor in corso");
+	            new LevelEditor(); 
+	            window.dispose();  
+	        });
 
 	     // Starts the game
 			startButton.addActionListener( e -> {

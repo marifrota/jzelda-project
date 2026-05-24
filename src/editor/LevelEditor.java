@@ -20,13 +20,19 @@ public class LevelEditor extends JFrame {
         setTitle("Level Editor - " + nomeFile);
         setTitle("Level Editor - JZelda");
         setSize(800, 650);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(15, 15));
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         
         JPanel panelGriglia = new JPanel(new GridLayout(15, 15));
         add(panelGriglia, BorderLayout.CENTER);
         JPanel panelBottoni = new JPanel();
+        
+        // 24/05 button menu
+        JButton pMenu = new JButton("MENU");
+        pMenu.addActionListener(e -> {
+            this.dispose(); 
+            view.GameWindow.main(null); 
+        });
         JButton pSave = new JButton("SAVE");
         pSave.addActionListener(e -> salvaFile());
         JButton pToggle = new JButton("Mode: TILES");
@@ -34,6 +40,7 @@ public class LevelEditor extends JFrame {
             pToggle.setText(enemyMode ? "Mode: ENEMIES" : "Mode: TILES");
         });
 
+        panelBottoni.add(pMenu);
         panelBottoni.add(pToggle);
         panelBottoni.add(pSave);
         add(panelBottoni, BorderLayout.SOUTH);
