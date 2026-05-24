@@ -1,5 +1,7 @@
 package model;
 import view.GameObserver;
+import java.io.File;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import model.SaveManager;
@@ -39,6 +41,12 @@ public class GameState implements Serializable {
         player = new Player(128, 320);
         spawnEnemies(); }
         private void spawnEnemies() {
+        	if (loadEnemiesFromFile()) {
+                getEnemy2().setDirezione(Enemy.Direzione.EST);
+                getEnemy3().setDirezione(Enemy.Direzione.SUD);
+                getEnemy4().scegliDirezioneCasuale();
+                getEnemy5().scegliDirezioneCasuale();
+                return; }
             enemies.clear();
             // GEL
             enemies.add(new Enemy(128,128));
@@ -230,7 +238,38 @@ public class GameState implements Serializable {
                  getEnemy3().setDirezione(Enemy.Direzione.SUD);
                  getEnemy4().scegliDirezioneCasuale();
                  getEnemy5().scegliDirezioneCasuale();
+                 
              }
+        	private boolean loadEnemiesFromFile() {
+        	    String path = "resources/levels/lvl" + livelloCorrente + "_entities.txt";
+        	    File file = new File(path);
+        	    if (!file.exists()) {
+        	        return false;
+        	    }
+
+        	    enemies.clear();
+        	    for (int i = 0; i < 5; i++) {
+        	        Enemy e = new Enemy(0, 0);
+        	        e.setAlive(false);
+        	        enemies.add(e);
+        	    }
+        	    try (Scanner sc = new Scanner(file)) {
+        	        int i = 0;
+        	        while (sc.hasNextLine() && i < 5) {
+        	            String line = sc.nextLine();
+        	            String[] parts = line.split(",");
+        	            if (parts[0].equals("ENEMY")) {
+        	                enemies.get(i).setX(Integer.parseInt(parts[1]));
+        	                enemies.get(i).setY(Integer.parseInt(parts[2]));
+        	                enemies.get(i).setAlive(true);
+        	                i++;
+        	            }
+        	        }
+        	        return true;
+        	    } catch (Exception e) {
+        	        return false; 
+        	    }
+        	}
       //23/05 LIVELLI
         public void lvlSuccessivo() {addWins();
             if (livelloCorrente < 16) {
