@@ -246,8 +246,7 @@ public class GameState implements Serializable {
                 
                 System.out.println("Livello " + livelloCorrente);
             } else {
-                gameOver = true;
-                addWins(); // 
+                gameOver = true; 
                 System.out.println("THE END!");
             }
         }

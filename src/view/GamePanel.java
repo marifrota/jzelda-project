@@ -127,13 +127,11 @@ public class GamePanel extends JPanel implements GameObserver{
 		if(gameState.isGameOver() && gameState.getLivelloCorrente() == 16 && gameState.getPlayer().getPuntiVita() > 0) {
 			g.setColor(new Color(0,0,0,180));
 			g.fillRect(0,0,getWidth(),getHeight());
-			
 			g.setFont(new Font("Serif", Font.BOLD, 90));
-			g.setColor(new Color(200, 150, 0)); 
-			g.drawString("GAME ENDED", 105, 225);
-			g.setColor(new Color(255, 215, 0));
-			g.drawString("GAME ENDED", 100, 220);
-			
+			g.setColor(new Color(255,215,0)); 
+			g.drawString("GAME ENDED", 145,225);
+			g.setColor(new Color(20,130,70));
+			g.drawString("GAME ENDED", 140, 225);
 			exitButton.setVisible(true); 
 			retryButton.setVisible(true); 
 		}
@@ -188,6 +186,7 @@ public class GamePanel extends JPanel implements GameObserver{
 		hud.aumentavita(gameState.getPlayer().getPuntiVita());
 		hud.aumentaRupees(gameState.getRupees());
 		hud.aumentaLosses(gameState.getLosses());
+		hud.aumentaWins(gameState.getWins());
 		hud.aumentaGiocate(gameState.getGiocate());
 	}
 	/**Draw player*/
