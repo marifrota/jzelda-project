@@ -109,7 +109,7 @@ public class GamePanel extends JPanel implements GameObserver{
 	}
 	/**Draw GAME OVER in the center with the dark red and the gold for the shadow, also it draws the retry and exit*/
 	private void drawGameOver(Graphics g) {
-		if(gameState.isGameOver()) {
+		if(gameState.isGameOver() && gameState.getPlayer().getPuntiVita() <= 0) {
 			g.setColor(new Color(0,0,0,180));
 			g.fillRect(0,0,getWidth(),getHeight());
 			g.setFont(new Font("Serif", Font.BOLD, 110));
@@ -122,7 +122,22 @@ public class GamePanel extends JPanel implements GameObserver{
 			exitButton.setVisible(true);
 		}
 	}
-	
+	//24/05 level 16 finished
+	private void drawGameEnded(Graphics g) {
+		if(gameState.isGameOver() && gameState.getLivelloCorrente() == 16 && gameState.getPlayer().getPuntiVita() > 0) {
+			g.setColor(new Color(0,0,0,180));
+			g.fillRect(0,0,getWidth(),getHeight());
+			
+			g.setFont(new Font("Serif", Font.BOLD, 90));
+			g.setColor(new Color(200, 150, 0)); 
+			g.drawString("GAME ENDED", 105, 225);
+			g.setColor(new Color(255, 215, 0));
+			g.drawString("GAME ENDED", 100, 220);
+			
+			exitButton.setVisible(true); 
+			retryButton.setVisible(true); 
+		}
+	}
 	/**Draw all game elements on  the screen like map, player, elements, HUD, shop, attack effects and game over screen*/
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -133,6 +148,7 @@ public class GamePanel extends JPanel implements GameObserver{
 		drawEnemy(g);
 		drawAttackEffect(g);
 		drawGameOver(g);
+		drawGameEnded(g);
 		drawLevel(g);
 		drawRupees(g);
 		drawCOLLISSION(g);
