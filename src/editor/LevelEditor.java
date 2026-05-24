@@ -72,6 +72,7 @@ public class LevelEditor extends JFrame {
                         
                         if (!entita.contains(nuovaEntita)) {
                             // add
+                        	entita.add(nuovaEntita);
                             p.setBackground(Color.RED); 
                             System.out.println(nuovaEntita + " added");  
                         } else {
