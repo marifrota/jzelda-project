@@ -6,8 +6,8 @@ import java.io.*;
 import java.util.*;
 
 public class LevelEditor extends JFrame {
-    private int[][] mappa = new int[15][15]; // 
-    private JButton[][] bottoni = new JButton[15][15];
+    private int[][] mappa = new int[7][15]; // 
+    private JButton[][] bottoni = new JButton[7][15];
     private String nomeFile = "resources/levels/lvl1.txt";
     private java.util.List<String> entita = new java.util.ArrayList<>();
     private boolean enemyMode = false;
@@ -23,7 +23,7 @@ public class LevelEditor extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         
-        JPanel panelGriglia = new JPanel(new GridLayout(15, 15));
+        JPanel panelGriglia = new JPanel(new GridLayout(7, 15));
         add(panelGriglia, BorderLayout.CENTER);
         JPanel panelBottoni = new JPanel();
         
@@ -50,20 +50,37 @@ public class LevelEditor extends JFrame {
     }
 
     private void griglia(JPanel panel) {
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 7; i++) {
         for (int j = 0; j < 15; j++) {
                 JButton p = new JButton(String.valueOf(mappa[i][j])); //p is button (pulsante) 
-                
                 int riga = i; int col = j;
-                    p.addActionListener(e -> {
-                      if (!enemyMode) {
+                p.setOpaque(true);
+                p.setBorderPainted(false);
+                
+                String checkEntita = "ENEMY," + (col * 64) + "," + (riga * 64);
+                if (entita.contains(checkEntita)) {
+                    p.setBackground(Color.RED);
+                }
+                p.addActionListener(e -> {
+                    if (!enemyMode) {
+                        // map mode
                         mappa[riga][col] = (mappa[riga][col] + 1) % 7;
                         p.setText(String.valueOf(mappa[riga][col]));
                     } else {
+                        // enemy mode
                         String nuovaEntita = "ENEMY," + (col * 64) + "," + (riga * 64);
-                        entita.add(nuovaEntita);
-                        p.setBackground(Color.RED); 
-                        System.out.println(nuovaEntita + " added");  } 
+                        
+                        if (!entita.contains(nuovaEntita)) {
+                            // add
+                            p.setBackground(Color.RED); 
+                            System.out.println(nuovaEntita + " added");  
+                        } else {
+                            // remove
+                            entita.remove(nuovaEntita);
+                            p.setBackground(UIManager.getColor("Button.background"));
+                            System.out.println(nuovaEntita + " removed");
+                        }
+                    } 
                 });
                 panel.add(p);
                 bottoni[i][j] = p;
@@ -74,7 +91,7 @@ public class LevelEditor extends JFrame {
     private void salvaFile() {
         // save map
         try (PrintWriter writer = new PrintWriter(new FileWriter(nomeFile))) {
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 7; i++) {
                 for (int j = 0; j < 15; j++) {
                     writer.print(mappa[i][j] + (j < 14 ? "," : "")); 
                 }
@@ -85,7 +102,7 @@ public class LevelEditor extends JFrame {
         String nomeFileEntita = nomeFile.replace(".txt", "_entities.txt");
 
         // save creature
-        try (PrintWriter pw = new PrintWriter(new FileWriter("resources/levels/lvl1_entities.txt"))) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(nomeFileEntita))) {
             for (String s : entita) {
                 pw.println(s);
             }
@@ -96,15 +113,20 @@ public class LevelEditor extends JFrame {
 
     private void caricaFile() {
         try (Scanner sc = new Scanner(new File(nomeFile))) {
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 7; i++) {
                 String[] riga = sc.nextLine().split(",");
              for (int j = 0; j < 15; j++) {
-            	 
                     mappa[i][j] = Integer.parseInt(riga[j]);
                 }
             }
         } catch (Exception e) { System.out.println("File not found"); }
+     entita.clear();
+    String nomeFileEntita = nomeFile.replace(".txt", "_entities.txt");
+    try (Scanner scEntita = new Scanner(new File(nomeFileEntita))) {
+        while (scEntita.hasNextLine()) {
+            entita.add(scEntita.nextLine());
+        }
+    } catch (Exception e) { System.out.println("Entities file not found (normal if new level)"); }
     }
-
     public static void main(String[] args) { new LevelEditor(); }
 }
