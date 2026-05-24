@@ -28,7 +28,7 @@ public class HUDPanel extends JPanel implements GameObserver{
 		add(scoreLabel);
 		add(livesLabel);
 		add(rupeesLabel);
-		
+		//the fonts of the words on the screen of the game
 		Font hudFont = new Font("Arial", Font.BOLD, 20);
 		nicknameLabel.setFont(hudFont);
 		rupeesLabel.setFont(hudFont);
@@ -39,7 +39,7 @@ public class HUDPanel extends JPanel implements GameObserver{
 		setOpaque(false);
 		scoreLabel.setForeground(new Color(255,215,0));
 		livesLabel.setForeground(new Color(220,40,40));
-		
+		//it draws on the screen the elements: nickname, losses, wins, partite.
 		nicknameLabel.setBounds(140, 0, 180, 30);
 		scoreLabel.setBounds(320, 0, 130, 30);
 		livesLabel.setBounds(470, 0, 120, 30);

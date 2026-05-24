@@ -5,7 +5,8 @@ import view.GamePanel;
 import view.AudioManager;
 import model.Player;
 import java.awt.Rectangle;
-
+/**this is to control the main gamee loop, update the gamestate and renders the graphics on the screen.
+ * This is also to implements runnavle to allow the game to run in a separate thread*/
 public class GameController implements Runnable {
 
     private GameState gameState;
@@ -13,26 +14,26 @@ public class GameController implements Runnable {
     private Thread gameThread;
     private InputHandler inputHandler;
     private boolean isRunning = false;
-
+/**this is a target frames per second in 60 FPS for the game loop*/
     // 60 should be standard
     private static final int FPS = 60;
-
+/**creates the game controller and it initializes the game components and music*/
     public GameController(GameState gameState, GamePanel gamePanel, InputHandler inputHandler) {
         this.gameState = gameState;
         this.gamePanel = gamePanel;
         this.inputHandler = inputHandler;
-        
+        //starts the music
         AudioManager.getInstance().playMusica("resources/03.-Dungeon-Theme_1.wav");
     }
-    // to start game engine 
+    /**start the game*/    // to start game engine 
     public void start() {
-        if (!isRunning) {
+        if (!isRunning) {// it prevents that a lot of threads happens from the begginging
             isRunning = true;
             gameThread = new Thread(this);
             gameThread.start(); // to start run method()
         }
     }
-
+    /**this is the main game loop with the continuos updating and rendering of the game while the game is running*/
     @Override
     public void run() {
         // Time calculation to have 60 constant FPS
@@ -49,13 +50,13 @@ public class GameController implements Runnable {
 
             // Pause a bit the game
             try {
-                double remainingTime = nextDrawTime - System.nanoTime();
+                double remainingTime = nextDrawTime - System.nanoTime();//calculates remaining time before next frame
                 remainingTime = remainingTime / 1000000; 
-                if (remainingTime < 0) {
+                if (remainingTime < 0) {//prevents negative sleep value
                     remainingTime = 0;
                 }
 
-                Thread.sleep((long) remainingTime);
+                Thread.sleep((long) remainingTime);// Pauses the thread to maintain stable FPS
                 nextDrawTime += drawInterval;
 
             } catch (InterruptedException e) {
@@ -63,23 +64,23 @@ public class GameController implements Runnable {
             }
         }
     }
-
+    /**updates the game logic like movement, collisions, attacks and game states */
     private void update() {
-    	this.gameState = gamePanel.getGameState();
+    	this.gameState = gamePanel.getGameState();// Synchronizes local game state with the panel
     	if(inputHandler.exit) {
-            System.exit(0);
+            System.exit(0);//close the game when pressed exit
         }
     	
-    	if(inputHandler.retry && gameState.isGameOver()) {
+    	if(inputHandler.retry && gameState.isGameOver()) {//restart the game after gameover
             gameState.resetGame();
             AudioManager.getInstance().playMusica("resources/03.-Dungeon-Theme_1.wav");
         }
     	//EXIT
     	
     	//TRY AGAIN
-    	if(!gameState.isGameOver()) {
+    	if(!gameState.isGameOver()) { // Updates game when the game over is false
  
-   Player player = gameState.getPlayer(); //22/05 change to debug
+   Player player = gameState.getPlayer(); //22/05 change to debug, // Gets the current player object
    
 //MOVEMENT
 
@@ -136,16 +137,16 @@ public class GameController implements Runnable {
 	        //	gameState.addScore(100);
     		//Attack
 	        if (inputHandler.attacco) {
-	            gameState.getPlayer().startAttack();
+	            gameState.getPlayer().startAttack();// Starts sword attack 
 	        }
 	        gameState.getPlayer().update();
-	        gameState.update(); 
+	        gameState.update(); // Updates enemies, collisions and game systems
     	}
 	    }
     
-
+/**this request the screen to repaint and display the updated game graphics screen*/
     private void render() {
         //Asks Swing to redimension the panel 
-        gamePanel.repaint();
+        gamePanel.repaint(); // Requests Swing to redraw the screen
     }
 }

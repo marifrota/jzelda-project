@@ -21,10 +21,10 @@ public class MenuPanel extends JPanel{
 			gameState.setNickname(nickname);
 			GamePanel gamePanel = new GamePanel(gameState);
 			InputHandler inputHandler = new InputHandler(gamePanel);			GameController controller = new GameController(gameState, gamePanel, inputHandler);
-		
+			//screen to be black
 			setLayout(null);
 			setBackground(Color.BLACK);
-			
+			//buttons
 			JButton startButton = new JButton("START");
 			add(startButton);
 			JButton exitButton = new JButton("EXIT");
@@ -38,7 +38,7 @@ public class MenuPanel extends JPanel{
 	        exitButton.setForeground(Color.WHITE);
 	        startButton.setFocusPainted(false);
 	        exitButton.setFocusPainted(false);   
-	            
+	        //start and exit buttons size
 	        startButton.setBounds(360,230,250,70);
 	        exitButton.setBounds(360,325,250,70);//(x,y,largura,altura)(x,y,large,height)
 	        
@@ -87,12 +87,12 @@ public class MenuPanel extends JPanel{
 	    // shadow
 	    g2.setColor(new Color(80,40,0));
 	    g2.drawString("JZELDA", 315, 125);
-	    // gold
+	    // gold color
 	    g2.setColor(new Color(255,215,0));
 	    g2.drawString("JZELDA", 310, 120);
 	    // subtitle
 	    g2.setFont(new Font("Arial", Font.PLAIN, 28));
 	    g2.setColor(Color.WHITE);
-	    g2.drawString("The Forgotten Ruins", 360, 175);
+	    g2.drawString("The Hell of Bugs", 360, 175);
 	}
 }

@@ -121,7 +121,7 @@ public class GamePanel extends JPanel implements GameObserver{
 			retryButton.setVisible(true);
 			exitButton.setVisible(true);
 		}
-	}
+	}/**Draw the Game Ended when the player wins and also the buttons try again and exit*/
 	//24/05 level 16 finished
 	private void drawGameEnded(Graphics g) {
 		if(gameState.isGameOver() && gameState.getLivelloCorrente() == 16 && gameState.getPlayer().getPuntiVita() > 0) {
@@ -163,7 +163,7 @@ public class GamePanel extends JPanel implements GameObserver{
 			if(gameState.getPlayer().isStaAttaccando()) {
 				g.drawString("ATTACCO!!!", 250,250);
 			}
-		}/**Drawing the shop*/
+		}//Drawing the shop
 		if(shopOpen) {
 			g.setColor(new Color(0,0,0,220));
 		    g.fillRect(200,100,500,300);
@@ -237,7 +237,7 @@ public class GamePanel extends JPanel implements GameObserver{
 		hud.aumentapunteggio(score);
 		repaint();
 	}
-	/*to gain life*/
+	/**to gain life*/
 	public void aumentavita( int vita) {
 		vite += vita;
 		hud.aumentavita(vite);
@@ -268,7 +268,7 @@ public class GamePanel extends JPanel implements GameObserver{
 		             .filter(rupee -> !rupee.isCollected())
 		             .forEach(rupee -> g.drawImage(moeda, rupee.getX(), rupee.getY(), 32, 32, null));
 		}
-	/*draw scudo and the sworm*/
+	/**draw scudo and the sworm*/
 	private void drawItems(Graphics g) {
 	    if(gameState.scudo()) {
 	    	g.drawImage(escudo,820,35,32,32,null);
@@ -277,6 +277,7 @@ public class GamePanel extends JPanel implements GameObserver{
 	    	g.drawImage(espada,860,35,32,32,null);
 	    }
 	}
+	/**it updates the gamepanel when the gamestate changes and repaints the screen using the gameobeserver pattern*/
 	@Override
     public void update() {
         repaint(); 

@@ -85,7 +85,7 @@ public class InputHandler implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int codice = e.getKeyCode();
-
+        //MOVEMENT REALEASE(rilascio del movimento)
       
         if (codice == KeyEvent.VK_UP)    su = false;
         if (codice == KeyEvent.VK_DOWN)  giu = false;
