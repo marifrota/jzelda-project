@@ -18,7 +18,7 @@ public class Player implements Serializable {
     private Direzione direzione = Direzione.SUD; // initial direction
     private boolean staAttaccando = false;
     private int timerAttacco = 0;
-
+    private boolean hasSword = false;
     public void update() {
 
         if (timerAttacco > 0) {
@@ -40,6 +40,14 @@ public class Player implements Serializable {
     public Player(int xIniziale, int yIniziale) {
         this.x = xIniziale;
         this.y = yIniziale;
+    }
+    
+    public boolean hasSword() {
+        return hasSword;
+    }
+
+    public void setHasSword(boolean hasSword) {
+        this.hasSword = hasSword;
     }
 
     public void muoviSu() {
@@ -94,23 +102,19 @@ public class Player implements Serializable {
     //rectangle for the sword
     public Rectangle getAttackBounds() {
     	//MERYEM THIS WAS THE ATTACK BUG!!!
-        switch (direzione) {
-
-            case NORD:
-                return new Rectangle(x, y - 48, 54, 54);
-
-            case SUD:
-                return new Rectangle(x, y + 48, 54, 54);
-
-            case EST:
-                return new Rectangle(x + 48, y, 54, 54);
-
-            case OVEST:
-                return new Rectangle(x - 48, y, 54, 54);
-
-            default:
-                return getBounds();
-        }
+    	int size = hasSword ? 72 : 48; // this is to make the sword powerful
+    	switch (direzione) {
+	        case NORD:
+	            return new Rectangle(x, y - size, size, size);
+	        case SUD:
+	            return new Rectangle(x, y + size, size, size);
+	        case EST:
+	            return new Rectangle(x + size, y, size, size);
+	        case OVEST:
+	            return new Rectangle(x - size, y, size, size);
+	        default:
+	            return getBounds();
+    	}
     }
 
     //GETTERS AND SETTERS

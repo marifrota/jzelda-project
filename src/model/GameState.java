@@ -467,6 +467,7 @@ public class GameState implements Serializable {
         if(rupees >= 15) {
             rupees -= 15;
             spada = true;
+            player.setHasSword(true);
         }
     }
     
