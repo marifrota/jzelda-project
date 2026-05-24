@@ -37,16 +37,36 @@ public class LevelEditor extends JFrame {
         pSave.addActionListener(e -> salvaFile());
         JButton pToggle = new JButton("Mode: TILES");
         pToggle.addActionListener(e -> { enemyMode = !enemyMode;
-            pToggle.setText(enemyMode ? "Mode: ENEMIES" : "Mode: TILES");
-        });
+            pToggle.setText(enemyMode ? "Mode: ENEMIES" : "Mode: TILES"); });
+        JButton pReset = new JButton("RESET");
+        pReset.addActionListener(e -> resetMappa());
 
         panelBottoni.add(pMenu);
         panelBottoni.add(pToggle);
         panelBottoni.add(pSave);
+        panelBottoni.add(pReset);
         add(panelBottoni, BorderLayout.SOUTH);
         caricaFile();
         griglia(panelGriglia); 
         setVisible(true);
+    }
+    
+    private void resetMappa() {
+        int confirm= JOptionPane.showConfirmDialog(this, 
+            "Reset all the map?", 
+            "Confirm Reset", 
+            JOptionPane.YES_NO_OPTION);   
+        if (confirm == JOptionPane.YES_OPTION) {
+            entita.clear();
+            for (int i = 0; i < 7; i++) {
+                for (int j = 0; j < 15; j++) {
+                    mappa[i][j] = 0; 
+                    bottoni[i][j].setText("0"); 
+                    bottoni[i][j].setBackground(UIManager.getColor("Button.background")); 
+                }
+            }
+            System.out.println("Mappa resettata");
+        }
     }
 
     private void griglia(JPanel panel) {
