@@ -52,20 +52,25 @@ public class LevelEditor extends JFrame {
     }
     
     private void resetMappa() {
-        int confirm= JOptionPane.showConfirmDialog(this, 
-            "Reset all the map?", 
+        int confirm = JOptionPane.showConfirmDialog(this, 
+            "Reset to last save?", 
             "Confirm Reset", 
             JOptionPane.YES_NO_OPTION);   
         if (confirm == JOptionPane.YES_OPTION) {
-            entita.clear();
-            for (int i = 0; i < 7; i++) {
+            caricaFile();
+            
+           for (int i = 0; i < 7; i++) {
                 for (int j = 0; j < 15; j++) {
-                    mappa[i][j] = 0; 
-                    bottoni[i][j].setText("0"); 
-                    bottoni[i][j].setBackground(UIManager.getColor("Button.background")); 
+                    bottoni[i][j].setText(String.valueOf(mappa[i][j])); 
+                    String checkEntita = "ENEMY," + (j * 64) + "," + (i * 64);
+                    if (entita.contains(checkEntita)) {
+                        bottoni[i][j].setBackground(Color.RED);
+                    } else {
+                        bottoni[i][j].setBackground(UIManager.getColor("Button.background")); 
+                    }
                 }
             }
-            System.out.println("Mappa resettata");
+            System.out.println("Map resetted successfully.");
         }
     }
 
