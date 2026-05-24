@@ -32,6 +32,11 @@ public class GamePanel extends JPanel implements GameObserver{
 	private Image porcao;
 	private Image espada;
 	private Image escudo;
+	private Image ganon;
+	private Image gohma;
+	private Image stalfos;	
+	private Image gibo;
+	
 	public void setGameState(GameState gameState) {
 	    this.gameState = gameState;
 	}
@@ -56,7 +61,11 @@ public class GamePanel extends JPanel implements GameObserver{
 		escudo = new ImageIcon("resources/sprites/ESCUDO.png").getImage();
 		espada = new ImageIcon("resources/sprites/SPADA.png").getImage();
 		porcao = new ImageIcon("resources/sprites/PORCAO.png").getImage();
-
+		ganon = new ImageIcon("resources/sprites/ganon (1).png").getImage();
+		gohma = new ImageIcon("resources/sprites/gohma.png").getImage();
+		stalfos = new ImageIcon("resources/sprites/stalfos (1).png").getImage();
+		gibo = new ImageIcon("resources/sprites/gibo.png").getImage();
+		
 		retryButton = new JButton("TRY AGAIN");
 		exitButton = new JButton("EXIT");
 		retryButton.setBounds(300, 280, 180, 60);
@@ -178,7 +187,7 @@ public class GamePanel extends JPanel implements GameObserver{
 	        } else {
 	            g.setColor(Color.BLACK);
 	        }
-	        g.drawImage(tektiteblue,enemy.getX(),enemy.getY(),105,65,null);
+	        g.drawImage(enemyMoblinSprite,enemy.getX(),enemy.getY(),105,65,null);
 	    }
 	    /**Draw enemy2*/
 	    if(gameState.getEnemy2().isAlive()) {
@@ -188,17 +197,17 @@ public class GamePanel extends JPanel implements GameObserver{
 	    /**Draw enemy3*/
 	    if(gameState.getEnemy3().isAlive()) {
 	        Enemy enemy3 = gameState.getEnemy3();
-	        g.drawImage(enemyLinelSprite,enemy3.getX(),enemy3.getY(),105,65,null);
+	        g.drawImage(gibo,enemy3.getX(),enemy3.getY(),105,65,null);
 	    }
 	    /**Draw enemy4*/
 	    if(gameState.getEnemy4().isAlive()) {
 	        Enemy enemy4 = gameState.getEnemy4();
-	        g.drawImage(oktorokblue,enemy4.getX(),enemy4.getY(),105,65,null);
+	        g.drawImage(stalfos,enemy4.getX(),enemy4.getY(),105,65,null);
 	    }
 	    /**Draw enemy5*/
 	    if(gameState.getEnemy5().isAlive()) {
 	        Enemy enemy5 = gameState.getEnemy5();
-	        g.drawImage(enemyMoblinSprite,enemy5.getX(),enemy5.getY(),105,65,null);
+	        g.drawImage(ganon,enemy5.getX(),enemy5.getY(),105,65,null);
 	    }
 	}
 		
