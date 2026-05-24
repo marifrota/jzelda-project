@@ -38,17 +38,197 @@ public class GameState implements Serializable {
         spawnEnemies(); }
         private void spawnEnemies() {
             enemies.clear();
-            enemies.add(new Enemy(512, 128)); //(Enemy 1)
-            enemies.add(new Enemy(128, 128)); //(Enemy 2)
-            enemies.add(new Enemy(768, 320)); //(Enemy 3)
-            enemies.add(new Enemy(640, 128)); //(Enemy 4)
-            enemies.add(new Enemy(704, 320)); //(Enemy 5)
-            
-            getEnemy2().setDirezione(Enemy.Direzione.EST);
-            getEnemy3().setDirezione(Enemy.Direzione.SUD);
-            getEnemy4().scegliDirezioneCasuale();
-        }
-        
+            // GEL
+            enemies.add(new Enemy(128,128));
+            // OCTOROK
+            enemies.add(new Enemy(256,128));
+            // MOBLIN
+            enemies.add(new Enemy(384,128));
+            // DARKNUT
+            enemies.add(new Enemy(512,128));
+            // GANON
+            enemies.add(new Enemy(640,128));
+            if(livelloCorrente == 1){
+                getEnemy().setX(512);
+                getEnemy().setY(192);
+                getEnemy2().setAlive(false);
+                getEnemy3().setAlive(false);
+                getEnemy4().setAlive(false);
+                getEnemy5().setAlive(false);
+            }else if(livelloCorrente == 2){
+                     getEnemy().setX(704);
+                     getEnemy().setY(256);
+                     getEnemy2().setX(640);
+                     getEnemy2().setY(256);
+                     getEnemy3().setAlive(false);
+                     getEnemy4().setAlive(false);
+                     getEnemy5().setAlive(false);
+                 }
+                 else if(livelloCorrente == 3){
+                     getEnemy().setX(256);
+                     getEnemy().setY(128);
+                     getEnemy2().setX(512);
+                     getEnemy2().setY(320);
+                     getEnemy3().setX(448);
+                     getEnemy3().setY(320);
+                     getEnemy4().setAlive(false);
+                     getEnemy5().setAlive(false);
+                 }
+                 else if(livelloCorrente == 4){
+                     getEnemy().setX(192);
+                     getEnemy().setY(128);
+                     getEnemy2().setX(512);
+                     getEnemy2().setY(256);
+                     getEnemy3().setX(704);
+                     getEnemy3().setY(256);
+                     getEnemy4().setAlive(false);
+                     getEnemy5().setAlive(false);
+                 }
+                 else if(livelloCorrente == 5){
+                     getEnemy().setX(128);
+                     getEnemy().setY(128);
+                     getEnemy2().setX(512);
+                     getEnemy2().setY(192);
+                     getEnemy3().setX(704);
+                     getEnemy3().setY(320);
+                     getEnemy4().setAlive(false);
+                     getEnemy5().setAlive(false);
+                 }
+                 else if(livelloCorrente == 6){
+                     getEnemy().setX(320);
+                     getEnemy().setY(192);
+                     getEnemy2().setX(320);
+                     getEnemy2().setY(320);
+                     getEnemy3().setX(704);
+                     getEnemy3().setY(192);
+                     getEnemy4().setX(512);
+                     getEnemy4().setY(320);
+                     getEnemy5().setAlive(false);
+                 }
+                 else if(livelloCorrente == 7){ //problema
+                     getEnemy().setX(192);
+                     getEnemy().setY(128);
+                     getEnemy2().setX(640);
+                     getEnemy2().setY(128);
+                     getEnemy3().setX(576);//problem
+                     getEnemy3().setY(192);
+                     getEnemy4().setX(704);
+                     getEnemy4().setY(320);
+                     getEnemy5().setAlive(false);
+                 }
+                 else if(livelloCorrente == 8){
+                     getEnemy().setX(256);
+                     getEnemy().setY(128);
+                     getEnemy2().setX(640);
+                     getEnemy2().setY(128);
+                     getEnemy3().setX(640);
+                     getEnemy3().setY(256);
+                     getEnemy4().setX(704);
+                     getEnemy4().setY(192);
+                     getEnemy5().setX(448);
+                     getEnemy5().setY(256);
+                 }
+                 else if(livelloCorrente == 9){
+                     getEnemy().setX(128);
+                     getEnemy().setY(192);
+                     getEnemy2().setX(320);
+                     getEnemy2().setY(256);
+                     getEnemy3().setX(448);
+                     getEnemy3().setY(192);
+                     getEnemy4().setX(640);
+                     getEnemy4().setY(192);
+                     getEnemy5().setX(640);
+                     getEnemy5().setY(320);
+                 }
+                 else if(livelloCorrente == 10){
+                     getEnemy().setX(192);
+                     getEnemy().setY(128);
+                     getEnemy2().setX(320);
+                     getEnemy2().setY(320);
+                     getEnemy3().setX(512);
+                     getEnemy3().setY(256);
+                     getEnemy4().setX(704);
+                     getEnemy4().setY(128);
+                     getEnemy5().setX(640);
+                     getEnemy5().setY(320);
+                 }
+                 else if(livelloCorrente == 11){
+                     getEnemy().setX(256);
+                     getEnemy().setY(128);
+                     getEnemy2().setX(640);
+                     getEnemy2().setY(128);
+                     getEnemy3().setX(384);
+                     getEnemy3().setY(256);
+                     getEnemy4().setX(704);
+                     getEnemy4().setY(320);
+                     getEnemy5().setX(512);
+                     getEnemy5().setY(192);
+                 }
+                 else if(livelloCorrente == 12){
+                     getEnemy().setX(128);
+                     getEnemy().setY(128);
+                     getEnemy2().setX(256);
+                     getEnemy2().setY(192);
+                     getEnemy3().setX(512);
+                     getEnemy3().setY(128);
+                     getEnemy4().setX(704);
+                     getEnemy4().setY(256);
+                     getEnemy5().setX(640);
+                     getEnemy5().setY(320);
+                 }
+                 else if(livelloCorrente == 13){ 
+                     getEnemy().setX(384);
+                     getEnemy().setY(320);
+                     getEnemy2().setX(192);
+                     getEnemy2().setY(128);
+                     getEnemy3().setX(640);
+                     getEnemy3().setY(320);
+                     getEnemy4().setX(256);
+                     getEnemy4().setY(192);
+                     getEnemy5().setX(64);
+                     getEnemy5().setY(192);
+                 }
+                 else if(livelloCorrente == 14){
+                     getEnemy().setX(256);
+                     getEnemy().setY(128);
+                     getEnemy2().setX(448);//problema
+                     getEnemy2().setY(256);
+                     getEnemy3().setX(640);
+                     getEnemy3().setY(192);
+                     getEnemy4().setX(640);
+                     getEnemy4().setY(192);//problema
+                     getEnemy5().setX(640);
+                     getEnemy5().setY(320);
+                 }
+                 else if(livelloCorrente == 15){
+                     getEnemy().setAlive(false);
+                     getEnemy2().setAlive(false);
+                     getEnemy3().setAlive(false);
+                     getEnemy4().setAlive(false);
+                     // GANON
+                     getEnemy5().setX(512);
+                     getEnemy5().setY(128);//problema
+                 }
+
+                 else if(livelloCorrente == 16){
+                     getEnemy().setX(256);
+                     getEnemy().setY(320);
+                     getEnemy2().setX(704);
+                     getEnemy2().setY(320);
+                     getEnemy3().setX(384);
+                     getEnemy3().setY(128);
+                     getEnemy4().setX(640);
+                     getEnemy4().setY(128);                   
+                     // BOSS
+                     getEnemy5().setX(512);
+                     getEnemy5().setY(192);
+                 }
+                 // DIRECTIONS
+                 getEnemy2().setDirezione(Enemy.Direzione.EST);
+                 getEnemy3().setDirezione(Enemy.Direzione.SUD);
+                 getEnemy4().scegliDirezioneCasuale();
+                 getEnemy5().scegliDirezioneCasuale();
+             }
       //23/05 LIVELLI
         public void lvlSuccessivo() {
             if (livelloCorrente < 16) {

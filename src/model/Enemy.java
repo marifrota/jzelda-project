@@ -1,11 +1,9 @@
 package model;
 
 import java.awt.Rectangle;
-import java.io.Serializable;
 import java.util.Random; // to make the enemy go in different directions
 
-public class Enemy implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Enemy {
 	private boolean hit = false;
 	private boolean alive = true;
     public enum Direzione {
