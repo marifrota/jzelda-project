@@ -93,20 +93,20 @@ public class Player implements Serializable {
 
     //rectangle for the sword
     public Rectangle getAttackBounds() {
-
+    	//MERYEM THIS WAS THE ATTACK BUG!!!
         switch (direzione) {
 
             case NORD:
-                return new Rectangle(x, y - 48, 48, 48);
+                return new Rectangle(x, y - 48, 54, 54);
 
             case SUD:
-                return new Rectangle(x + 48, y, 48, 48);
+                return new Rectangle(x, y + 48, 54, 54);
 
             case EST:
-                return new Rectangle(x + 48, y, 48, 48);
+                return new Rectangle(x + 48, y, 54, 54);
 
             case OVEST:
-                return new Rectangle(x, y - 48, 48, 48);
+                return new Rectangle(x - 48, y, 54, 54);
 
             default:
                 return getBounds();
