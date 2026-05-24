@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-450
-=======
-6200
->>>>>>> branch 'master' of https://github.com/marifrota/jzelda-project.git
+1550
