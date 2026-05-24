@@ -4,14 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.util.*;
-
+/**
+ * Level editor used to create and modify maps as well as the enemies
+ */
 public class LevelEditor extends JFrame {
     private int[][] mappa = new int[7][15]; // 
     private JButton[][] bottoni = new JButton[7][15];
     private String nomeFile = "resources/levels/lvl1.txt";
     private java.util.List<String> entita = new java.util.ArrayList<>();
     private boolean enemyMode = false;
-
+    /**
+     * Creates the level editor window.
+     */
     public LevelEditor() {
     	String input = JOptionPane.showInputDialog(this, "Which level do you want to edit?");
         if (input != null && !input.isEmpty()) {
@@ -50,7 +54,9 @@ public class LevelEditor extends JFrame {
         griglia(panelGriglia); 
         setVisible(true);
     }
-    
+    /**
+     * reset mapa
+     */
     private void resetMappa() {
         int confirm = JOptionPane.showConfirmDialog(this, 
             "Reset to last save?", 
@@ -73,7 +79,9 @@ public class LevelEditor extends JFrame {
             System.out.println("Map resetted successfully.");
         }
     }
-
+/**
+ * creates the editable grid interface
+ */
     private void griglia(JPanel panel) {
         for (int i = 0; i < 7; i++) {
         for (int j = 0; j < 15; j++) {
@@ -113,7 +121,9 @@ public class LevelEditor extends JFrame {
             }
         }
     }
-
+    /**
+     * Saves map and entities into files.
+     */
     private void salvaFile() {
         // save map
         try (PrintWriter writer = new PrintWriter(new FileWriter(nomeFile))) {
@@ -136,7 +146,9 @@ public class LevelEditor extends JFrame {
         
         JOptionPane.showMessageDialog(this, "Salvataggio completato");
     }
-
+    /**
+     * Loads map and entities from files.
+     */
     private void caricaFile() {
         try (Scanner sc = new Scanner(new File(nomeFile))) {
             for (int i = 0; i < 7; i++) {
@@ -154,5 +166,8 @@ public class LevelEditor extends JFrame {
         }
     } catch (Exception e) { System.out.println("Entities file not found (normal if new level)"); }
     }
+    /**
+     * Starts the level editor
+     */
     public static void main(String[] args) { new LevelEditor(); }
 }

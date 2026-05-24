@@ -9,7 +9,10 @@ import view.AudioManager;
 import model.Rupee;
 import java.io.Serializable;
 import java.awt.Rectangle;
-
+/**
+ * keeps and controls all the gamestate like the player, enemies, levels, collision, score, shop and progression
+ * 
+ */
 public class GameState implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -35,19 +38,29 @@ public class GameState implements Serializable {
     private boolean spada = false;
     private int giocate = 0;
     // CONSTRUCT
+    /**
+     * it creates the initial game state
+     */
     public GameState() {
     	addGiocate();
         // coordinates of the characters
         player = new Player(128, 320);
-        spawnEnemies(); }
+        spawnEnemies();//create new enemies
+    }
+        
+        /**
+         * make it appears enemies for the current level
+         */
         private void spawnEnemies() {
-        	if (loadEnemiesFromFile()) {
-                getEnemy2().setDirezione(Enemy.Direzione.EST);
+        	if (loadEnemiesFromFile()) {// Loads enemies from external entity file
+                //initial direction
+        		getEnemy2().setDirezione(Enemy.Direzione.EST);
                 getEnemy3().setDirezione(Enemy.Direzione.SUD);
+                //random direction
                 getEnemy4().scegliDirezioneCasuale();
                 getEnemy5().scegliDirezioneCasuale();
                 return; }
-            enemies.clear();
+            enemies.clear();//clear old enemies
             // GEL
             enemies.add(new Enemy(128,128));
             // OCTOROK
@@ -58,6 +71,8 @@ public class GameState implements Serializable {
             enemies.add(new Enemy(512,128));
             // GANON
             enemies.add(new Enemy(640,128));
+            
+            //LEVEL CONFIGURATIONS
             if(livelloCorrente == 1){
                 getEnemy().setX(512);
                 getEnemy().setY(192);
@@ -240,6 +255,9 @@ public class GameState implements Serializable {
                  getEnemy5().scegliDirezioneCasuale();
                  
              }
+        /**
+         * loads enemy position from entity file
+         */
         	private boolean loadEnemiesFromFile() {
         	    String path = "resources/levels/lvl" + livelloCorrente + "_entities.txt";
         	    File file = new File(path);
@@ -247,7 +265,7 @@ public class GameState implements Serializable {
         	        return false;
         	    }
 
-        	    enemies.clear();
+        	    enemies.clear();//clear enemy list
         	    for (int i = 0; i < 5; i++) {
         	        Enemy e = new Enemy(0, 0);
         	        e.setAlive(false);
@@ -257,11 +275,11 @@ public class GameState implements Serializable {
         	        int i = 0;
         	        while (sc.hasNextLine() && i < 5) {
         	            String line = sc.nextLine();
-        	            String[] parts = line.split(",");
+        	            String[] parts = line.split(","); // Splits entity information
         	            if (parts[0].equals("ENEMY")) {
-        	                enemies.get(i).setX(Integer.parseInt(parts[1]));
+        	                enemies.get(i).setX(Integer.parseInt(parts[1]));//enemy position
         	                enemies.get(i).setY(Integer.parseInt(parts[2]));
-        	                enemies.get(i).setAlive(true);
+        	                enemies.get(i).setAlive(true);//activate enemy
         	                i++;
         	            }
         	        }
@@ -270,17 +288,20 @@ public class GameState implements Serializable {
         	        return false; 
         	    }
         	}
+        	/**
+        	 * load the next level
+        	 */
       //23/05 LIVELLI
         public void lvlSuccessivo() {addWins();
             if (livelloCorrente < 16) {
                 livelloCorrente++;
-                livelloAttuale = new Level(livelloCorrente); 
-                
+                livelloAttuale = new Level(livelloCorrente);  // Loads new level map
+                // Resets player position
                 player.setX(128); 
                 player.setY(320);
-                
+                //make it appears new enemies
                 spawnEnemies();
-                
+                //remove rupees on the ground
                 rupeesOnGround.clear(); 
                 
                 System.out.println("Livello " + livelloCorrente);
@@ -289,25 +310,32 @@ public class GameState implements Serializable {
                 System.out.println("THE END!");
             }
         }
-        
+        /**
+         * reset
+         */
+         
         //RESET 
         public void resetGame() {
-        	addGiocate();
+        	addGiocate();//add played match
         	gameOver = false;
             score = 0;
-            livelloCorrente = 1;
+            livelloCorrente = 1;// this must be before the spawn enemies because if not it will create all the enemies not respecting the number per level
             livelloAttuale = new Level(1);
         	player = new Player(128,320);
             spawnEnemies();
-            AudioManager.getInstance().playMusica("resources/03.-Dungeon-Theme_1.wav");
+            AudioManager.getInstance().playMusica("resources/03.-Dungeon-Theme_1.wav");//restarts music
     }
-        
+        /**
+         * checks collision with map obstacles
+         */
     //OSTACOLI TT
     public boolean touchObstacle(Rectangle bounds) {
-        int step = 8;
+        int step = 8;// Collision precision step
+     // Scans hitbox area
         for (int x = bounds.x; x < bounds.x + bounds.width; x += step) {
         for (int y = bounds.y; y < bounds.y + bounds.height; y += step) {
-        if (livelloAttuale.presenzaOstacolo(x, y)) {
+        	 // Detects obstacle collision
+        	if (livelloAttuale.presenzaOstacolo(x, y)) {
                     return true;
                 }
             }
@@ -315,26 +343,51 @@ public class GameState implements Serializable {
 
         return false;
     }
+    /**
+     * return the rupees on the map
+     */
+   
         //RUPIE (mariana)
     public List<Rupee> getRupeesOnGround() {
 	   return rupeesOnGround;
     }
+    /**
+     * add the score to the points
+     */
     // score system
     public void addScore(int points) { score += points; }
+    /**
+     * add number the rupees*
+     */
     public void addRupees(int value) {
         rupees += value;
     }
+    /**
+     * return player score
+     */
     public int getScore() { return score; }
+    /**
+     * return current level
+     */
     public int getLivelloCorrente() {
         return livelloCorrente;
     }
+    /**
+     * return current rupee
+     */
+     
     public int getRupees() {
         return rupees;
     }
+    /**
+     * advances level manually after killing all the enemies and going to the door
+     */
     public void nextLevel() {
         livelloCorrente++;
     }
-   
+   /**
+    * main logic update method
+    */
     //  BRAIN 
     public void update() {
         if (gameOver) return; // so we stop when game over
@@ -378,15 +431,17 @@ public class GameState implements Serializable {
              lvlSuccessivo(); //changed to Stream
          }
      }
-        
+        /**
+         * controls the combat and collision detection
+         */
         private void checkCollision() {
         	colliding = false;
-      
+        	//PLAYER ATTACK SYSTEM
         //colliding controls (MARIANA UPDATE 15/5)
         //COMBAT, the player attacks the enemies
         	if (player.isStaAttaccando()) {
                 if (getEnemy().isAlive() && player.getAttackBounds().intersects(getEnemy().getBounds())) {
-                    getEnemy().subisciDanno(spada ? 2 : 1);
+                    getEnemy().subisciDanno(spada ? 2 : 1);//sword damage
                     if (getEnemy().nemicoMorto()) {
                         addScore(50); 
                         rupeesOnGround.add(new Rupee(getEnemy().getX(), getEnemy().getY()));
@@ -421,7 +476,7 @@ public class GameState implements Serializable {
                     }
                 }
             }
-        
+        //	player DAMAGE COLLISION
         	if (getEnemy().isAlive() && player.getBounds().intersects(getEnemy().getBounds())) {
                 colliding = true; if (cooldownDamage == 0) loseLife();
             }
@@ -439,10 +494,12 @@ public class GameState implements Serializable {
             }
         }
 
-
+/**
+ * applies the damage to the player, that is, it loses life
+ */
     public void loseLife() {
-    	if(scudo) {
-    		scudo = false;
+    	if(scudo) {//shield aborbs damage
+    		scudo = false;//after the hit removes the shield
     	  	System.out.println("Shield broken!");
     	}else {
     	    player.setPuntiVita(player.getPuntiVita() - 1);
@@ -457,37 +514,80 @@ public class GameState implements Serializable {
     }
     
    // PER LA LISTA
+    
+      /**
+       * returns enemy1
+       */
+     
+     
     public Enemy getEnemy()  { return enemies.get(0); }
+    /**returns enemy2
+     */
     public Enemy getEnemy2() { return enemies.get(1); }
+ /**
+  * returns enemy3
+  */
     public Enemy getEnemy3() { return enemies.get(2); }
+    /**
+     * returns enemy4
+     */
     public Enemy getEnemy4() { return enemies.get(3); }
+    /**
+     * returns enemy5
+     */
     public Enemy getEnemy5() { return enemies.get(4); }
+   /**
+    * returns the enemy list
+    */ 
     public List<Enemy> getEnemiesList() { return enemies; }
     
     
-    
+    /**
+     * changes the player nickname
+     */
     public void setNickname(String nickname) {
        this.nickname = nickname;
     }
+    /**
+     * returns player nickname
+     */
     public String getNickname() {
         return nickname;
     }
+    /**
+     * adds an observer
+     */
     public void addObserver(GameObserver observer) {
-    	
+    	// Recreates observer list after loading save
     	if (this.observers == null) {
             this.observers = new java.util.ArrayList<>();
         }
         observers.add(observer);
     }//GameObserve allows that GameState notify the HUD and the others objects when some information changes.
+    /**
+     * Updates all observers.
+     */
     public void notifyObservers() {
         for(GameObserver observer: observers) {
             observer.update();
         }
     }
     // SHOP (MARIANA)
+    /**
+     * Returns player.
+     */
     public Player getPlayer() { return player; }
+    /**
+     * return scudo
+     */
     public boolean scudo() { return scudo; }
+    /**
+     * return spada
+     */
     public boolean spada() { return spada; }
+    /**
+     * return portion
+     */
     public void buyPotion() {
     	if(rupees >= 5) {
     		rupees -= 5;
@@ -495,13 +595,18 @@ public class GameState implements Serializable {
     		System.out.println(player.getPuntiVita());
     	}
     }//doesnt need private boolean because it used imediately
+   /**
+    * buy scudo
+    */
     public void buyscudo() {
         if(rupees >= 10) {
             rupees -= 10;
             scudo = true;
         }
     }
-    
+    /**
+     * buy spada
+     */
     public void buyspada() {
         if(rupees >= 15) {
             rupees -= 15;
@@ -512,13 +617,42 @@ public class GameState implements Serializable {
     
 //github.com/marifrota/jzelda-project.git
     //GETTERS
+    /**
+     * returns current level map
+     */
     public Level getLivelloAttuale() { return livelloAttuale; }
+    /**
+     * returns game over
+     */
     public boolean isGameOver() { return gameOver; }
+   /**
+    * 
+    * returns collision
+    * */
     public boolean isColliding() { return colliding; } //MARIANA UPDATE  15/5
+    /**
+     * 
+     * return total losses
+     */
     public int getLosses() { return losses; }
+    /**
+     * return total wins
+     */
     public int getWins() { return wins; }
+    /**
+     * Returns partite giocate
+     */
     public int getGiocate() { return giocate;}
+    /**
+     * Adds partite giocate registered.
+     */
     public void addGiocate() { giocate++;}
+    /**
+     * Adds win registered.
+     */
     public void addWins() { wins++; }
+    /** 
+     * Adds losses registered
+     */
     public void addLosses() {  losses++; }
 }

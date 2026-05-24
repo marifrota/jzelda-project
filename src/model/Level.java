@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
+
+/**
+ * this class represents a game level that controls the map loading, rendering, obstacles and level entities
+ */
 public class  Level implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final int erba = 0;
@@ -33,18 +37,22 @@ public class  Level implements Serializable {
     private int livelloCorrente = 1;
     
 
-       
+       /**
+        * this is to create a level and a load map data
+        */
     public Level(int numeroLvl) {
         this.livelloCorrente = numeroLvl;
         caricaLvl(numeroLvl);
         caricaEntita(numeroLvl);
     }
-    
+    /**
+     * this loads level map from text file at the resources
+     */
     private void caricaLvl(int numeroLvl) {
-        String file = "resources/levels/lvl" + numeroLvl + ".txt";
+        String file = "resources/levels/lvl" + numeroLvl + ".txt";//creat the file path
         
         try {
-            java.util.List<String> totRighe = java.nio.file.Files.readAllLines(java.nio.file.Paths.get(file));
+            java.util.List<String> totRighe = java.nio.file.Files.readAllLines(java.nio.file.Paths.get(file));//read all the lines
             
             this.mappa = new int[totRighe.size()][];
             
@@ -65,10 +73,13 @@ public class  Level implements Serializable {
     }
     
  // ENTITIES 24/04
+    /**
+     * loads enemy entities from file
+     */
     private java.util.List<String> entitaDaCaricare = new java.util.ArrayList<>();
 
     private void caricaEntita(int numeroLvl) {
-        String fileEntita = "resources/levels/lvl" + numeroLvl + "_entities.txt";
+        String fileEntita = "resources/levels/lvl" + numeroLvl + "_entities.txt";// Creates entity file path
         try {
             java.util.List<String> righe = java.nio.file.Files.readAllLines(java.nio.file.Paths.get(fileEntita));
             this.entitaDaCaricare = righe; 
@@ -79,10 +90,14 @@ public class  Level implements Serializable {
     }
     
  // 23/05 link touch door
+    /**
+     * check if the LINK touch door
+     */
     public boolean isPorta(int x, int y) {
+    	//convert to a tile coordinate
         int colonna = x / tileSize;
         int riga = y / tileSize;
-
+        // Prevents out of bounds access
         if (riga < 0 || riga >= mappa.length || colonna < 0 || colonna >= mappa[0].length) {
             return false;
         }
@@ -91,18 +106,22 @@ public class  Level implements Serializable {
     }
  // Later add enemies in the room
    
-
+/**
+ * empty constructor
+ */
     public Level() {
         
     }
-
+/**
+ * it draws the level map
+ */
     public void render(Graphics2D g2) {
         for (int riga = 0; riga < mappa.length; riga++) {
             for (int colonna = 0; colonna < mappa[riga].length; colonna++) {
-                
+                //convert tiles to pixels
                 int x = colonna * tileSize;
                 int y = riga * tileSize;
-
+                
                 if (mappa[riga][colonna] == muro) {
                     g2.setColor(coloreMuro); }
                     // Wall, gray 
@@ -133,6 +152,9 @@ public class  Level implements Serializable {
     }
 
     // for colliding
+    /**
+     * collision
+     */
     public boolean presenzaOstacolo(int x, int y) {
         int colonna = x / tileSize;
         int riga = y / tileSize;
@@ -142,9 +164,12 @@ public class  Level implements Serializable {
             return true;
         }
         int tipoOstacolo = mappa[riga][colonna];
-        
+        // Water, wall and lava are obstacles
         return (tipoOstacolo == 1 || tipoOstacolo == 3 || tipoOstacolo == 6);
     }
 
+    /**
+     * Returns tile size.
+     */
     public int getTileSize() { return tileSize; }
 }

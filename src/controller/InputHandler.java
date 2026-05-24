@@ -4,24 +4,34 @@ import model.SaveManager;
 import java.awt.event.KeyListener;
 import view.GamePanel;
 import model.GameState;
-/**Handles keyboard input for the game, controls player movement, attacks, shop, retry, exit commands and items */
+/**
+ * Handles keyboard input for the game, controls player movement, attacks, shop, retry, exit commands and items 
+ */
 public class InputHandler implements KeyListener {
 
 	private GamePanel gamePanel;
-	/** Movement and action keys */
+	/** 
+	 * Movement and action keys 
+	 */
     public boolean su, giu, sinistra, destra, attacco;
-    /** Retry and exit commands */
+    /** 
+     * Retry and exit commands 
+     */
     public boolean retry, exit; //MARIANA (detect keys for exit and try again)
-    /** Shop state */
+    /** 
+     * Shop state 
+     */
     public boolean shop;
     // CONSTRUCTOR
     /**
-     * Creates a new input handler*/
+     * Creates a new input handler
+     */
     public InputHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
     /**
-     * Detects when a key is pressed, controls movement, attacks, shop opening and item purchases*/
+     * Detects when a key is pressed, controls movement, attacks, shop opening and item purchases
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int codice = e.getKeyCode();
@@ -49,7 +59,7 @@ public class InputHandler implements KeyListener {
         if(codice == KeyEvent.VK_1) {
             System.out.println("POTION");
             gamePanel.getGameState().buyPotion();
-            gamePanel.repaint();
+            gamePanel.repaint();//updates the screen after the purchse'
         }
      // buy shield
         if(codice == KeyEvent.VK_2) {
@@ -81,7 +91,9 @@ public class InputHandler implements KeyListener {
             }
         }
     }
-    /**Detects when a key is released and stops the movement with the released key*/
+    /**
+     * Detects when a key is released and stops the movement with the released key
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         int codice = e.getKeyCode();
@@ -97,7 +109,9 @@ public class InputHandler implements KeyListener {
         if(codice == KeyEvent.VK_ESCAPE)
             exit = false;
     }
-    /**Detects typed keys.*/
+    /**
+     * Detects typed keys.
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         

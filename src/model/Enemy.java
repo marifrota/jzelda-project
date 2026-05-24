@@ -3,7 +3,9 @@ package model;
 import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.Random; // to make the enemy go in different directions
-
+/**
+ * this class is to put an enemy in the game, control the enemy movement, direction, collisions and health
+ */
 public class Enemy implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private boolean hit = false;
@@ -26,9 +28,11 @@ public class Enemy implements Serializable{
     
     private static final int offSet = 8;
     private static final int size = 48;
-    
+    /**
+     * enemy movements
+     */
     public void moveThere(GameState gameState) {
-
+    	//predicts collision area
         Rectangle future = getFutureBounds();
 
         if (!gameState.touchObstacle(future)) {
@@ -37,7 +41,7 @@ public class Enemy implements Serializable{
 
         } else {
 
-            switch (direzione) {
+            switch (direzione) {//changes direction after collision
 
                 case NORD:
                     direzione = Direzione.SUD;
@@ -61,28 +65,43 @@ public class Enemy implements Serializable{
             }
         }
     }
-    
+    /**
+     * return true is the enemy is hit
+     */
     //construct
     public boolean isHit() {
         return hit;
     }
+    /**
+     * change the hit state of the enemy
+     */
     public void setHit(boolean hit) {
         this.hit = hit;
     }
-    
+    /**
+     * new enemy
+     */
     public Enemy(int xIniziale, int yIniziale) {
 
         this.x = xIniziale;
         this.y = yIniziale;
     }
+    /**
+     * verify if its alive
+     */
     public boolean isAlive() {
     	return alive;
     }
+    /**
+     * changes the enemy alive state
+     */
     public void setAlive(boolean alive) {
     	this.alive = alive;
     }
     
- 
+    /**
+     * the brain, it will be called by the game loop each 60 updates
+     */
     //the brain, it will be called by the game loop each 60 updates
     public void aggiorna() {
         contatorePassi++;
@@ -91,14 +110,16 @@ public class Enemy implements Serializable{
         contatorePassi = 0;
         }
     }
-    
+    /**
+     * makes the enemy follow the player  DECIDE WHERE THE ENEMY SHOULD GO
+     */
 //20/05 
     public void followPlayer(Player player) {
 
-        int dx = player.getX() - this.x;
-        int dy = player.getY() - this.y;
+        int dx = player.getX() - this.x;//horizontal distance from the player
+        int dy = player.getY() - this.y;//vertical distance from the player
 
-        if (Math.abs(dx) > Math.abs(dy)) {
+        if (Math.abs(dx) > Math.abs(dy)) {//prefers the largest distance
 
             if (dx > 0) { direzione = Direzione.EST;
              } else {
@@ -111,7 +132,9 @@ public class Enemy implements Serializable{
             }
         }
     }
-    
+    /**
+     * REALLY MOVE THE ENEMY
+     */
    //movement based on the preferred direction
     
     public void moveEnemy() {
@@ -132,13 +155,21 @@ public class Enemy implements Serializable{
             case IDLE:
             	break;
         }
-    }
+    }/**
+    Change enemy direction
+    */
     public void setDirezione(Direzione direzione) {
         this.direzione = direzione;
     }
+    /**
+     * Return enemy direction
+     */
     public Direzione getDirezione() {
         return direzione;
     } // spostare
+    /**
+     * Changes to a random movement direction
+     */
     public void scegliDirezioneCasuale() {
         int numero = random.nextInt(5);
         switch (numero) {
@@ -161,51 +192,73 @@ public class Enemy implements Serializable{
         }
     }
     
+    /**
+     * to understand if the Enemy made contact with the Player or an object
+     */
   //to understand if the Enemy made contact with the Player or an object
     public Rectangle getBounds() {
 
         return new Rectangle( x + offSet, y + offSet, size, size );
     }
-    
+    /**
+     * Predicts future collision hitbox
+     */
     public Rectangle getFutureBounds() {
         int nextX = x;
         int nextY = y;
+        /**
+         * predicts next movement position
+         */
         switch (direzione) {
             case NORD:  nextY -= velocita; break;
             case SUD:   nextY += velocita; break;
             case EST:   nextX += velocita; break;
             case OVEST: nextX -= velocita; break;
         }
+        //return predicted hitbox
         return new Rectangle( nextX + offSet, nextY + offSet, size, size);
     }
     
-    
+ /**
+  * applies damage to the enemy life
+  */   
 //when the enemy loses health points
     public void subisciDanno(int danno) {
       puntiVita-= danno;
       
-      if (puntiVita <=0) {
+      if (puntiVita <=0) {//kills
     	  alive = false;
       }
     }
-    
+    /**
+     * return true if its dead
+     */
 //when enemy dead
     public boolean nemicoMorto() {
         return puntiVita <= 0;
     }
-
+/**
+ * return enemy position x
+ */
     public int getX() {
         return x;
     }
-
+/**
+ * return enemy y position
+ */
     public int getY() {
         return y;
     }
     //20/05
+    /**
+     * change enemy x position
+     */
     public void setX(int x) {
         this.x = x;
     }
-
+/**
+ * change enemy y position
+ */
     public void setY(int y) {
         this.y = y;
     }

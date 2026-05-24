@@ -6,7 +6,8 @@ import view.AudioManager;
 import model.Player;
 import java.awt.Rectangle;
 /**this is to control the main gamee loop, update the gamestate and renders the graphics on the screen.
- * This is also to implements runnavle to allow the game to run in a separate thread*/
+ * This is also to implements runnavle to allow the game to run in a separate thread
+ */
 public class GameController implements Runnable {
 
     private GameState gameState;
@@ -14,10 +15,14 @@ public class GameController implements Runnable {
     private Thread gameThread;
     private InputHandler inputHandler;
     private boolean isRunning = false;
-/**this is a target frames per second in 60 FPS for the game loop*/
+/**
+ * this is a target frames per second in 60 FPS for the game loop
+ */
     // 60 should be standard
     private static final int FPS = 60;
-/**creates the game controller and it initializes the game components and music*/
+/**
+ * creates the game controller and it initializes the game components and music
+ */
     public GameController(GameState gameState, GamePanel gamePanel, InputHandler inputHandler) {
         this.gameState = gameState;
         this.gamePanel = gamePanel;
@@ -25,7 +30,10 @@ public class GameController implements Runnable {
         //starts the music
         AudioManager.getInstance().playMusica("resources/03.-Dungeon-Theme_1.wav");
     }
-    /**start the game*/    // to start game engine 
+    /**
+     * start the game
+     */    
+    // to start game engine 
     public void start() {
         if (!isRunning) {// it prevents that a lot of threads happens from the begginging
             isRunning = true;
@@ -33,7 +41,11 @@ public class GameController implements Runnable {
             gameThread.start(); // to start run method()
         }
     }
-    /**this is the main game loop with the continuos updating and rendering of the game while the game is running*/
+    /**
+     * Controls the main game loop, updates the game state
+     * and renders graphics on the screen.
+     * Implements Runnable to run the game in a separate thread.
+     */
     @Override
     public void run() {
         // Time calculation to have 60 constant FPS
@@ -64,7 +76,9 @@ public class GameController implements Runnable {
             }
         }
     }
-    /**updates the game logic like movement, collisions, attacks and game states */
+    /**
+     * updates the game logic like movement, collisions, attacks and game states 
+     */
     private void update() {
     	this.gameState = gamePanel.getGameState();// Synchronizes local game state with the panel
     	if(inputHandler.exit) {
@@ -144,7 +158,9 @@ public class GameController implements Runnable {
     	}
 	    }
     
-/**this request the screen to repaint and display the updated game graphics screen*/
+/**
+ * this request the screen to repaint and display the updated game graphics screen
+ */
     private void render() {
         //Asks Swing to redimension the panel 
         gamePanel.repaint(); // Requests Swing to redraw the screen

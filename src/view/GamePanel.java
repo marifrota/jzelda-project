@@ -11,7 +11,10 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 import model.Rupee;
 import javax.swing.JButton;
-
+/**
+ * Main panel responsible for rendering the game,
+ * drawing sprites, HUD and handling visual updates.
+ */
 public class GamePanel extends JPanel implements GameObserver{
 	private JButton retryButton;
 	private JButton exitButton;
@@ -36,11 +39,14 @@ public class GamePanel extends JPanel implements GameObserver{
 	private Image gohma;
 	private Image stalfos;	
 	private Image gibo;
-	
+	/**
+	 * Changes the current game state.
+	 */
 	public void setGameState(GameState gameState) {
 	    this.gameState = gameState;
 	}
-	/**Creates the main game panel and loads, sprites, HUD, buttons and game resources.
+	/**
+	 * Creates the main game panel and loads, sprites, HUD, buttons and game resources.
 	 */
 	public GamePanel(GameState gameState) {
 		this.gameState = gameState;
@@ -90,7 +96,8 @@ public class GamePanel extends JPanel implements GameObserver{
 		exitButton.addActionListener(e -> {System.exit(0);});
 	}
 	/** 
-	 * Draw the yellow attack effect*/
+	 * Draw the yellow attack effect
+	 */
 	private void drawAttackEffect(Graphics g) {
 		Player player = gameState.getPlayer();
 		if(player.isStaAttaccando()) {
@@ -99,7 +106,8 @@ public class GamePanel extends JPanel implements GameObserver{
 		}
 	}
 	/**
-	 * Draw the big red string "collision" always when colide with an enemy*/
+	 * Draw the big red string "collision" always when colide with an enemy
+	 */
 	private void drawCOLLISSION(Graphics g) {
 	    if(gameState.isColliding()) {
 	        g.setFont(new Font("Arial", Font.BOLD, 40));
@@ -107,7 +115,9 @@ public class GamePanel extends JPanel implements GameObserver{
 	        g.drawString("COLLISION!", 320, 220);
 	    }
 	}
-	/**Draw GAME OVER in the center with the dark red and the gold for the shadow, also it draws the retry and exit*/
+	/**
+	 * Draw GAME OVER in the center with the dark red and the gold for the shadow, also it draws the retry and exit
+	 */
 	private void drawGameOver(Graphics g) {
 		if(gameState.isGameOver() && gameState.getPlayer().getPuntiVita() <= 0) {
 			g.setColor(new Color(0,0,0,180));
@@ -121,7 +131,10 @@ public class GamePanel extends JPanel implements GameObserver{
 			retryButton.setVisible(true);
 			exitButton.setVisible(true);
 		}
-	}/**Draw the Game Ended when the player wins and also the buttons try again and exit*/
+	}
+	/** 
+	 * Draw the Game Ended when the player wins and also the buttons try again and exit
+	 */
 	//24/05 level 16 finished
 	private void drawGameEnded(Graphics g) {
 		if(gameState.isGameOver() && gameState.getLivelloCorrente() == 16 && gameState.getPlayer().getPuntiVita() > 0) {
@@ -136,7 +149,9 @@ public class GamePanel extends JPanel implements GameObserver{
 			retryButton.setVisible(true); 
 		}
 	}
-	/**Draw all game elements on  the screen like map, player, elements, HUD, shop, attack effects and game over screen*/
+	/**
+	 * Draw all game elements on  the screen like map, player, elements, HUD, shop, attack effects and game over screen
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -189,12 +204,18 @@ public class GamePanel extends JPanel implements GameObserver{
 		hud.aumentaWins(gameState.getWins());
 		hud.aumentaGiocate(gameState.getGiocate());
 	}
-	/**Draw player*/
+	/**
+	 * Draw player*
+	 */
 	private void drawPlayer(Graphics g) {
 		Player player = gameState.getPlayer();
         g.drawImage(playerzelda,player.getX(),player.getY(),105,65,null);
 	}
-	/**Draw enemy1*/
+	/**
+	 * Draw enemy1
+	 * 
+	 */
+	
 	private void drawEnemy(Graphics g) {
 	    if(gameState.getEnemy().isAlive()) {
 	        Enemy enemy = gameState.getEnemy();
@@ -205,50 +226,68 @@ public class GamePanel extends JPanel implements GameObserver{
 	        }
 	        g.drawImage(enemyMoblinSprite,enemy.getX(),enemy.getY(),105,65,null);
 	    }
-	    /**Draw enemy2*/
+	    /**
+	     * Draw enemy2
+	     * */
 	    if(gameState.getEnemy2().isAlive()) {
 	        Enemy enemy2 = gameState.getEnemy2();
 	        g.drawImage(enemyOctorokSprite,enemy2.getX(),enemy2.getY(),105,65,null);
 	    }
-	    /**Draw enemy3*/
+	    /**
+	     * Draw enemy3
+	     * */
 	    if(gameState.getEnemy3().isAlive()) {
 	        Enemy enemy3 = gameState.getEnemy3();
 	        g.drawImage(gibo,enemy3.getX(),enemy3.getY(),105,65,null);
 	    }
-	    /**Draw enemy4*/
+	    /**
+	     * Draw enemy4
+	     * */
 	    if(gameState.getEnemy4().isAlive()) {
 	        Enemy enemy4 = gameState.getEnemy4();
 	        g.drawImage(stalfos,enemy4.getX(),enemy4.getY(),105,65,null);
 	    }
-	    /**Draw enemy5*/
+	    /**
+	     * Draw enemy5
+	     * */
 	    if(gameState.getEnemy5().isAlive()) {
 	        Enemy enemy5 = gameState.getEnemy5();
 	        g.drawImage(ganon,enemy5.getX(),enemy5.getY(),105,65,null);
 	    }
 	}
 		
-	/**draw map*/
+	/**
+	 * draw map
+	 * */
 	private void drawMap(Graphics g) {
 	    gameState.getLivelloAttuale().render((Graphics2D) g);
 	}
-	/**to gain points(aumentare punteggio)*/
+	/**
+	 * to gain points(aumentare punteggio)
+	 * */
 	public void aumentapunteggio(int xscore) {
 		score += xscore;
 		hud.aumentapunteggio(score);
 		repaint();
 	}
-	/**to gain life*/
+	/**
+	 * to gain life
+	 * */
 	public void aumentavita( int vita) {
 		vite += vita;
 		hud.aumentavita(vite);
 		repaint();
 	}
-	/*open the shop and also close*/
+	/**
+	 * open the shop and also close*
+	 */
 	public void setShopOpen(boolean shopOpen) {
 	    this.shopOpen = shopOpen;
 	}
 
-	/**Draw the level*/
+	/**
+	 * Draw the level*
+	 */
 	public void drawLevel(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Arial", Font.BOLD, 20));
@@ -260,7 +299,9 @@ public class GamePanel extends JPanel implements GameObserver{
 	public GameState getGameState() {
 	    return gameState;
 	}
-	/**Draw rupie*/
+	/**
+	 * Draw rupie*
+	 */
 	
 		private void drawRupees(Graphics g) {
 		    // CHANGED STRAEM
@@ -268,7 +309,9 @@ public class GamePanel extends JPanel implements GameObserver{
 		             .filter(rupee -> !rupee.isCollected())
 		             .forEach(rupee -> g.drawImage(moeda, rupee.getX(), rupee.getY(), 32, 32, null));
 		}
-	/**draw scudo and the sworm*/
+	/**
+	 * draw scudo and the sworm*
+	 */
 	private void drawItems(Graphics g) {
 	    if(gameState.scudo()) {
 	    	g.drawImage(escudo,820,35,32,32,null);
@@ -277,7 +320,9 @@ public class GamePanel extends JPanel implements GameObserver{
 	    	g.drawImage(espada,860,35,32,32,null);
 	    }
 	}
-	/**it updates the gamepanel when the gamestate changes and repaints the screen using the gameobeserver pattern*/
+	/**
+	 * it updates the gamepanel when the gamestate changes and repaints the screen using the gameobeserver pattern*
+	 */
 	@Override
     public void update() {
         repaint(); 

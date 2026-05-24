@@ -4,7 +4,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 
-/**HUD display panel,hows score, lives, rupees, wins and losses*/
+/**
+ * HUD display panel,hows score, lives, rupees, wins and losses
+ */
 public class HUDPanel extends JPanel implements GameObserver{
 	
 	private JLabel scoreLabel;
@@ -72,26 +74,38 @@ public class HUDPanel extends JPanel implements GameObserver{
 	public void aumentapunteggio(int score) {
 		scoreLabel.setText("Score: " + score);
 	}
-	/**update the partite giocata*/
+	/**
+	 * update the partite giocata
+	 */
 	public void aumentaGiocate(int giocate) {
 	    this.giocate = giocate;
 	    giocateLabel.setText("Partite: " + giocate);
 	}
-	/**update the life*/
+	/**
+	 * update the life
+	 */
 	public void aumentavita(int vita) {
 	    livesLabel.setText("♥ ".repeat(vita));
 	}
-	/**update the wins*/
+	/**
+	 * update the wins
+	 */
 	public void aumentaWins(int wins) {
 	    winsLabel.setText("Wins: " + wins);
 	}
-	/**update the rupee*/
+	/**
+	 * update the rupee
+	 */
 	public void aumentaRupees(int rupees) {
 	    rupeesLabel.setText("Rupees: " + rupees);
-	}/**update the lost*/
+	}
+	/**
+	 * update the lost
+	 */
 	public void aumentaLosses(int losses) {
 	    lossesLabel.setText("Losses: " + losses);
-	}/**
+	}
+	/**
 	 * Updates the HUD observer.
 	 */
 	public void update() {System.out.println("HUD updated!");

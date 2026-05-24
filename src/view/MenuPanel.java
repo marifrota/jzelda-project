@@ -10,17 +10,22 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-/** its the main menu panel of the game that allows the player to start and also to exit the game*/
+/** 
+ * its the main menu panel of the game that allows the player to start and also to exit the game
+ */
 public class MenuPanel extends JPanel{
 	
 	private JFrame window;
-	 /* it creates the game menu and initializes buttons, game state and controller*/
+	 /**
+	  *  it creates the game menu and initializes buttons, game state and controller
+	  */
 	public MenuPanel(JFrame w, String nickname) {		window = w;
 			//nao pode usar this dentro do main(cant use this inside the main)
 			GameState gameState = new GameState();
 			gameState.setNickname(nickname);
 			GamePanel gamePanel = new GamePanel(gameState);
-			InputHandler inputHandler = new InputHandler(gamePanel);			GameController controller = new GameController(gameState, gamePanel, inputHandler);
+			InputHandler inputHandler = new InputHandler(gamePanel);			
+			GameController controller = new GameController(gameState, gamePanel, inputHandler);
 			//screen to be black
 			setLayout(null);
 			setBackground(Color.BLACK);
@@ -75,7 +80,9 @@ public class MenuPanel extends JPanel{
 	        });
 			
 	    }
-	/** Draws the menu background and title screen "JZELDA"  in the color gold with the brown shadow*/
+	/** 
+	 * Draws the menu background and title screen "JZELDA"  in the color gold with the brown shadow
+	 */
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
 	    Graphics2D g2 = (Graphics2D) g;

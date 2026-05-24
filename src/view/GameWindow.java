@@ -6,9 +6,13 @@ import javax.swing.JPanel;
 import controller.InputHandler;
 import javax.swing.JOptionPane;
 /**
- * its the main game windown and this starts the application and loads the menu screen*/
+ * its the main game windown and this starts the application and loads the menu screen
+ */
 public class GameWindow extends JFrame {
 	//starts the game
+	/**
+	 * start the game app
+	 */
     public static void main(String[] args) {
     	//it creates the main game windoe
         JFrame window = new JFrame("JZelda");
