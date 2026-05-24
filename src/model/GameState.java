@@ -31,8 +31,10 @@ public class GameState implements Serializable {
     private boolean levelCompleted = false;
     private boolean scudo = false;
     private boolean spada = false;
+    private int giocate = 0;
     // CONSTRUCT
     public GameState() {
+    	addGiocate();
         // coordinates of the characters
         player = new Player(128, 320);
         spawnEnemies(); }
@@ -230,7 +232,7 @@ public class GameState implements Serializable {
                  getEnemy5().scegliDirezioneCasuale();
              }
       //23/05 LIVELLI
-        public void lvlSuccessivo() {
+        public void lvlSuccessivo() {addWins();
             if (livelloCorrente < 16) {
                 livelloCorrente++;
                 livelloAttuale = new Level(livelloCorrente); 
@@ -244,20 +246,20 @@ public class GameState implements Serializable {
                 
                 System.out.println("Livello " + livelloCorrente);
             } else {
-                gameOver = true;
-                addWins(); // 
+                gameOver = true; 
                 System.out.println("THE END!");
             }
         }
         
         //RESET 
         public void resetGame() {
-        	player = new Player(128,320);
-           spawnEnemies();
-            gameOver = false;
+        	addGiocate();
+        	gameOver = false;
             score = 0;
             livelloCorrente = 1;
             livelloAttuale = new Level(1);
+        	player = new Player(128,320);
+            spawnEnemies();
             AudioManager.getInstance().playMusica("resources/03.-Dungeon-Theme_1.wav");
     }
         
@@ -465,6 +467,7 @@ public class GameState implements Serializable {
         if(rupees >= 15) {
             rupees -= 15;
             spada = true;
+            player.setHasSword(true);
         }
     }
     
@@ -475,6 +478,8 @@ public class GameState implements Serializable {
     public boolean isColliding() { return colliding; } //MARIANA UPDATE  15/5
     public int getLosses() { return losses; }
     public int getWins() { return wins; }
+    public int getGiocate() { return giocate;}
+    public void addGiocate() { giocate++;}
     public void addWins() { wins++; }
     public void addLosses() {  losses++; }
 }
