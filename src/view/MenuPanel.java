@@ -17,7 +17,7 @@ public class MenuPanel extends JPanel{
 	
 	private JFrame window;
 	 /**
-	  *  it creates the game menu and initializes buttons, game state and controller
+	  *  it creates the game menu and starts the buttons and the game state and the controller
 	  */
 	public MenuPanel(JFrame w, String nickname) {		window = w;
 			//nao pode usar this dentro do main(cant use this inside the main)

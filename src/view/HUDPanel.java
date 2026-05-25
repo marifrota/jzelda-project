@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Color;
 
 /**
- * HUD display panel,hows score, lives, rupees, wins and losses
+ * this is the HUD display panel,hows score, lives, rupees, wins and losses
  */
 public class HUDPanel extends JPanel implements GameObserver{
 	
@@ -63,7 +63,7 @@ public class HUDPanel extends JPanel implements GameObserver{
 		giocateLabel.setBounds(20, 25, 150, 30);
 	}
 	/**
-	 * Sets the player's nickname.
+	 * this pubblic creates the player's nickname.
 	 */
 	public void setNickname(String nickname) {
 	    nicknameLabel.setText("Player: " + nickname);
@@ -82,19 +82,19 @@ public class HUDPanel extends JPanel implements GameObserver{
 	    giocateLabel.setText("Partite: " + giocate);
 	}
 	/**
-	 * update the life
+	 * it update the life
 	 */
 	public void aumentavita(int vita) {
 	    livesLabel.setText("♥ ".repeat(vita));
 	}
 	/**
-	 * update the wins
+	 * it updates the wins
 	 */
 	public void aumentaWins(int wins) {
 	    winsLabel.setText("Wins: " + wins);
 	}
 	/**
-	 * update the rupee
+	 * this is to update the rupee
 	 */
 	public void aumentaRupees(int rupees) {
 	    rupeesLabel.setText("Rupees: " + rupees);
@@ -106,7 +106,7 @@ public class HUDPanel extends JPanel implements GameObserver{
 	    lossesLabel.setText("Losses: " + losses);
 	}
 	/**
-	 * Updates the HUD observer.
+	 * this is to update the HUD observer.
 	 */
 	public void update() {System.out.println("HUD updated!");
 	}

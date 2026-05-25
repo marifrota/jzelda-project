@@ -5,7 +5,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 /**
- * Level editor used to create and modify maps as well as the enemies
+ * this is a Level editor used to create and modify maps as well as the enemies
  */
 public class LevelEditor extends JFrame {
     private int[][] mappa = new int[7][15]; // 
@@ -14,7 +14,7 @@ public class LevelEditor extends JFrame {
     private java.util.List<String> entita = new java.util.ArrayList<>();
     private boolean enemyMode = false;
     /**
-     * Creates the level editor window.
+     * it creates the level editor window.
      */
     public LevelEditor() {
     	String input = JOptionPane.showInputDialog(this, "Which level do you want to edit?");
@@ -122,7 +122,7 @@ public class LevelEditor extends JFrame {
         }
     }
     /**
-     * Saves map and entities into files.
+     * Save the map and entities into files.
      */
     private void salvaFile() {
         // save map
@@ -147,7 +147,7 @@ public class LevelEditor extends JFrame {
         JOptionPane.showMessageDialog(this, "Salvataggio completato");
     }
     /**
-     * Loads map and entities from files.
+     * Load the map and entities from files.
      */
     private void caricaFile() {
         try (Scanner sc = new Scanner(new File(nomeFile))) {
@@ -167,7 +167,7 @@ public class LevelEditor extends JFrame {
     } catch (Exception e) { System.out.println("Entities file not found (normal if new level)"); }
     }
     /**
-     * Starts the level editor
+     * it is to starts the level editor
      */
     public static void main(String[] args) { new LevelEditor(); }
 }

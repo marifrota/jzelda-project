@@ -12,8 +12,7 @@ import java.awt.Image;
 import model.Rupee;
 import javax.swing.JButton;
 /**
- * Main panel responsible for rendering the game,
- * drawing sprites, HUD and handling visual updates.
+ * it is the main panel that is responsible for rendering the game, drawing sprites, HUD and handling visual updates
  */
 public class GamePanel extends JPanel implements GameObserver{
 	private JButton retryButton;
@@ -44,13 +43,13 @@ public class GamePanel extends JPanel implements GameObserver{
 	private Image rupeeRoxa;
 	private Image rupeeDourada;
 	/**
-	 * Changes the current game state.
+	 * this public changes the current game state
 	 */
 	public void setGameState(GameState gameState) {
 	    this.gameState = gameState;
 	}
 	/**
-	 * Creates the main game panel and loads, sprites, HUD, buttons and game resources.
+	 * creates the main game panel and loads, sprites, HUD, buttons and game resources.
 	 */
 	public GamePanel(GameState gameState) {
 		this.gameState = gameState;

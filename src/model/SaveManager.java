@@ -2,7 +2,7 @@ package model;
 
 import java.io.*;
 /**
- * controls save and load, high score and game progress
+ * this public class its to control the save and load, high score and game progress
  * */
 public class SaveManager {
     private static final String fileScore = "highscore.txt"; // High score file
@@ -10,7 +10,7 @@ public class SaveManager {
     
     // SCORE
     /**
-     * saves player score into a text file
+     * this is to save player score into a text file
      * */
     public static void saveScore(int score) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(fileScore))) {
@@ -21,7 +21,7 @@ public class SaveManager {
         }
     }
 /**
- * loads saved score
+ * it loads saved score
  * */
     public static int loadScore() {
         File file = new File(fileScore);

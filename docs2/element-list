@@ -1,2 +1,5 @@
 module:JZeldaProject
+controller
+editor
 model
+view
