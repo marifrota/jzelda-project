@@ -60,7 +60,7 @@ public class HUDPanel extends JPanel implements GameObserver{
 		add(giocateLabel);
 		giocateLabel.setFont(hudFont);
 		giocateLabel.setForeground(new Color(120,200,255));
-		giocateLabel.setBounds(850, 25, 150, 30);
+		giocateLabel.setBounds(20, 25, 150, 30);
 	}
 	/**
 	 * Sets the player's nickname.
