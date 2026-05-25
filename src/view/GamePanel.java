@@ -112,7 +112,9 @@ public class GamePanel extends JPanel implements GameObserver{
 			g.fillOval(player.getX()+20, player.getY()-5, 30,30);
 		}
 	}
-	
+	/**
+	 * to allow external access to  HUD panel
+	 */
 	public HUDPanel getHUD() {
 	    return this.hud;
 	}
@@ -354,6 +356,9 @@ public class GamePanel extends JPanel implements GameObserver{
 	    	g.drawImage(espada,860,35,32,32,null);
 	    }
 	}
+	/**
+	 * clean the game panel from the buttons after loading a save 
+	 */
 	public void resetUILoaded() {
         if (retryButton != null && exitButton != null) {
             retryButton.setVisible(false);

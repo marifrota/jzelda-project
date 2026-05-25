@@ -158,6 +158,10 @@ public class GameController implements Runnable {
 	        gameState.update(); // Updates enemies, collisions and game systems
     	}
 	    }
+    /**
+     * overides main game state reference
+
+     */
     public void setGameState(GameState state) {
         this.gameState = state;
     }

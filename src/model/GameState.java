@@ -682,14 +682,22 @@ public class GameState implements Serializable {
     public void addLosses() {  losses++; }
     
     private int usedProfile = 0;
-
+/**
+ * update  active profile identifier
+ */
     public void setProfiloAttivo(int usedProfile) {
         this.usedProfile = usedProfile;
     }
+    /**
+     * 
+     * looks which profile is chosen for the load or save
+     */
     public int getUsedProfile() {
         return this.usedProfile;
     }
-    
+    /** setter to change the profile slot 
+     * 
+     */
     public void setUsedProfile(int usedProfile) {
     	 this.usedProfile = usedProfile;
     }
