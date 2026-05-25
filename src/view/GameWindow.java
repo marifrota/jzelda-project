@@ -14,7 +14,7 @@ public class GameWindow extends JFrame {
 	 * start the game app
 	 */
     public static void main(String[] args) {
-    	//it creates the main game windoe
+    	//it creates the main game window
         JFrame window = new JFrame("JZelda");
         //asks the players name
         String nickname = JOptionPane.showInputDialog("Enter your nickname:");

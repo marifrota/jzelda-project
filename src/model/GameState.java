@@ -59,7 +59,14 @@ public class GameState implements Serializable {
                 //random direction
                 getEnemy4().scegliDirezioneCasuale();
                 getEnemy5().scegliDirezioneCasuale();
-                return; }
+             // Different enemy speeds for gameplay variety
+                getEnemy().setVelocita(1);   // weakest
+                getEnemy2().setVelocita(2);
+                getEnemy3().setVelocita(3);
+                getEnemy4().setVelocita(4);
+                getEnemy5().setVelocita(5);  // strongest
+                return; 
+            }
             enemies.clear();//clear old enemies
             // GEL
             enemies.add(new Enemy(128,128));
@@ -253,7 +260,6 @@ public class GameState implements Serializable {
                  getEnemy3().setDirezione(Enemy.Direzione.SUD);
                  getEnemy4().scegliDirezioneCasuale();
                  getEnemy5().scegliDirezioneCasuale();
-                 
              }
         /**
          * loads enemy position from entity file

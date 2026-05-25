@@ -98,6 +98,12 @@ public class Enemy implements Serializable{
     public void setAlive(boolean alive) {
     	this.alive = alive;
     }
+    /**
+     *Changes the enemy speed 
+     */
+    public void setVelocita(int velocita) {
+    	this.velocita = velocita;
+    }
     
     /**
      * the brain, it will be called by the game loop each 60 updates
