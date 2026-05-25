@@ -10,6 +10,7 @@ public class Enemy implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private boolean hit = false;
 	private boolean alive = true;
+	private int tipoRupee;
     public enum Direzione {
         NORD, SUD, EST, OVEST, IDLE
     } //
@@ -18,7 +19,7 @@ public class Enemy implements Serializable{
     private int x;
     private int y; //coordinates
 
-    private int velocita = 1; //speed
+    private int velocidade = 1; //speed
     private int puntiVita = 4; ///health points (2=1 heart)
 
     //to make the enemy move
@@ -81,10 +82,11 @@ public class Enemy implements Serializable{
     /**
      * new enemy
      */
-    public Enemy(int xIniziale, int yIniziale) {
+    public Enemy(int xIniziale, int yIniziale, int tipoRupee) {
 
         this.x = xIniziale;
         this.y = yIniziale;
+        this.tipoRupee = tipoRupee;
     }
     /**
      * verify if its alive
@@ -101,8 +103,8 @@ public class Enemy implements Serializable{
     /**
      *Changes the enemy speed 
      */
-    public void setVelocita(int velocita) {
-    	this.velocita = velocita;
+    public void setvelocidade(int velocidade) {
+    	this.velocidade = velocidade;
     }
     
     /**
@@ -147,16 +149,16 @@ public class Enemy implements Serializable{
         switch (direzione) {
 
             case NORD:
-                y -= velocita;
+                y -= velocidade;
                 break;
             case SUD:
-                y += velocita;
+                y += velocidade;
                 break;
             case EST:
-                x += velocita;
+                x += velocidade;
                 break;
             case OVEST:
-                x -= velocita;
+                x -= velocidade;
                 break;
             case IDLE:
             	break;
@@ -216,10 +218,10 @@ public class Enemy implements Serializable{
          * predicts next movement position
          */
         switch (direzione) {
-            case NORD:  nextY -= velocita; break;
-            case SUD:   nextY += velocita; break;
-            case EST:   nextX += velocita; break;
-            case OVEST: nextX -= velocita; break;
+            case NORD:  nextY -= velocidade; break;
+            case SUD:   nextY += velocidade; break;
+            case EST:   nextX += velocidade; break;
+            case OVEST: nextX -= velocidade; break;
         }
         //return predicted hitbox
         return new Rectangle( nextX + offSet, nextY + offSet, size, size);
@@ -267,5 +269,10 @@ public class Enemy implements Serializable{
  */
     public void setY(int y) {
         this.y = y;
+    }
+    /**DIFFERENT TYPES OF RUPEES
+     */
+    public int getTipoRupee() {
+        return tipoRupee;
     }
 }

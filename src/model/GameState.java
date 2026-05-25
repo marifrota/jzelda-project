@@ -15,7 +15,7 @@ import java.awt.Rectangle;
  */
 public class GameState implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+	private int tipoRupee;
     // WORLD'S ELEMENTS
     private Player player;
     private List<Enemy> enemies = new ArrayList<>(); 
@@ -60,24 +60,24 @@ public class GameState implements Serializable {
                 getEnemy4().scegliDirezioneCasuale();
                 getEnemy5().scegliDirezioneCasuale();
              // Different enemy speeds for gameplay variety
-                getEnemy().setVelocita(1);   // weakest
-                getEnemy2().setVelocita(2);
-                getEnemy3().setVelocita(3);
-                getEnemy4().setVelocita(4);
-                getEnemy5().setVelocita(5);  // strongest
+                getEnemy().setvelocidade(1);   // weakest
+                getEnemy2().setvelocidade(2);
+                getEnemy3().setvelocidade(3);
+                getEnemy4().setvelocidade(4);
+                getEnemy5().setvelocidade(5);  // strongest
                 return; 
             }
             enemies.clear();//clear old enemies
-            // GEL
-            enemies.add(new Enemy(128,128));
+         // GEL
+            enemies.add(new Enemy(128,128, Rupee.ROSA));
             // OCTOROK
-            enemies.add(new Enemy(256,128));
+            enemies.add(new Enemy(256,128, Rupee.AZUL));
             // MOBLIN
-            enemies.add(new Enemy(384,128));
+            enemies.add(new Enemy(384,128, Rupee.VERMELHO));
             // DARKNUT
-            enemies.add(new Enemy(512,128));
+            enemies.add(new Enemy(512,128, Rupee.ROXO));
             // GANON
-            enemies.add(new Enemy(640,128));
+            enemies.add(new Enemy(640,128, Rupee.DOURADO));
             
             //LEVEL CONFIGURATIONS
             if(livelloCorrente == 1){
@@ -273,7 +273,20 @@ public class GameState implements Serializable {
 
         	    enemies.clear();//clear enemy list
         	    for (int i = 0; i < 5; i++) {
-        	        Enemy e = new Enemy(0, 0);
+        	    	int tipo = Rupee.ROSA;
+        	    	if(i == 1) {
+        	            tipo = Rupee.AZUL;
+        	        }
+        	        else if(i == 2) {
+        	            tipo = Rupee.VERMELHO;
+        	        }
+        	        else if(i == 3) {
+        	            tipo = Rupee.ROXO;
+        	        }
+        	        else if(i == 4) {
+        	            tipo = Rupee.DOURADO;
+        	        }
+        	    	Enemy e = new Enemy(0, 0, tipo);
         	        e.setAlive(false);
         	        enemies.add(e);
         	    }
@@ -386,6 +399,12 @@ public class GameState implements Serializable {
         return rupees;
     }
     /**
+     * THIS IS FOR THE DIFFERENT RUPEES FOR DIFFERENT ENEMIES
+     */
+    public int getTipoRupee() {
+        return tipoRupee;
+    }
+    /**
      * advances level manually after killing all the enemies and going to the door
      */
     public void nextLevel() {
@@ -423,9 +442,9 @@ public class GameState implements Serializable {
     	  cooldownDamage--;
       }
       for(Rupee rupee : rupeesOnGround) {
-    	    if(!rupee.isCollected()&&player.getBounds().intersects(rupee.getBounds())) {
-    	    	rupee.collect();
-    	    	addRupees(1);
+    	    if(!rupee.iscoletada()&&player.getBounds().intersects(rupee.getBounds())) {
+    	    	rupee.coletada();
+    	    	addRupees(rupee.getValor());
     	    }
     	}
             //20/05 manage all of the collisions
@@ -450,35 +469,35 @@ public class GameState implements Serializable {
                     getEnemy().subisciDanno(spada ? 2 : 1);//sword damage
                     if (getEnemy().nemicoMorto()) {
                         addScore(50); 
-                        rupeesOnGround.add(new Rupee(getEnemy().getX(), getEnemy().getY()));
+                        rupeesOnGround.add(new Rupee(getEnemy().getX(), getEnemy().getY(),getEnemy().getTipoRupee()));
                     }
                 }
                 if (getEnemy2().isAlive() && player.getAttackBounds().intersects(getEnemy2().getBounds())) {
                     getEnemy2().subisciDanno(spada ? 2 : 1); 
                     if (getEnemy2().nemicoMorto()) {
                         addScore(100);
-                        rupeesOnGround.add(new Rupee(getEnemy2().getX() + 40, getEnemy2().getY() + 20));
+                        rupeesOnGround.add(new Rupee(getEnemy2().getX() + 40, getEnemy2().getY() + 20,getEnemy2().getTipoRupee()));
                     }
                 }
                 if (getEnemy3().isAlive() && player.getAttackBounds().intersects(getEnemy3().getBounds())) {
                     getEnemy3().subisciDanno(spada ? 2 : 1);
                     if (getEnemy3().nemicoMorto()) {
                         addScore(150);
-                        rupeesOnGround.add(new Rupee(getEnemy3().getX(), getEnemy3().getY()));
+                        rupeesOnGround.add(new Rupee(getEnemy3().getX(), getEnemy3().getY(),getEnemy3().getTipoRupee()));
                     }
                 }
                 if (getEnemy4().isAlive() && player.getAttackBounds().intersects(getEnemy4().getBounds())) {
                     getEnemy4().subisciDanno(spada ? 2 : 1);
                     if (getEnemy4().nemicoMorto()) {
                         addScore(200);
-                        rupeesOnGround.add(new Rupee(getEnemy4().getX(), getEnemy4().getY()));
+                        rupeesOnGround.add(new Rupee(getEnemy4().getX(), getEnemy4().getY(),getEnemy4().getTipoRupee()));
                     }
                 }
                 if (getEnemy5().isAlive() && player.getAttackBounds().intersects(getEnemy5().getBounds())) {
                     getEnemy5().subisciDanno(spada ? 2 : 1);
                     if (getEnemy5().nemicoMorto()) {
                         addScore(250);
-                        rupeesOnGround.add(new Rupee(getEnemy5().getX(), getEnemy5().getY())); 
+                        rupeesOnGround.add(new Rupee(getEnemy5().getX(), getEnemy5().getY(),getEnemy5().getTipoRupee())); 
                     }
                 }
             }
@@ -595,7 +614,7 @@ public class GameState implements Serializable {
      * return portion
      */
     public void buyPotion() {
-    	if(rupees >= 5) {
+    	if(rupees >= 10) {
     		rupees -= 5;
     		player.setPuntiVita(player.getPuntiVita() + 1);
     		System.out.println(player.getPuntiVita());
@@ -605,7 +624,7 @@ public class GameState implements Serializable {
     * buy scudo
     */
     public void buyscudo() {
-        if(rupees >= 10) {
+        if(rupees >= 20) {
             rupees -= 10;
             scudo = true;
         }
@@ -614,7 +633,7 @@ public class GameState implements Serializable {
      * buy spada
      */
     public void buyspada() {
-        if(rupees >= 15) {
+        if(rupees >= 30) {
             rupees -= 15;
             spada = true;
             player.setHasSword(true);

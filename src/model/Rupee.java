@@ -7,47 +7,68 @@ import java.io.Serializable;
  * */
 public class Rupee implements Serializable {
 	private static final long serialVersionUID = 1L;
-	 private int x;
-	 private int y;
+	 private int posicaox;
+	 private int posicaoy;
+	 private int valor;
 	 /**
 	  * manages if it was collected the rupee
 	  * */
-	 private boolean collected = false;
+	 private boolean coletada = false;//collected
+	 
+	 public static final int ROSA = 1; //pink rupee
+	 public static final int AZUL = 5;//blue rupee
+	 public static final int VERMELHO = 10; //red rupee
+	 public static final int DOURADO = 15;//gold rupee
+	 public static final int ROXO = 20; // purple rupee
 	 /**
-	  * creates a new rupee
+	  * creates a new rupee pink by default
 	  * */
-	 public Rupee(int x, int y) {
-		 this.x = x;
-		 this.y = y;
+	 public Rupee(int posicaox, int posicaoy) {
+	        this(posicaox, posicaoy, ROSA);
 	 }
+	 /**
+	  * this is for create a currency with a speciic type
+	  */
+	 public Rupee(int posicaox, int posicaoy, int valor) {
+	        this.posicaox = posicaox;
+	        this.posicaoy = posicaoy;
+	        this.valor = valor;
+	}
 	 /**
 	  * returns rupee collision area
 	  * */
 	 public Rectangle getBounds() {
-		 return new Rectangle(x,y,24,24);
+		 return new Rectangle(posicaox,posicaoy,24,24);
 	 }
 	 /**
 	  * return X position rupee
 	  * */
-	 public int getX() {
-		 return x;
+	 public int getposicaoX() {
+		 return posicaox;
 	 }
+	 
 	 /**
 	  * return Y position rupee
 	  * */
-	 public int getY() {
-		 return y;
+	 public int getposicaoY() {
+		 return posicaoy;
 	 }
 	 /**
 	  * verify if its true if rupee was collected
 	  * */
-	public boolean isCollected() {
-		return collected;
+	public boolean iscoletada() {
+		return coletada;
 	}
 	/**
 	 * mark the rupee as collected
 	 * */
-	public void collect() {
-		collected = true;
+	public void coletada() {
+		coletada = true;
+	}
+	/**
+	 * return the rupee valore
+	 */
+	public int getValor() {
+		return valor;
 	}
 }

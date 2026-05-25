@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements GameObserver{
 	private Image linelblue;
 	private Image oktorokblue;
 	private Image playerzelda;
-	private Image moeda;
+	private Image moeda;//rupee rosa
 	private boolean shopOpen = false;
 	private Image porcao;
 	private Image espada;
@@ -39,6 +39,10 @@ public class GamePanel extends JPanel implements GameObserver{
 	private Image gohma;
 	private Image stalfos;	
 	private Image gibo;
+	private Image rupeeAzul;
+	private Image rupeeVermelha;
+	private Image rupeeRoxa;
+	private Image rupeeDourada;
 	/**
 	 * Changes the current game state.
 	 */
@@ -71,7 +75,11 @@ public class GamePanel extends JPanel implements GameObserver{
 		gohma = new ImageIcon("resources/sprites/gohma.png").getImage();
 		stalfos = new ImageIcon("resources/sprites/stalfos (1).png").getImage();
 		gibo = new ImageIcon("resources/sprites/gibo.png").getImage();
-		
+		rupeeAzul = new ImageIcon("resources/sprites/BLU.png").getImage();
+		rupeeVermelha = new ImageIcon("resources/sprites/VERMELHA.png").getImage();
+		rupeeRoxa = new ImageIcon("resources/sprites/MOEDAA.png").getImage();
+		rupeeDourada = new ImageIcon("resources/sprites/DOURADA.png").getImage();
+
 		retryButton = new JButton("TRY AGAIN");
 		exitButton = new JButton("EXIT");
 		retryButton.setBounds(300, 280, 180, 60);
@@ -187,12 +195,12 @@ public class GamePanel extends JPanel implements GameObserver{
 		    g.drawString("SHOP", 360, 150);
 		    g.setFont(new Font("Arial", Font.PLAIN, 22));
 		    g.drawImage(porcao, 220, 200, 40, 40, null);
-		    g.drawString("1 - POTION (5)", 280, 230);
+		    g.drawString("1 - POTION (10)", 280, 230);
 		    g.drawImage(escudo, 220, 250, 40, 40, null);
-		    g.drawString("2 - SHIELD (10)", 280, 280);
+		    g.drawString("2 - SHIELD (20)", 280, 280);
 		    g.drawImage(espada, 220, 300, 40, 40, null);
-		    g.drawString("3 - MASTER SWORD (15)", 280, 330);
-		    g.drawString("3 - MASTER SWORD (15)", 280, 330);
+		    g.drawString("3 - MASTER SWORD (30)", 280, 330);
+		    g.drawString("3 - MASTER SWORD (30)", 280, 330);
 		    g.setFont(new Font("Arial", Font.PLAIN, 16));
 		    g.drawString("Press B to exit", 320, 380);
 		}
@@ -300,14 +308,29 @@ public class GamePanel extends JPanel implements GameObserver{
 	    return gameState;
 	}
 	/**
-	 * Draw rupie*
+	 * Draw rupee*
 	 */
-	
 		private void drawRupees(Graphics g) {
 		    // CHANGED STRAEM
 		    gameState.getRupeesOnGround().stream()
-		             .filter(rupee -> !rupee.isCollected())
-		             .forEach(rupee -> g.drawImage(moeda, rupee.getX(), rupee.getY(), 32, 32, null));
+		             .filter(rupee -> !rupee.iscoletada())
+		             .forEach(rupee ->{
+		            	 Image sprite = moeda;
+					    if(rupee.getValor() == Rupee.AZUL) {
+			                sprite = rupeeAzul;
+			            }
+			            else if(rupee.getValor() == Rupee.VERMELHO) {
+			                sprite = rupeeVermelha;
+			            }
+			            else if(rupee.getValor() == Rupee.ROXO) {
+			                sprite = rupeeRoxa;
+			            }
+			            else if(rupee.getValor() == Rupee.DOURADO) {
+			                sprite = rupeeDourada;
+			            }
+					    g.drawImage(sprite,rupee.getposicaoX(),rupee.getposicaoY(),32,32,null);
+			        	});
+			        
 		}
 	/**
 	 * draw scudo and the sworm*
