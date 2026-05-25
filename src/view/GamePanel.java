@@ -12,7 +12,7 @@ import java.awt.Image;
 import model.Rupee;
 import javax.swing.JButton;
 /**
- * it is the main panel that is responsible for rendering the game, drawing sprites, HUD and handling visual updates
+ * main panel that is responsible for rendering the game, drawing sprites, HUD and handling visual updates
  */
 public class GamePanel extends JPanel implements GameObserver{
 	private JButton retryButton;
@@ -21,9 +21,9 @@ public class GamePanel extends JPanel implements GameObserver{
 	private int score = 0;
 	int vite = 3;
 	private HUDPanel hud;
-	private Image enemyMoblinSprite;//orange
-	private Image enemyOctorokSprite;//orange
-	private Image enemyLinelSprite;//blue
+	private Image enemyMoblin;//orange
+	private Image enemyOctorok;//orange
+	private Image enemyLinel;//blue
 	private Image zorablue;
 	private Image tektiteblue;
 	private Image linelblue;
@@ -58,9 +58,9 @@ public class GamePanel extends JPanel implements GameObserver{
 		hud.setNickname(gameState.getNickname());
 		add(hud);
 		hud.setBounds(0, 0, 975, 50);//define a posição e o tamanho do HUD para ele voltar a aparecer quando  usa setLayout(null)( the HUD position and size so it becomes visible again when using setLayout(null).
-		enemyMoblinSprite = new ImageIcon("resources/sprites/enemy_moblin (2)_ORANGE.png").getImage();
-		enemyOctorokSprite = new ImageIcon("resources/sprites/OCTOROK_BLUE.png").getImage();
-		enemyLinelSprite = new ImageIcon("resources/sprites/LINEL_ENEMY_BLUE.png").getImage();
+		enemyMoblin = new ImageIcon("resources/sprites/enemy_moblin (2)_ORANGE.png").getImage();
+		enemyOctorok = new ImageIcon("resources/sprites/OCTOROK_BLUE.png").getImage();
+		enemyLinel = new ImageIcon("resources/sprites/LINEL_ENEMY_BLUE.png").getImage();
 		zorablue = new ImageIcon("resources/sprites/ZORA_BLUE.png").getImage();
 		tektiteblue = new ImageIcon("resources/sprites/TEKTITE_BLUE.png").getImage();
 		linelblue = new ImageIcon("resources/sprites/LINEL_BLUE.png").getImage();
@@ -95,9 +95,9 @@ public class GamePanel extends JPanel implements GameObserver{
 		add(retryButton);
 		add(exitButton);
 		retryButton.addActionListener(e -> {
-		    gameState.resetGame();
+		    this.gameState.resetGame();
 		    this.retryButton.setVisible(false);
-		    exitButton.setVisible(false);
+		    this.exitButton.setVisible(false);
 		    repaint();
 		});
 		exitButton.addActionListener(e -> {System.exit(0);});
@@ -236,14 +236,14 @@ public class GamePanel extends JPanel implements GameObserver{
 	        } else {
 	            g.setColor(Color.BLACK);
 	        }
-	        g.drawImage(enemyMoblinSprite,enemy.getX(),enemy.getY(),105,65,null);
+	        g.drawImage(enemyMoblin,enemy.getX(),enemy.getY(),105,65,null);
 	    }
 	    /**
 	     * Draw enemy2
 	     * */
 	    if(gameState.getEnemy2().isAlive()) {
 	        Enemy enemy2 = gameState.getEnemy2();
-	        g.drawImage(enemyOctorokSprite,enemy2.getX(),enemy2.getY(),105,65,null);
+	        g.drawImage(enemyOctorok,enemy2.getX(),enemy2.getY(),105,65,null);
 	    }
 	    /**
 	     * Draw enemy3
