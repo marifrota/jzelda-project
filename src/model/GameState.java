@@ -614,7 +614,7 @@ public class GameState implements Serializable {
      * return portion
      */
     public void buyPotion() {
-    	if(rupees >= 10) {
+    	if(rupees >= 25) {
     		rupees -= 5;
     		player.setPuntiVita(player.getPuntiVita() + 1);
     		System.out.println(player.getPuntiVita());
@@ -624,7 +624,7 @@ public class GameState implements Serializable {
     * buy scudo
     */
     public void buyscudo() {
-        if(rupees >= 20) {
+        if(rupees >= 50) {
             rupees -= 10;
             scudo = true;
         }
@@ -633,7 +633,7 @@ public class GameState implements Serializable {
      * buy spada
      */
     public void buyspada() {
-        if(rupees >= 30) {
+        if(rupees >= 100) {
             rupees -= 15;
             spada = true;
             player.setHasSword(true);

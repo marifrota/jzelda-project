@@ -194,12 +194,12 @@ public class GamePanel extends JPanel implements GameObserver{
 		    g.drawString("SHOP", 360, 150);
 		    g.setFont(new Font("Arial", Font.PLAIN, 22));
 		    g.drawImage(porcao, 220, 200, 40, 40, null);
-		    g.drawString("1 - POTION (10)", 280, 230);
+		    g.drawString("1 - POTION (25)", 280, 230);
 		    g.drawImage(escudo, 220, 250, 40, 40, null);
-		    g.drawString("2 - SHIELD (20)", 280, 280);
+		    g.drawString("2 - SHIELD (50)", 280, 280);
 		    g.drawImage(espada, 220, 300, 40, 40, null);
-		    g.drawString("3 - MASTER SWORD (30)", 280, 330);
-		    g.drawString("3 - MASTER SWORD (30)", 280, 330);
+		    g.drawString("3 - MASTER SWORD (100)", 280, 330);
+		    g.drawString("3 - MASTER SWORD (100)", 280, 330);
 		    g.setFont(new Font("Arial", Font.PLAIN, 16));
 		    g.drawString("Press B to exit", 320, 380);
 		}
