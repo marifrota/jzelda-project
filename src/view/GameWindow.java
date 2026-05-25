@@ -17,7 +17,7 @@ public class GameWindow extends JFrame {
     	//it creates the main game window
         JFrame window = new JFrame("JZelda");
         //asks the players name
-        String nickname = JOptionPane.showInputDialog("Enter your nickname:");
+     //   String nickname = JOptionPane.showInputDialog("Enter your nickname:"); lm removing it for the profile management 25/05
       //put the window size
         window.setSize(975,485);
         //close the application when press exit
@@ -27,7 +27,7 @@ public class GameWindow extends JFrame {
         
         window.setLayout(new BorderLayout());//definir o layout(set the layout)
       //sets the main menu panel
-        window.setContentPane(new MenuPanel(window, nickname));        		
+        window.setContentPane(new MenuPanel(window, ""));      //removed nickname 25/05  		
         //makes the window visible
         window.setVisible(true);
                

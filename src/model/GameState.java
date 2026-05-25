@@ -680,4 +680,19 @@ public class GameState implements Serializable {
      * Adds losses registered
      */
     public void addLosses() {  losses++; }
+    
+    private int usedProfile = 0;
+
+    public void setProfiloAttivo(int usedProfile) {
+        this.usedProfile = usedProfile;
+    }
+    public int getUsedProfile() {
+        return this.usedProfile;
+    }
+    
+    public void setUsedProfile(int usedProfile) {
+    	 this.usedProfile = usedProfile;
+    }
+    
+ 
 }

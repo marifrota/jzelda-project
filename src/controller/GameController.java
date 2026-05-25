@@ -87,6 +87,7 @@ public class GameController implements Runnable {
     	
     	if(inputHandler.retry && gameState.isGameOver()) {//restart the game after gameover
             gameState.resetGame();
+            gamePanel.resetUILoaded();
             AudioManager.getInstance().playMusica("resources/03.-Dungeon-Theme_1.wav");
         }
     	//EXIT
@@ -157,6 +158,9 @@ public class GameController implements Runnable {
 	        gameState.update(); // Updates enemies, collisions and game systems
     	}
 	    }
+    public void setGameState(GameState state) {
+        this.gameState = state;
+    }
     
 /**
  * this request the screen to repaint and display the updated game graphics screen

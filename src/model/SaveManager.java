@@ -43,12 +43,13 @@ public class SaveManager {
     /**
      * save game state
      * */
-    public static void saveGame(GameState state) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileSave))) {//create binary output stream
+    public static void saveGame(GameState state, int profile) { //fixing another bug! 25/05 
+    	String savedGame = "savegame_" + profile + ".dat";
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(savedGame))) {//create binary output stream
             oos.writeObject(state); // Serializes game state object
-            System.out.println("Partita salvata");
+            System.out.println("Game saved in:" + profile);
         } catch (IOException e) {
-            System.err.println("Errore salvataggio: " + e.getMessage());
+            System.err.println("Error" + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -57,17 +58,18 @@ public class SaveManager {
     /**
      * load game stateo
      * */
-    public static GameState loadGame() {
-        File file = new File(fileSave);
+    public static GameState loadGame(int profile) {
+    	String savedGame= "savegame_" + profile + ".dat";
+        File file = new File(savedGame);
         if (!file.exists()) {
-            System.out.println("Nessun salvataggio trovato.");
+            System.out.println("Nessun salvataggio trovato");
             return null;
         }
             
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileSave))) {
-                return (GameState) ois.readObject();// Deserializes saved game object
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(savedGame))) {
+                return (GameState) ois.readObject();// Unserializes saved game object
             } catch (IOException | ClassNotFoundException e) {
-                System.err.println("Errore nel caricamento: " + e.getMessage());
+                System.err.println("Errore:" + e.getMessage());
                 return null;
             }
           }

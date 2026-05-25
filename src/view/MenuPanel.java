@@ -4,6 +4,7 @@ import editor.LevelEditor; //24/05
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import controller.GameController;
+import javax.swing.JOptionPane;
 import model.GameState;
 import controller.InputHandler;
 import java.awt.Color;
@@ -22,7 +23,7 @@ public class MenuPanel extends JPanel{
 	public MenuPanel(JFrame w, String nickname) {		window = w;
 			//nao pode usar this dentro do main(cant use this inside the main)
 			GameState gameState = new GameState();
-			gameState.setNickname(nickname);
+			gameState.setNickname(nickname); // da vedere
 			GamePanel gamePanel = new GamePanel(gameState);
 			InputHandler inputHandler = new InputHandler(gamePanel);			
 			GameController controller = new GameController(gameState, gamePanel, inputHandler);
@@ -64,6 +65,34 @@ public class MenuPanel extends JPanel{
 
 	     // Starts the game
 			startButton.addActionListener( e -> {
+				String[] chooseProfile = {"PROFILE 1", "PROFILE 2", "PROFILE 3"}; //adding slots today 25/05
+				int chosenProfile = JOptionPane.showOptionDialog(
+						this,
+						"Select a file:", "Choose a profile:",
+						JOptionPane.DEFAULT_OPTION,
+						JOptionPane.PLAIN_MESSAGE,
+						null,
+						chooseProfile,
+						chooseProfile[0] );
+				
+          if(chosenProfile== JOptionPane.CLOSED_OPTION) {
+        	  return;
+          }
+          gameState.setProfiloAttivo(chosenProfile);
+						
+          String Nickname = JOptionPane.showInputDialog(
+        		  this,
+        		  "Hero, choose your Name:",
+        		  "Name memorized.",
+        		  JOptionPane.PLAIN_MESSAGE );
+          
+          if(Nickname == null || Nickname.trim().isEmpty()) {
+        	  Nickname= "Link";
+          }
+          
+          gameState.setNickname(Nickname);
+          gamePanel.setGameState(gameState);
+          gamePanel.getHUD().setNickname(Nickname);          
 				System.out.println("inizio del gioco");
 				window.setContentPane(gamePanel);
 				gamePanel.setFocusable(true);
@@ -72,7 +101,10 @@ public class MenuPanel extends JPanel{
 				window.revalidate();
 				controller.start();
 				window.repaint();
+				
 			});
+			
+			
 			// Closes the application
 			exitButton.addActionListener(e -> {
 

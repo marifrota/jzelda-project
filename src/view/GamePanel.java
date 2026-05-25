@@ -96,7 +96,7 @@ public class GamePanel extends JPanel implements GameObserver{
 		add(exitButton);
 		retryButton.addActionListener(e -> {
 		    gameState.resetGame();
-		    retryButton.setVisible(false);
+		    this.retryButton.setVisible(false);
 		    exitButton.setVisible(false);
 		    repaint();
 		});
@@ -111,6 +111,10 @@ public class GamePanel extends JPanel implements GameObserver{
 			g.setColor(Color.YELLOW);
 			g.fillOval(player.getX()+20, player.getY()-5, 30,30);
 		}
+	}
+	
+	public HUDPanel getHUD() {
+	    return this.hud;
 	}
 	/**
 	 * Draw the big red string "collision" always when colide with an enemy
@@ -210,6 +214,7 @@ public class GamePanel extends JPanel implements GameObserver{
 		hud.aumentaLosses(gameState.getLosses());
 		hud.aumentaWins(gameState.getWins());
 		hud.aumentaGiocate(gameState.getGiocate());
+		hud.setNickname(gameState.getNickname());
 	}
 	/**
 	 * Draw player*
@@ -306,6 +311,11 @@ public class GamePanel extends JPanel implements GameObserver{
 	public GameState getGameState() {
 	    return gameState;
 	}
+	/* cleans interface after the game over // TOGLIERE SE FA CASINO
+	
+	 * 
+	 */
+	
 	/**
 	 * Draw rupee*
 	 */
@@ -331,6 +341,8 @@ public class GamePanel extends JPanel implements GameObserver{
 			        	});
 			        
 		}
+		
+		
 	/**
 	 * draw scudo and the sworm*
 	 */
@@ -342,6 +354,13 @@ public class GamePanel extends JPanel implements GameObserver{
 	    	g.drawImage(espada,860,35,32,32,null);
 	    }
 	}
+	public void resetUILoaded() {
+        if (retryButton != null && exitButton != null) {
+            retryButton.setVisible(false);
+            exitButton.setVisible(false);
+        }
+        repaint();
+    }
 	/**
 	 * it updates the gamepanel when the gamestate changes and repaints the screen using the gameobeserver pattern*
 	 */

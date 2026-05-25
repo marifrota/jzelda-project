@@ -71,21 +71,26 @@ public class InputHandler implements KeyListener {
             gamePanel.repaint();
         }
         
-     // KEY S TO SAVE
+     // KEY S TO SAVE 25/05 
         if (codice == KeyEvent.VK_S) {
-            SaveManager.saveGame(gamePanel.getGameState());
-            System.out.println("Salvataggio completato");
+        	GameState current = gamePanel.getGameState(); //ultimo= the current one
+        	int profile = current.getUsedProfile();
+            SaveManager.saveGame(current, profile);
+            System.out.println("Salvataggio completato in:" + profile);
         }
 
         // Key L TO LOAD, 23/05 meryem
         if (codice == KeyEvent.VK_L) {
-            GameState loadedState = SaveManager.loadGame();
+        	int currentProfile = gamePanel.getGameState().getUsedProfile();
+            GameState loadedState = SaveManager.loadGame(currentProfile);
             if (loadedState != null) {
+            	loadedState.setProfiloAttivo(currentProfile);
                 gamePanel.setGameState(loadedState);
                 loadedState.addObserver(gamePanel); 
-                
+            
+                gamePanel.resetUILoaded();
                 gamePanel.repaint();
-                System.out.println("Caricamento completato");
+                System.out.println("Caricamento completato di");
             } else {
                 System.out.println("Nessun salvataggio trovato.");
             }
