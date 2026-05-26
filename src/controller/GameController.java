@@ -5,7 +5,8 @@ import view.GamePanel;
 import view.AudioManager;
 import model.Player;
 import java.awt.Rectangle;
-/**this is to control the main gamee loop, update the gamestate and renders the graphics on the screen.
+/**
+ * this is to control the main gamee loop, update the gamestate and renders the graphics on the screen.
  * This is also to implements runnavle to allow the game to run in a separate thread
  */
 public class GameController implements Runnable {
@@ -160,12 +161,10 @@ public class GameController implements Runnable {
 	    }
     /**
      * overides main game state reference
-
      */
     public void setGameState(GameState state) {
         this.gameState = state;
-    }
-    
+    }   
 /**
  * this request the screen to repaint and display the updated game graphics screen
  */

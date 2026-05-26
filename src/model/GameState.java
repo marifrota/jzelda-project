@@ -10,8 +10,7 @@ import model.Rupee;
 import java.io.Serializable;
 import java.awt.Rectangle;
 /**
- * keeps and controls all the gamestate like the player, enemies, levels, collision, score, shop and progression
- * 
+ * keeps and controls all the gamestate like the player, enemies, levels, collision, score, shop and progression 
  */
 public class GameState implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -615,7 +614,7 @@ public class GameState implements Serializable {
      */
     public void buyPotion() {
     	if(rupees >= 25) {
-    		rupees -= 5;
+    		rupees -= 25;
     		player.setPuntiVita(player.getPuntiVita() + 1);
     		System.out.println(player.getPuntiVita());
     	}
@@ -625,7 +624,7 @@ public class GameState implements Serializable {
     */
     public void buyscudo() {
         if(rupees >= 50) {
-            rupees -= 10;
+            rupees -= 50;
             scudo = true;
         }
     }
@@ -634,7 +633,7 @@ public class GameState implements Serializable {
      */
     public void buyspada() {
         if(rupees >= 100) {
-            rupees -= 15;
+            rupees -= 100;
             spada = true;
             player.setHasSword(true);
         }

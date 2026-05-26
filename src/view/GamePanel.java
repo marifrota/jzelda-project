@@ -49,7 +49,7 @@ public class GamePanel extends JPanel implements GameObserver{
 	    this.gameState = gameState;
 	}
 	/**
-	 * creates the main game panel and loads, sprites, HUD, buttons and game resources.
+	 * creates the main game panel and loads, sprites, HUD, buttons and game resources
 	 */
 	public GamePanel(GameState gameState) {
 		this.gameState = gameState;
@@ -219,7 +219,7 @@ public class GamePanel extends JPanel implements GameObserver{
 		hud.setNickname(gameState.getNickname());
 	}
 	/**
-	 * Draw player*
+	 * Draw player
 	 */
 	private void drawPlayer(Graphics g) {
 		Player player = gameState.getPlayer();
@@ -242,28 +242,28 @@ public class GamePanel extends JPanel implements GameObserver{
 	    }
 	    /**
 	     * Draw enemy2
-	     * */
+	     */
 	    if(gameState.getEnemy2().isAlive()) {
 	        Enemy enemy2 = gameState.getEnemy2();
 	        g.drawImage(enemyOctorok,enemy2.getX(),enemy2.getY(),105,65,null);
 	    }
 	    /**
 	     * Draw enemy3
-	     * */
+	     */
 	    if(gameState.getEnemy3().isAlive()) {
 	        Enemy enemy3 = gameState.getEnemy3();
 	        g.drawImage(gibo,enemy3.getX(),enemy3.getY(),105,65,null);
 	    }
 	    /**
 	     * Draw enemy4
-	     * */
+	     */
 	    if(gameState.getEnemy4().isAlive()) {
 	        Enemy enemy4 = gameState.getEnemy4();
 	        g.drawImage(stalfos,enemy4.getX(),enemy4.getY(),105,65,null);
 	    }
 	    /**
 	     * Draw enemy5
-	     * */
+	     */
 	    if(gameState.getEnemy5().isAlive()) {
 	        Enemy enemy5 = gameState.getEnemy5();
 	        g.drawImage(ganon,enemy5.getX(),enemy5.getY(),105,65,null);
@@ -272,13 +272,13 @@ public class GamePanel extends JPanel implements GameObserver{
 		
 	/**
 	 * draw map
-	 * */
+	 */
 	private void drawMap(Graphics g) {
 	    gameState.getLivelloAttuale().render((Graphics2D) g);
 	}
 	/**
 	 * to gain points(aumentare punteggio)
-	 * */
+	 */
 	public void aumentapunteggio(int xscore) {
 		score += xscore;
 		hud.aumentapunteggio(score);
@@ -286,21 +286,21 @@ public class GamePanel extends JPanel implements GameObserver{
 	}
 	/**
 	 * to gain life
-	 * */
+	 */
 	public void aumentavita( int vita) {
 		vite += vita;
 		hud.aumentavita(vite);
 		repaint();
 	}
 	/**
-	 * open the shop and also close*
+	 * open the shop and also close
 	 */
 	public void setShopOpen(boolean shopOpen) {
 	    this.shopOpen = shopOpen;
 	}
 
 	/**
-	 * Draw the level*
+	 * Draw the level
 	 */
 	public void drawLevel(Graphics g) {
 		g.setColor(Color.WHITE);
@@ -319,7 +319,7 @@ public class GamePanel extends JPanel implements GameObserver{
 	 */
 	
 	/**
-	 * Draw rupee*
+	 * Draw rupee
 	 */
 		private void drawRupees(Graphics g) {
 		    // CHANGED STRAEM
@@ -346,7 +346,7 @@ public class GamePanel extends JPanel implements GameObserver{
 		
 		
 	/**
-	 * draw scudo and the sworm*
+	 * draw scudo and the sworm
 	 */
 	private void drawItems(Graphics g) {
 	    if(gameState.scudo()) {
@@ -367,7 +367,7 @@ public class GamePanel extends JPanel implements GameObserver{
         repaint();
     }
 	/**
-	 * it updates the gamepanel when the gamestate changes and repaints the screen using the gameobeserver pattern*
+	 * it updates the gamepanel when the gamestate changes and repaints the screen using the gameobeserver pattern
 	 */
 	@Override
     public void update() {

@@ -163,7 +163,8 @@ public class Enemy implements Serializable{
             case IDLE:
             	break;
         }
-    }/**
+    }
+    /**
     Change enemy direction
     */
     public void setDirezione(Direzione direzione) {
@@ -270,7 +271,8 @@ public class Enemy implements Serializable{
     public void setY(int y) {
         this.y = y;
     }
-    /**DIFFERENT TYPES OF RUPEES
+    /**
+     * DIFFERENT TYPES OF RUPEES
      */
     public int getTipoRupee() {
         return tipoRupee;

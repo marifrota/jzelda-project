@@ -23,8 +23,8 @@ public class Player implements Serializable {
     private boolean staAttaccando = false;
     private int timerAttacco = 0;
     private boolean hasSword = false;
-   /*
-    * *updates attack animation state
+   /** 
+    * updates attack animation state
     */
     public void update() {
 
@@ -46,8 +46,8 @@ public class Player implements Serializable {
         }
     }
 /**
- * creates a new playe
- * r*/
+ * creates a new playeR
+ */
     public Player(int xIniziale, int yIniziale) {
         this.x = xIniziale;
         this.y = yIniziale;

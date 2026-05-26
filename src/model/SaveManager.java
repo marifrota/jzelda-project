@@ -3,7 +3,7 @@ package model;
 import java.io.*;
 /**
  * this public class its to control the save and load, high score and game progress
- * */
+ */
 public class SaveManager {
     private static final String fileScore = "highscore.txt"; // High score file
     private static final String fileSave = "savegame.dat"; // Save game file
@@ -11,7 +11,7 @@ public class SaveManager {
     // SCORE
     /**
      * this is to save player score into a text file
-     * */
+     */
     public static void saveScore(int score) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(fileScore))) {
             writer.println(score);
@@ -22,7 +22,7 @@ public class SaveManager {
     }
 /**
  * it loads saved score
- * */
+ */
     public static int loadScore() {
         File file = new File(fileScore);
         if (!file.exists()) {
@@ -42,7 +42,7 @@ public class SaveManager {
  // SAVE
     /**
      * save game state
-     * */
+     */
     public static void saveGame(GameState state, int profile) { //fixing another bug! 25/05 
     	String savedGame = "savegame_" + profile + ".dat";
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(savedGame))) {//create binary output stream
@@ -56,8 +56,8 @@ public class SaveManager {
 
     // LOAD
     /**
-     * load game stateo
-     * */
+     * load game state
+     */
     public static GameState loadGame(int profile) {
     	String savedGame= "savegame_" + profile + ".dat";
         File file = new File(savedGame);

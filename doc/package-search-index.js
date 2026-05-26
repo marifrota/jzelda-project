@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"JZeldaProject","l":"controller"},{"m":"JZeldaProject","l":"editor"},{"m":"JZeldaProject","l":"model"},{"m":"JZeldaProject","l":"view"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"JZeldaProject","l":"editor"},{"m":"JZeldaProject","l":"model"},{"m":"JZeldaProject","l":"view"}];updateSearchResults();

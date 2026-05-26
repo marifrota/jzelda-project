@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 /**
  * This is for control the background music and sound effects for the game and also uses the Singleton pattern to make sure that will exist only one audio manager
- * */
+ */
 public class AudioManager {
     
     
@@ -17,7 +17,7 @@ public class AudioManager {
     private Clip sound;
     /**
      * It returns the unique object of audiomanager
-     * */
+     */
     public static AudioManager getInstance() {
         if (instance == null) {
             instance = new AudioManager();//creates the unique object
@@ -27,12 +27,12 @@ public class AudioManager {
     
     /**
      * this is a private constructor for singleton pattern
-     * */
+     */
     private AudioManager() {
     }
     /**
      * this public void playMusica plays a background musica track and loops it continuosly is it is a dungeon or theme soundtrack
-     * */
+     */
     public void playMusica(String filename) {
         try {
         	
